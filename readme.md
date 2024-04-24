@@ -7,4 +7,4 @@
 [link](https://stackoverflow.com/questions/5289284/compiling-and-runnin-opengl-glut-program-in-ubuntu-10-10)
 
 compile comamnds (do not use gcc)
-g++ gl.cpp -o gl -lGL -lGLU -lglut
+g++ test.cpp -o glRun -lGL -lGLU -lglut
