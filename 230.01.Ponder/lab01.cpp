@@ -15,10 +15,11 @@
 using namespace std; 
 
 /***********************************************************
+ * main
  * Print out hello world
  **********************************************************/
 int main() {
-    // print hello world to console
-    cout << "Hello World" << endl;
-    return 0;
+   // print hello world to console
+   cout << "Hello World" << endl;
+   return 0;
 }
