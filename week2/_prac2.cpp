@@ -160,7 +160,7 @@ double computeVerticalComponent(double total, double angle)
  * TEST COMPUTE VERTICAL COMPONENT
  * 
  * OUTPUT
- *      return 0 if all tests pass
+ *     exit case: return 0 if all tests pass
 ***********************************************/
 int testComputeVerticalComponent() 
 {
@@ -250,7 +250,6 @@ double prompt(string text)
 
 /**************************************************
  * TEST RUNNER
- *
  * runs all the test functions
 **************************************************/
 void testRunner() 
