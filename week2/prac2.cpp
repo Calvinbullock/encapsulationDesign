@@ -1,14 +1,14 @@
 /*************************************************************
  * 1. Name:
- *      -your name-
+ *      Calvin Bullock, Hyrum Bullock
  * 2. Assignment Name:
  *      Practice 02: Physics simulator
  * 3. Assignment Description:
  *      Compute how the Apollo lander will move across the screen
  * 4. What was the hardest part? Be as specific as possible.
- *      -a paragraph or two about how the assignment went for you-
+ *      TODO -a paragraph or two about how the assignment went for you-
  * 5. How long did it take for you to complete the assignment?
- *      -total time in hours: reading the assignment, submitting, etc.
+ *      TODO -total time in hours: reading the assignment, submitting, etc.
  **************************************************************/
 
 #include <iostream>  // for CIN and COUT
@@ -31,7 +31,10 @@ using namespace std;
  * OUTPUT
  *     s : new position, in meters
  **************************************************/
-// your function goes here
+void computeDistance() 
+{
+
+}
 
 /**************************************************
  * COMPUTE ACCELERATION
