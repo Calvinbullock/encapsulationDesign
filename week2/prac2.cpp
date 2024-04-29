@@ -11,12 +11,13 @@
  *      TODO -total time in hours: reading the assignment, submitting, etc.
  **************************************************************/
 
-#include <iostream>  // for CIN and COUT
+#include <iostream> // for CIN and COUT
+#include <string>
 using namespace std;
 
-#define WEIGHT   15103.000   // Weight in KG
-#define GRAVITY     -1.625   // Vertical acceleration due to gravity, in m/s^2
-#define THRUST   45000.000   // Thrust of main engine, in Newtons (kg m/s^2)
+#define WEIGHT 15103.000 // Weight in KG
+#define GRAVITY -1.625   // Vertical acceleration due to gravity, in m/s^2
+#define THRUST 45000.000 // Thrust of main engine, in Newtons (kg m/s^2)
 
 /***************************************************
  * COMPUTE DISTANCE
@@ -31,14 +32,13 @@ using namespace std;
  * OUTPUT
  *     s : new position, in meters
  **************************************************/
-void computeDistance() 
+void computeDistance()
 {
-
 }
 
 /**************************************************
  * COMPUTE ACCELERATION
- * Find the acceleration given a thrust and mass. 
+ * Find the acceleration given a thrust and mass.
  * This will be done using Newton's second law of motion:
  *     f = m * a
  * INPUT
@@ -50,12 +50,11 @@ void computeDistance()
 // your function goes here
 double computeAcceleration(double force, double mass)
 {
-   // to find acceleration we need to change the 
+   // to find acceleration we need to change the
    // formula to accel = force/mass
-   double accel = force/mass;
+   double accel = force / mass;
    return accel;
 }
-
 
 /***********************************************
  * COMPUTE VELOCITY
@@ -72,7 +71,6 @@ double computeAcceleration(double force, double mass)
  *     v : new velocity, in meters/second
  ***********************************************/
 // your function goes here
-
 
 /***********************************************
  * COMPUTE VERTICAL COMPONENT
@@ -116,7 +114,7 @@ double computeAcceleration(double force, double mass)
 
 /************************************************
  * COMPUTE TOTAL COMPONENT
- * Given the horizontal and vertical components of 
+ * Given the horizontal and vertical components of
  * something (velocity or acceleration), determine
  * the total component. To do this, use the Pythagorean Theorem:
  *    x^2 + y^2 = t^2
@@ -134,7 +132,6 @@ double computeAcceleration(double force, double mass)
  *    total : total component
  ***********************************************/
 // your function goes here
-
 
 /*************************************************
  * RADIANS FROM DEGEES
@@ -156,6 +153,12 @@ double computeAcceleration(double force, double mass)
  *      response : the user's response
  ***************************************************/
 // your function goes here
+double prompt(string text)
+{
+   cout << text << endl;
+   
+   return 0;
+}
 
 /****************************************************************
  * MAIN
@@ -163,31 +166,30 @@ double computeAcceleration(double force, double mass)
  ****************************************************************/
 int main()
 {
-    // Prompt for input and variables to be computed
-    double dx =       prompt("What is your horizontal velocity (m/s)? ");
-    double dy =       prompt("What is your vertical velocity (m/s)? ");
-    double y =        prompt("What is your altitude (m)? ");
-    double x =        prompt("What is your position (m)? ");
-    double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
-    double t =        prompt("What is the time interval (s)? ");
-    double aRadians;            // Angle in radians
-    double accelerationThrust;  // Acceleration due to thrust 
-    double ddxThrust;           // Horizontal acceleration due to thrust
-    double ddyThrust;           // Vertical acceleration due to thrust
-    double ddx;                 // Total horizontal acceleration
-    double ddy;                 // Total vertical acceleration
-    double v;                   // Total velocity
+   // Prompt for input and variables to be computed
+   double dx = prompt("What is your horizontal velocity (m/s)? ");
+   double dy = prompt("What is your vertical velocity (m/s)? ");
+   double y = prompt("What is your altitude (m)? ");
+   double x = prompt("What is your position (m)? ");
+   double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
+   double t = prompt("What is the time interval (s)? ");
+   double aRadians;           // Angle in radians
+   double accelerationThrust; // Acceleration due to thrust
+   double ddxThrust;          // Horizontal acceleration due to thrust
+   double ddyThrust;          // Vertical acceleration due to thrust
+   double ddx;                // Total horizontal acceleration
+   double ddy;                // Total vertical acceleration
+   double v;                  // Total velocity
 
-    // Go through the simulator five times
-      // your code goes here
+   // Go through the simulator five times
+   // your code goes here
 
-      // Output
-      cout.setf(ios::fixed | ios::showpoint);
-      cout.precision(2);
-      cout << "\tNew position:   (" <<  x << ", " <<  y << ")m\n";
-      cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
-      cout << "\tTotal velocity:  " << v << "m/s\n\n";
-
+   // Output
+   cout.setf(ios::fixed | ios::showpoint);
+   cout.precision(2);
+   cout << "\tNew position:   (" << x << ", " << y << ")m\n";
+   cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
+   cout << "\tTotal velocity:  " << v << "m/s\n\n";
 
    return 0;
-}  
+}
