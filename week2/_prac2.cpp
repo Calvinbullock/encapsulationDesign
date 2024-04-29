@@ -219,18 +219,25 @@ double prompt(string text)
    return 0;
 }
 
+/**************************************************
+ * TEST RUNNER
+ *
+ * runs all the test functions
+**************************************************/
+void testRunner() 
+{
+   testComputeDistance();
+   testComputeVelocity();
+}
 
 /****************************************************************
  * MAIN
  * Prompt for input, compute new position, and display output
  ****************************************************************/
 int main()
-{
-   
-   testComputeDistance();
-   testComputeVelocity();
+{ 
+   testRunner();
 
-   // Prompt for input and variables to be computed
    double dx = prompt("What is your horizontal velocity (m/s)? ");
    double dy = prompt("What is your vertical velocity (m/s)? ");
    double y = prompt("What is your altitude (m)? ");
