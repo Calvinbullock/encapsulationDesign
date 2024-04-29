@@ -286,7 +286,7 @@ double computeDegreestoRadians(double degrees)
  * tests the math in radians to degrees
  *
  * OUTPUT
- *      returns 0 if pass
+ *     exit case: return 0 if all tests pass
  ***************************************************/
 void testComputeDegreestoRadians()
 {
@@ -318,7 +318,7 @@ double prompt(string text)
 
 /**************************************************
  * TEST RUNNER
- * runs all the test functions
+ * Runs all the test functions
  **************************************************/
 void testRunner()
 {
