@@ -170,7 +170,6 @@ void testComputeVelocity()
 double computeVerticalComponent(double totalVel, double angle)
 {
    double y = cos(angle) * totalVel;
-   cout << y << endl;
    return y;
 }
 
@@ -331,7 +330,7 @@ void testRunner()
    testComputeAcceleration();
    testComputeDegreestoRadians();
 
-   cout << "testing Completed" << endl;
+   cout << "testing Completed\n" << endl;
 }
 
 /****************************************************************
