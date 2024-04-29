@@ -34,7 +34,7 @@ using namespace std;
  * OUTPUT
  *     s : new position, in meters
  **************************************************/
-double computeDistance(double startPos, double velocity, double aceel, double time) 
+double computeDistance(double startPos, double velocity, double aceel, double time)
 {
    double endPos;
    endPos = startPos + velocity * time + .5 * aceel * (time * time);
@@ -47,18 +47,18 @@ double computeDistance(double startPos, double velocity, double aceel, double ti
  *
  * OUTPUT
  *     exit case: return 0 if all tests pass
-***************************************************/
-int testComputeDistance() 
+ ***************************************************/
+int testComputeDistance()
 {
    double stP;
    double vel;
    double accel;
    double time;
-   
+
    // sanity check
    assert(computeDistance(0, 0, 0, 0) == 0);
 
-   // normal case 
+   // normal case
    stP = 2.3;
    vel = 2.3;
    accel = 3.3;
@@ -94,15 +94,15 @@ double computeAcceleration(double force, double mass)
  *
  * OUTPUT
  *      returns 0 if pass
-***************************************************/
+ ***************************************************/
 int testComputeAcceleration()
-{  
+{
    double force = 400;
-   double mass  = 20;
+   double mass = 20;
    double accel = 20;
 
    assert(computeAcceleration(force, mass) == accel);
-   
+
    return 0;
 }
 
@@ -120,7 +120,7 @@ int testComputeAcceleration()
  * OUTPUT
  *     v : new velocity, in meters/second
  ***********************************************/
-double computeVelocity(double vel, double accel, double time) 
+double computeVelocity(double vel, double accel, double time)
 {
    double endVel;
    endVel = vel + accel * time;
@@ -129,20 +129,20 @@ double computeVelocity(double vel, double accel, double time)
 
 /***********************************************
  * TEST COMPUTE VELOCITY
- * 
+ *
  * OUTPUT
  *     exit case: return 0 if all tests pass
-***********************************************/
-void testComputeVelocity() 
+ ***********************************************/
+void testComputeVelocity()
 {
    double vel;
    double accel;
    double time;
 
-   // Sanity check  
+   // Sanity check
    assert(computeVelocity(0, 0, 0) == 0);
 
-   // 
+   //
    vel = 2.3;
    accel = 3.3;
    time = 4.0;
@@ -167,7 +167,7 @@ void testComputeVelocity()
  * OUTPUT
  *     y : the vertical component of the total
  ***********************************************/
-double computeVerticalComponent(double totalVel, double angle) 
+double computeVerticalComponent(double totalVel, double angle)
 {
    double y = cos(angle) * totalVel;
    cout << y << endl;
@@ -176,15 +176,15 @@ double computeVerticalComponent(double totalVel, double angle)
 
 /***********************************************
  * TEST COMPUTE VERTICAL COMPONENT
- * 
+ *
  * OUTPUT
  *     exit case: return 0 if all tests pass
-***********************************************/
-int testComputeVerticalComponent() 
+ ***********************************************/
+int testComputeVerticalComponent()
 {
    double total;
    double angle;
-   
+
    // sanity check
    assert(computeVerticalComponent(0, 0) == 0);
 
@@ -215,7 +215,7 @@ int testComputeVerticalComponent()
  * OUTPUT
  *     x : the vertical component of the total
  ***********************************************/
-double computeHorizontalComponent(double totalVel, double angle) 
+double computeHorizontalComponent(double totalVel, double angle)
 {
    double x;
    x = sin(angle) * totalVel;
@@ -224,15 +224,15 @@ double computeHorizontalComponent(double totalVel, double angle)
 
 /***********************************************
  * TEST COMPUTE HORIZONTAL COMPONENT
- * 
+ *
  * OUTPUT
  *     exit case: return 0 if all tests pass
-***********************************************/
-int testComputeHorizontalComponent() 
+ ***********************************************/
+int testComputeHorizontalComponent()
 {
    double totalVel;
    double angle;
-   
+
    // sanity check
    assert(computeHorizontalComponent(0, 0) == 0);
 
@@ -277,7 +277,7 @@ int testComputeHorizontalComponent()
 
 double computeDegreestoRadians(double degrees)
 {
-   double radians = (2*M_PI)*(degrees / 360);
+   double radians = (2 * M_PI) * (degrees / 360);
 
    return radians;
 }
@@ -288,21 +288,20 @@ double computeDegreestoRadians(double degrees)
  *
  * OUTPUT
  *      returns 0 if pass
-***************************************************/
+ ***************************************************/
 void testComputeDegreestoRadians()
-{  
+{
    double radians = 0.3490658504;
    double degrees = 20;
 
    assert(computeDegreestoRadians(degrees) - (radians) <= 0.00001);
-   
 }
 
 /**************************************************
  * TEST RUNNER
  * runs all the test functions
-**************************************************/
-void testRunner() 
+ **************************************************/
+void testRunner()
 {
    testComputeDistance();
    testComputeVelocity();
@@ -314,7 +313,6 @@ void testRunner()
 
    cout << "testing Completed" << endl;
 }
-
 
 /**************************************************
  * PROMPT
@@ -329,7 +327,7 @@ double prompt(string text)
    double input;
 
    cout << text << endl;
-   cin  >> input;
+   cin >> input;
 
    cin.ignore(); // clear input buffer
 
@@ -341,7 +339,7 @@ double prompt(string text)
  * Prompt for input, compute new position, and display output
  ****************************************************************/
 int main()
-{ 
+{
    testRunner();
 
    double dx = prompt("What is your horizontal velocity (m/s)? ");
