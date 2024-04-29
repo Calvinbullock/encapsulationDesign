@@ -40,6 +40,33 @@ double computeDistance(double startPos, double velocity, double aceel, double ti
    return endPos;
 }
 
+/***************************************************
+* TEST COMPUTE DISTANCE
+* Tests compute distance
+*
+* OUTPUT
+* returns 0 if pass
+***************************************************/
+int testComputeDistance() 
+{
+   double stP;
+   double vel;
+   double accel;
+   double time;
+   
+   // sanity check
+   assert(computeDistance(0, 0, 0, 0) == 0);
+
+   // normal case 
+   stP = 2.3;
+   vel = 2.3;
+   accel = 3.3;
+   time = 4.0;
+   assert(computeDistance(stP, vel, accel, time) == 37.9);
+
+   return 0;
+}
+
 /**************************************************
  * COMPUTE ACCELERATION
  * Find the acceleration given a thrust and mass.
@@ -175,6 +202,9 @@ double prompt(string text)
  ****************************************************************/
 int main()
 {
+   
+   testComputeDistance();
+   
    // Prompt for input and variables to be computed
    double dx = prompt("What is your horizontal velocity (m/s)? ");
    double dy = prompt("What is your vertical velocity (m/s)? ");
