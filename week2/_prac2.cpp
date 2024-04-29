@@ -41,11 +41,11 @@ double computeDistance(double startPos, double velocity, double aceel, double ti
 }
 
 /***************************************************
-* TEST COMPUTE DISTANCE
-* Tests compute distance
-*
-* OUTPUT
-* returns 0 if pass
+ * TEST COMPUTE DISTANCE
+ * Tests compute distance
+ *
+ * OUTPUT
+ *      returns 0 if pass
 ***************************************************/
 int testComputeDistance() 
 {
@@ -105,7 +105,30 @@ double computeVelocity(double vel, double accel, double time)
 {
    double endVel;
    endVel = vel + accel * time;
-   return 0.0;
+   return endVel;
+}
+
+
+/***********************************************
+ * TEST COMPUTE VELOCITY
+ * 
+ * OUTPUT
+ *      returns 0 if pass
+***********************************************/
+void testComputeVelocity() 
+{
+   double vel;
+   double accel;
+   double time;
+
+   // Sanity check  
+   assert(computeVelocity(0, 0, 0) == 0);
+
+   // 
+   vel = 2.3;
+   accel = 3.3;
+   time = 4.0;
+   assert(computeVelocity(vel, accel, time) == 15.5);
 }
 
 /***********************************************
@@ -196,6 +219,7 @@ double prompt(string text)
    return 0;
 }
 
+
 /****************************************************************
  * MAIN
  * Prompt for input, compute new position, and display output
@@ -204,7 +228,8 @@ int main()
 {
    
    testComputeDistance();
-   
+   testComputeVelocity();
+
    // Prompt for input and variables to be computed
    double dx = prompt("What is your horizontal velocity (m/s)? ");
    double dy = prompt("What is your vertical velocity (m/s)? ");
