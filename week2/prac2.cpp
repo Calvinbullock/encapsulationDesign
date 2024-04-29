@@ -44,11 +44,8 @@ double computeDistance(double startPos, double velocity, double aceel, double ti
 /***************************************************
  * TEST COMPUTE DISTANCE
  * Tests compute distance
- *
- * OUTPUT
- *     exit case: return 0 if all tests pass
  ***************************************************/
-int testComputeDistance()
+void testComputeDistance()
 {
    double stP;
    double vel;
@@ -64,8 +61,6 @@ int testComputeDistance()
    accel = 3.3;
    time = 4.0;
    assert(computeDistance(stP, vel, accel, time) == 37.9);
-
-   return 0;
 }
 
 /**************************************************
@@ -91,19 +86,14 @@ double computeAcceleration(double force, double mass)
 /**************************************************
  * TEST COMPUTE ACCELERATION
  * test the F=MA calculations are correct
- *
- * OUTPUT
- *      returns 0 if pass
  ***************************************************/
-int testComputeAcceleration()
+void testComputeAcceleration()
 {
    double force = 400;
    double mass = 20;
    double accel = 20;
 
    assert(computeAcceleration(force, mass) == accel);
-
-   return 0;
 }
 
 /***********************************************
@@ -129,9 +119,6 @@ double computeVelocity(double vel, double accel, double time)
 
 /***********************************************
  * TEST COMPUTE VELOCITY
- *
- * OUTPUT
- *     exit case: return 0 if all tests pass
  ***********************************************/
 void testComputeVelocity()
 {
@@ -175,9 +162,6 @@ double computeVerticalComponent(double totalVel, double angle)
 
 /***********************************************
  * TEST COMPUTE VERTICAL COMPONENT
- *
- * OUTPUT
- *     exit case: return 0 if all tests pass
  ***********************************************/
 void testComputeVerticalComponent()
 {
@@ -221,9 +205,6 @@ double computeHorizontalComponent(double totalVel, double angle)
 
 /***********************************************
  * TEST COMPUTE HORIZONTAL COMPONENT
- *
- * OUTPUT
- *     exit case: return 0 if all tests pass
  ***********************************************/
 void testComputeHorizontalComponent()
 {
@@ -269,9 +250,6 @@ double computeTotalComponent(double hori, double vert)
 /**************************************************
  * TEST RADIANS FROM DEGEES
  * tests the math in radians to degrees
- *
- * OUTPUT
- *     exit case: return 0 if all tests pass
  ***************************************************/
 void testComputeTotalComponent()
 {
@@ -304,9 +282,6 @@ double computeDegreestoRadians(double degrees)
 /**************************************************
  * TEST RADIANS FROM DEGEES
  * tests the math in radians to degrees
- *
- * OUTPUT
- *     exit case: return 0 if all tests pass
  ***************************************************/
 void testComputeDegreestoRadians()
 {
