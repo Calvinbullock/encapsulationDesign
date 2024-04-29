@@ -32,8 +32,9 @@ using namespace std;
  * OUTPUT
  *     s : new position, in meters
  **************************************************/
-void computeDistance()
+double computeDistance(double startPos, double velocity, double aceel, double time) 
 {
+
 }
 
 /**************************************************
@@ -70,7 +71,10 @@ double computeAcceleration(double force, double mass)
  * OUTPUT
  *     v : new velocity, in meters/second
  ***********************************************/
-// your function goes here
+double computeVelocity() 
+{
+    return 0.0;
+}
 
 /***********************************************
  * COMPUTE VERTICAL COMPONENT
