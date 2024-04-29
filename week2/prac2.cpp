@@ -298,23 +298,6 @@ void testComputeDegreestoRadians()
 }
 
 /**************************************************
- * TEST RUNNER
- * runs all the test functions
- **************************************************/
-void testRunner()
-{
-   testComputeDistance();
-   testComputeVelocity();
-   testComputeVerticalComponent();
-   testComputeHorizontalComponent();
-
-   testComputeAcceleration();
-   testComputeDegreestoRadians();
-
-   cout << "testing Completed" << endl;
-}
-
-/**************************************************
  * PROMPT
  * A generic function to prompt the user for a double
  * INPUT
@@ -334,6 +317,23 @@ double prompt(string text)
    return input;
 }
 
+/**************************************************
+ * TEST RUNNER
+ * runs all the test functions
+ **************************************************/
+void testRunner()
+{
+   testComputeDistance();
+   testComputeVelocity();
+   testComputeVerticalComponent();
+   testComputeHorizontalComponent();
+
+   testComputeAcceleration();
+   testComputeDegreestoRadians();
+
+   cout << "testing Completed" << endl;
+}
+
 /****************************************************************
  * MAIN
  * Prompt for input, compute new position, and display output
@@ -348,6 +348,7 @@ int main()
    double x = prompt("What is your position (m)? ");
    double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
    double t = prompt("What is the time interval (s)? ");
+
    double aRadians;           // Angle in radians
    double accelerationThrust; // Acceleration due to thrust
    double ddxThrust;          // Horizontal acceleration due to thrust
