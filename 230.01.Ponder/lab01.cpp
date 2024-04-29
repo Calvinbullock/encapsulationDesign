@@ -18,7 +18,8 @@ using namespace std;
  * main
  * Print out hello world
  **********************************************************/
-int main() {
+int main() 
+{
    // print hello world to console
    cout << "Hello World" << endl;
    return 0;
