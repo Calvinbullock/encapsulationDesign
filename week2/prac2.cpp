@@ -14,6 +14,7 @@
 #include <iostream> // for CIN and COUT
 #include <string>
 #include <cassert>
+#include <cmath>
 using namespace std;
 
 #define WEIGHT 15103.000 // Weight in KG
@@ -58,10 +59,12 @@ double computeAcceleration(double force, double mass)
 }
 /**************************************************
  * TEST COMPUTE ACCELERATION
- * test the values of force, mass & accel
- * against all variatons of F=ma
+ * test the F=MA calculations are correct
+ *
+ * OUTPUT
+ *      returns 0 if pass
 ***************************************************/
-void testComputeAcceleration()
+int testComputeAcceleration()
 {  
    double force = 400;
    double mass  = 20;
@@ -69,6 +72,7 @@ void testComputeAcceleration()
 
    assert(computeAcceleration(force, mass) == accel);
    
+   return 0;
 }
 
 /***********************************************
@@ -162,6 +166,31 @@ double computeVelocity()
  **************************************************/
 // your function goes here
 
+double computeDegreestoRadians(double degrees)
+{
+   double radians = (2*M_PI)*(degrees / 360);
+
+   return radians;
+}
+
+/**************************************************
+ * TEST RADIANS FROM DEGEES
+ * tests the math in radians to degrees
+ *
+ * OUTPUT
+ *      returns 0 if pass
+***************************************************/
+void testComputeDegreestoRadians()
+{  
+   double radians = 0.3490658504;
+   double degrees = 20;
+
+   assert(computeDegreestoRadians(degrees) - (radians) <= 0.00001);
+   
+}
+
+
+
 /**************************************************
  * PROMPT
  * A generic function to prompt the user for a double
@@ -175,7 +204,7 @@ double prompt(string text)
    double input;
 
    cout << text << endl;
-   cin >> input;
+   cin  >> input;
 
    cin.ignore(); // clear input buffer
 
@@ -189,29 +218,32 @@ double prompt(string text)
 int main()
 {
    // Prompt for input and variables to be computed
-   double dx = prompt("What is your horizontal velocity (m/s)? ");
-   double dy = prompt("What is your vertical velocity (m/s)? ");
-   double y = prompt("What is your altitude (m)? ");
-   double x = prompt("What is your position (m)? ");
-   double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
-   double t = prompt("What is the time interval (s)? ");
-   double aRadians;           // Angle in radians
-   double accelerationThrust; // Acceleration due to thrust
-   double ddxThrust;          // Horizontal acceleration due to thrust
-   double ddyThrust;          // Vertical acceleration due to thrust
-   double ddx;                // Total horizontal acceleration
-   double ddy;                // Total vertical acceleration
-   double v;                  // Total velocity
+   // double dx = prompt("What is your horizontal velocity (m/s)? ");
+   // double dy = prompt("What is your vertical velocity (m/s)? ");
+   // double y = prompt("What is your altitude (m)? ");
+   // double x = prompt("What is your position (m)? ");
+   // double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
+   // double t = prompt("What is the time interval (s)? ");
+   // double aRadians;           // Angle in radians
+   // double accelerationThrust; // Acceleration due to thrust
+   // double ddxThrust;          // Horizontal acceleration due to thrust
+   // double ddyThrust;          // Vertical acceleration due to thrust
+   // double ddx;                // Total horizontal acceleration
+   // double ddy;                // Total vertical acceleration
+   // double v;                  // Total velocity
 
    // Go through the simulator five times
    // your code goes here
 
-   // Output
-   cout.setf(ios::fixed | ios::showpoint);
-   cout.precision(2);
-   cout << "\tNew position:   (" << x << ", " << y << ")m\n";
-   cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
-   cout << "\tTotal velocity:  " << v << "m/s\n\n";
+   testComputeAcceleration();
+   testComputeDegreestoRadians();
+
+   // // Output
+   // cout.setf(ios::fixed | ios::showpoint);
+   // cout.precision(2);
+   // cout << "\tNew position:   (" << x << ", " << y << ")m\n";
+   // cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
+   // cout << "\tTotal velocity:  " << v << "m/s\n\n";
 
    return 0;
 }
