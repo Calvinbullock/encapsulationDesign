@@ -14,6 +14,7 @@
 #include <iostream> // for CIN and COUT
 #include <string>
 #include <cassert>
+#include <cmath>
 using namespace std;
 
 #define WEIGHT 15103.000 // Weight in KG
@@ -108,7 +109,6 @@ double computeVelocity(double vel, double accel, double time)
    return endVel;
 }
 
-
 /***********************************************
  * TEST COMPUTE VELOCITY
  * 
@@ -149,7 +149,36 @@ void testComputeVelocity()
  * OUTPUT
  *     y : the vertical component of the total
  ***********************************************/
-// your function goes here
+double computeVerticalComponent(double total, double angle) 
+{
+   double y = cos(angle) * total;
+   cout << y << endl;
+   return y;
+}
+
+/***********************************************
+ * TEST COMPUTE VERTICAL COMPONENT
+ * 
+ * OUTPUT
+ *      return 0 if all tests pass
+***********************************************/
+int testComputeVerticalComponent() 
+{
+   double total;
+   double angle;
+   
+   // sanity check
+   //assert(computeVerticalComponent(0, 0) == 0);
+
+   // normal case
+   total = 4.0;
+   angle = 3.3;
+   // This assert takes in to account rounding tolerance
+   assert(computeVerticalComponent(total, angle) - (-3.94992) <= 0.00001);
+
+   return 0;
+}
+
 
 /***********************************************
  * COMPUTE HORIZONTAL COMPONENT
@@ -228,6 +257,7 @@ void testRunner()
 {
    testComputeDistance();
    testComputeVelocity();
+   testComputeVerticalComponent();
 }
 
 /****************************************************************
