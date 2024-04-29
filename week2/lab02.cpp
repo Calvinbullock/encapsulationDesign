@@ -1,7 +1,18 @@
-
-
+/*************************************************************
+ * 1. Name:
+ *      -your name-
+ * 2. Assignment Name:
+ *      Lab 02: Apollo 11
+ * 3. Assignment Description:
+ *      Simulate the Apollo 11 landing
+ * 4. What was the hardest part? Be as specific as possible.
+ *      -a paragraph or two about how the assignment went for you-
+ * 5. How long did it take for you to complete the assignment?
+ *      -total time in hours: reading the assignment, submitting, and writing code-
+ *****************************************************************/
 
 /*
+ * Sample interaction
 What is your horizontal velocity (m/s)? 0
 What is your vertical velocity (m/s)? -10
 What is your altitude (m)? 100
