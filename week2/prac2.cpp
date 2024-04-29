@@ -48,6 +48,11 @@ void computeDistance()
  *     a : acceleration, in meters/second^2
  ***************************************************/
 // your function goes here
+double computeAcceleration()
+{
+   
+}
+
 
 /***********************************************
  * COMPUTE VELOCITY
