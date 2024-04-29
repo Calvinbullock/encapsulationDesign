@@ -34,8 +34,38 @@ using namespace std;
  * OUTPUT
  *     s : new position, in meters
  **************************************************/
-double computeDistance(double startPos, double velocity, double aceel, double time)
+double computeDistance(double startPos, double velocity, double aceel, double time) 
 {
+   double endPos;
+   endPos = startPos + velocity * time + .5 * aceel * (time * time);
+   return endPos;
+}
+
+/***************************************************
+ * TEST COMPUTE DISTANCE
+ * Tests compute distance
+ *
+ * OUTPUT
+ *     exit case: return 0 if all tests pass
+***************************************************/
+int testComputeDistance() 
+{
+   double stP;
+   double vel;
+   double accel;
+   double time;
+   
+   // sanity check
+   assert(computeDistance(0, 0, 0, 0) == 0);
+
+   // normal case 
+   stP = 2.3;
+   vel = 2.3;
+   accel = 3.3;
+   time = 4.0;
+   assert(computeDistance(stP, vel, accel, time) == 37.9);
+
+   return 0;
 }
 
 /**************************************************
@@ -57,6 +87,7 @@ double computeAcceleration(double force, double mass)
    double accel = force / mass;
    return accel;
 }
+
 /**************************************************
  * TEST COMPUTE ACCELERATION
  * test the F=MA calculations are correct
@@ -89,9 +120,33 @@ int testComputeAcceleration()
  * OUTPUT
  *     v : new velocity, in meters/second
  ***********************************************/
-double computeVelocity()
+double computeVelocity(double vel, double accel, double time) 
 {
-   return 0.0;
+   double endVel;
+   endVel = vel + accel * time;
+   return endVel;
+}
+
+/***********************************************
+ * TEST COMPUTE VELOCITY
+ * 
+ * OUTPUT
+ *     exit case: return 0 if all tests pass
+***********************************************/
+void testComputeVelocity() 
+{
+   double vel;
+   double accel;
+   double time;
+
+   // Sanity check  
+   assert(computeVelocity(0, 0, 0) == 0);
+
+   // 
+   vel = 2.3;
+   accel = 3.3;
+   time = 4.0;
+   assert(computeVelocity(vel, accel, time) == 15.5);
 }
 
 /***********************************************
@@ -112,7 +167,35 @@ double computeVelocity()
  * OUTPUT
  *     y : the vertical component of the total
  ***********************************************/
-// your function goes here
+double computeVerticalComponent(double totalVel, double angle) 
+{
+   double y = cos(angle) * totalVel;
+   cout << y << endl;
+   return y;
+}
+
+/***********************************************
+ * TEST COMPUTE VERTICAL COMPONENT
+ * 
+ * OUTPUT
+ *     exit case: return 0 if all tests pass
+***********************************************/
+int testComputeVerticalComponent() 
+{
+   double total;
+   double angle;
+   
+   // sanity check
+   assert(computeVerticalComponent(0, 0) == 0);
+
+   // normal case
+   total = 4.0;
+   angle = 3.3;
+   // This assert takes in to account rounding tolerance
+   assert(computeVerticalComponent(total, angle) - (-3.94992) <= 0.00001);
+
+   return 0;
+}
 
 /***********************************************
  * COMPUTE HORIZONTAL COMPONENT
@@ -132,8 +215,35 @@ double computeVelocity()
  * OUTPUT
  *     x : the vertical component of the total
  ***********************************************/
-// your function goes here
+double computeHorizontalComponent(double totalVel, double angle) 
+{
+   double x;
+   x = sin(angle) * totalVel;
+   return x;
+}
 
+/***********************************************
+ * TEST COMPUTE HORIZONTAL COMPONENT
+ * 
+ * OUTPUT
+ *     exit case: return 0 if all tests pass
+***********************************************/
+int testComputeHorizontalComponent() 
+{
+   double totalVel;
+   double angle;
+   
+   // sanity check
+   assert(computeHorizontalComponent(0, 0) == 0);
+
+   // normal case
+   totalVel = 4.0;
+   angle = 3.3;
+   // This assert takes in to account rounding tolerance
+   assert(computeHorizontalComponent(totalVel, angle) - (-0.63098) <= 0.00001);
+
+   return 0;
+}
 /************************************************
  * COMPUTE TOTAL COMPONENT
  * Given the horizontal and vertical components of
@@ -153,7 +263,6 @@ double computeVelocity()
  * OUTPUT
  *    total : total component
  ***********************************************/
-// your function goes here
 
 /*************************************************
  * RADIANS FROM DEGEES
@@ -189,6 +298,20 @@ void testComputeDegreestoRadians()
    
 }
 
+/**************************************************
+ * TEST RUNNER
+ * runs all the test functions
+**************************************************/
+void testRunner() 
+{
+   testComputeDistance();
+   testComputeVelocity();
+   testComputeVerticalComponent();
+   testComputeHorizontalComponent();
+   testComputeAcceleration();
+   testComputeDegreestoRadians();
+   cout << "testing Completed" << endl;
+}
 
 
 /**************************************************
@@ -216,34 +339,32 @@ double prompt(string text)
  * Prompt for input, compute new position, and display output
  ****************************************************************/
 int main()
-{
-   // Prompt for input and variables to be computed
-   // double dx = prompt("What is your horizontal velocity (m/s)? ");
-   // double dy = prompt("What is your vertical velocity (m/s)? ");
-   // double y = prompt("What is your altitude (m)? ");
-   // double x = prompt("What is your position (m)? ");
-   // double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
-   // double t = prompt("What is the time interval (s)? ");
-   // double aRadians;           // Angle in radians
-   // double accelerationThrust; // Acceleration due to thrust
-   // double ddxThrust;          // Horizontal acceleration due to thrust
-   // double ddyThrust;          // Vertical acceleration due to thrust
-   // double ddx;                // Total horizontal acceleration
-   // double ddy;                // Total vertical acceleration
-   // double v;                  // Total velocity
+{ 
+   testRunner();
+
+   double dx = prompt("What is your horizontal velocity (m/s)? ");
+   double dy = prompt("What is your vertical velocity (m/s)? ");
+   double y = prompt("What is your altitude (m)? ");
+   double x = prompt("What is your position (m)? ");
+   double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
+   double t = prompt("What is the time interval (s)? ");
+   double aRadians;           // Angle in radians
+   double accelerationThrust; // Acceleration due to thrust
+   double ddxThrust;          // Horizontal acceleration due to thrust
+   double ddyThrust;          // Vertical acceleration due to thrust
+   double ddx;                // Total horizontal acceleration
+   double ddy;                // Total vertical acceleration
+   double v;                  // Total velocity
 
    // Go through the simulator five times
    // your code goes here
 
-   testComputeAcceleration();
-   testComputeDegreestoRadians();
-
-   // // Output
-   // cout.setf(ios::fixed | ios::showpoint);
-   // cout.precision(2);
-   // cout << "\tNew position:   (" << x << ", " << y << ")m\n";
-   // cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
-   // cout << "\tTotal velocity:  " << v << "m/s\n\n";
+   // Output
+   cout.setf(ios::fixed | ios::showpoint);
+   cout.precision(2);
+   cout << "\tNew position:   (" << x << ", " << y << ")m\n";
+   cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
+   cout << "\tTotal velocity:  " << v << "m/s\n\n";
 
    return 0;
 }
