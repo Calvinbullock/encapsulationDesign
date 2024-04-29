@@ -48,9 +48,12 @@ void computeDistance()
  *     a : acceleration, in meters/second^2
  ***************************************************/
 // your function goes here
-double computeAcceleration()
+double computeAcceleration(double force, double mass)
 {
-   
+   // to find acceleration we need to change the 
+   // formula to accel = force/mass
+   double accel = force/mass;
+   return accel;
 }
 
 
