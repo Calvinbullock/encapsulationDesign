@@ -156,12 +156,16 @@ double computeVelocity()
  * OUTPUT
  *      response : the user's response
  ***************************************************/
-// your function goes here
 double prompt(string text)
 {
-   cout << text << endl;
+   double input;
    
-   return 0;
+   cout << text << endl;
+   cin  >> input;
+
+   cin.ignore(); //clear input buffer
+
+   return input;
 }
 
 /****************************************************************
