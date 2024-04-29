@@ -46,7 +46,7 @@ double computeDistance(double startPos, double velocity, double aceel, double ti
  * Tests compute distance
  *
  * OUTPUT
- *      returns 0 if pass
+ *     exit case: return 0 if all tests pass
 ***************************************************/
 int testComputeDistance() 
 {
@@ -113,7 +113,7 @@ double computeVelocity(double vel, double accel, double time)
  * TEST COMPUTE VELOCITY
  * 
  * OUTPUT
- *      returns 0 if pass
+ *     exit case: return 0 if all tests pass
 ***********************************************/
 void testComputeVelocity() 
 {
@@ -149,9 +149,9 @@ void testComputeVelocity()
  * OUTPUT
  *     y : the vertical component of the total
  ***********************************************/
-double computeVerticalComponent(double total, double angle) 
+double computeVerticalComponent(double totalVel, double angle) 
 {
-   double y = cos(angle) * total;
+   double y = cos(angle) * totalVel;
    cout << y << endl;
    return y;
 }
@@ -168,7 +168,7 @@ int testComputeVerticalComponent()
    double angle;
    
    // sanity check
-   //assert(computeVerticalComponent(0, 0) == 0);
+   assert(computeVerticalComponent(0, 0) == 0);
 
    // normal case
    total = 4.0;
@@ -178,7 +178,6 @@ int testComputeVerticalComponent()
 
    return 0;
 }
-
 
 /***********************************************
  * COMPUTE HORIZONTAL COMPONENT
@@ -198,7 +197,35 @@ int testComputeVerticalComponent()
  * OUTPUT
  *     x : the vertical component of the total
  ***********************************************/
-// your function goes here
+double computeHorizontalComponent(double totalVel, double angle) 
+{
+   double x;
+   x = sin(angle) * totalVel;
+   return x;
+}
+
+/***********************************************
+ * TEST COMPUTE VERTICAL COMPONENT
+ * 
+ * OUTPUT
+ *     exit case: return 0 if all tests pass
+***********************************************/
+int testComputeHorizontalComponent() 
+{
+   double totalVel;
+   double angle;
+   
+   // sanity check
+   assert(computeHorizontalComponent(0, 0) == 0);
+
+   // normal case
+   totalVel = 4.0;
+   angle = 3.3;
+   // This assert takes in to account rounding tolerance
+   assert(computeHorizontalComponent(totalVel, angle) - (-0.63098) <= 0.00001);
+
+   return 0;
+}
 
 /************************************************
  * COMPUTE TOTAL COMPONENT
@@ -257,6 +284,7 @@ void testRunner()
    testComputeDistance();
    testComputeVelocity();
    testComputeVerticalComponent();
+   testComputeHorizontalComponent();
 }
 
 /****************************************************************
