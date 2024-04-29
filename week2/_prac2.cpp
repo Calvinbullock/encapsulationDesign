@@ -205,7 +205,7 @@ double computeHorizontalComponent(double totalVel, double angle)
 }
 
 /***********************************************
- * TEST COMPUTE VERTICAL COMPONENT
+ * TEST COMPUTE HORIZONTAL COMPONENT
  * 
  * OUTPUT
  *     exit case: return 0 if all tests pass
