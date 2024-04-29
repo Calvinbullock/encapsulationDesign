@@ -308,8 +308,10 @@ void testRunner()
    testComputeVelocity();
    testComputeVerticalComponent();
    testComputeHorizontalComponent();
+
    testComputeAcceleration();
    testComputeDegreestoRadians();
+
    cout << "testing Completed" << endl;
 }
 
