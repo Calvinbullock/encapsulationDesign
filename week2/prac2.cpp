@@ -13,6 +13,7 @@
 
 #include <iostream> // for CIN and COUT
 #include <string>
+#include <cassert>
 using namespace std;
 
 #define WEIGHT 15103.000 // Weight in KG
@@ -32,9 +33,8 @@ using namespace std;
  * OUTPUT
  *     s : new position, in meters
  **************************************************/
-double computeDistance(double startPos, double velocity, double aceel, double time) 
+double computeDistance(double startPos, double velocity, double aceel, double time)
 {
-
 }
 
 /**************************************************
@@ -56,6 +56,20 @@ double computeAcceleration(double force, double mass)
    double accel = force / mass;
    return accel;
 }
+/**************************************************
+ * TEST COMPUTE ACCELERATION
+ * test the values of force, mass & accel
+ * against all variatons of F=ma
+***************************************************/
+void testComputeAcceleration()
+{  
+   double force = 400;
+   double mass  = 20;
+   double accel = 20;
+
+   assert(computeAcceleration(force, mass) == accel);
+   
+}
 
 /***********************************************
  * COMPUTE VELOCITY
@@ -71,9 +85,9 @@ double computeAcceleration(double force, double mass)
  * OUTPUT
  *     v : new velocity, in meters/second
  ***********************************************/
-double computeVelocity() 
+double computeVelocity()
 {
-    return 0.0;
+   return 0.0;
 }
 
 /***********************************************
@@ -159,11 +173,11 @@ double computeVelocity()
 double prompt(string text)
 {
    double input;
-   
-   cout << text << endl;
-   cin  >> input;
 
-   cin.ignore(); //clear input buffer
+   cout << text << endl;
+   cin >> input;
+
+   cin.ignore(); // clear input buffer
 
    return input;
 }
