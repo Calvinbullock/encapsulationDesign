@@ -179,7 +179,7 @@ double computeVerticalComponent(double totalVel, double angle)
  * OUTPUT
  *     exit case: return 0 if all tests pass
  ***********************************************/
-int testComputeVerticalComponent()
+void testComputeVerticalComponent()
 {
    double total;
    double angle;
@@ -192,8 +192,6 @@ int testComputeVerticalComponent()
    angle = 3.3;
    // This assert takes in to account rounding tolerance
    assert(computeVerticalComponent(total, angle) - (-3.94992) <= 0.00001);
-
-   return 0;
 }
 
 /***********************************************
@@ -227,7 +225,7 @@ double computeHorizontalComponent(double totalVel, double angle)
  * OUTPUT
  *     exit case: return 0 if all tests pass
  ***********************************************/
-int testComputeHorizontalComponent()
+void testComputeHorizontalComponent()
 {
    double totalVel;
    double angle;
@@ -240,8 +238,6 @@ int testComputeHorizontalComponent()
    angle = 3.3;
    // This assert takes in to account rounding tolerance
    assert(computeHorizontalComponent(totalVel, angle) - (-0.63098) <= 0.00001);
-
-   return 0;
 }
 /************************************************
  * COMPUTE TOTAL COMPONENT
@@ -262,6 +258,30 @@ int testComputeHorizontalComponent()
  * OUTPUT
  *    total : total component
  ***********************************************/
+double computeTotalComponent(double hori, double vert)
+{
+   
+   double totalCmpnt = sqrt((hori*hori) + (vert*vert));
+   
+   return totalCmpnt;
+}
+
+/**************************************************
+ * TEST RADIANS FROM DEGEES
+ * tests the math in radians to degrees
+ *
+ * OUTPUT
+ *     exit case: return 0 if all tests pass
+ ***************************************************/
+void testComputeTotalComponent()
+{
+
+   double totalCmpnt = 28.284271247462;
+   double hori = 20;
+   double vert = 20;
+   
+    assert (computeTotalComponent(hori, vert) - (totalCmpnt) <= 0.00001);
+}
 
 /*************************************************
  * RADIANS FROM DEGEES
@@ -309,7 +329,7 @@ double prompt(string text)
    double input;
 
    cout << text << endl;
-   cin >> input;
+   cin  >> input;
 
    cin.ignore(); // clear input buffer
 
@@ -322,15 +342,19 @@ double prompt(string text)
  **************************************************/
 void testRunner()
 {
+
    testComputeDistance();
    testComputeVelocity();
    testComputeVerticalComponent();
    testComputeHorizontalComponent();
+   
 
    testComputeAcceleration();
    testComputeDegreestoRadians();
+   testComputeTotalComponent();
 
-   cout << "testing Completed\n" << endl;
+   cout << "testing Completed\n"
+        << endl;
 }
 
 /****************************************************************
