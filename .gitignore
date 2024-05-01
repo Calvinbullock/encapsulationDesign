@@ -1,4 +1,6 @@
 230.01.Ponder/a.out
 testDir/*
 */.exrc
-a.out
+*/a.out
+.clang-format
+*/runMe
