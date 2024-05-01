@@ -239,12 +239,12 @@ void testComputeHorizontalComponent()
  * OUTPUT
  *    total : total component
  ***********************************************/
-double computeTotalComponent(double hori, double vert)
+double computeTotalComponent(double x, double y)
 {
 
-   double totalCmpnt = sqrt((hori * hori) + (vert * vert));
+   double total= sqrt((x * x) + (y * y));
 
-   return totalCmpnt;
+   return total;
 }
 
 /**************************************************
@@ -272,11 +272,11 @@ void testComputeTotalComponent()
  **************************************************/
 // your function goes here
 
-double computeDegreestoRadians(double degrees)
+double computeDegreestoRadians(double d)
 {
-   double radians = (2 * M_PI) * (degrees / 360);
+   double r = (2 * M_PI) * (d / 360);
 
-   return radians;
+   return r;
 }
 
 /**************************************************
