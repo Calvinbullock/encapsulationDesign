@@ -11,10 +11,10 @@
  *      TODO -total time in hours: reading the assignment, submitting, etc.
  **************************************************************/
 
-#include <iostream> // for CIN and COUT
-#include <string>
 #include <cassert>
 #include <cmath>
+#include <iostream> // for CIN and COUT
+#include <string>
 using namespace std;
 
 #define WEIGHT 15103.000 // Weight in KG
@@ -154,9 +154,9 @@ void testComputeVelocity()
  * OUTPUT
  *     y : the vertical component of the total
  ***********************************************/
-double computeVerticalComponent(double totalVel, double angle)
+double computeVerticalComponent(double total, double angle)
 {
-   double y = cos(angle) * totalVel;
+   double y = cos(angle) * total;
    return y;
 }
 
@@ -196,10 +196,10 @@ void testComputeVerticalComponent()
  * OUTPUT
  *     x : the vertical component of the total
  ***********************************************/
-double computeHorizontalComponent(double totalVel, double angle)
+double computeHorizontalComponent(double total, double angle)
 {
    double x;
-   x = sin(angle) * totalVel;
+   x = sin(angle) * total;
    return x;
 }
 
@@ -241,9 +241,9 @@ void testComputeHorizontalComponent()
  ***********************************************/
 double computeTotalComponent(double hori, double vert)
 {
-   
-   double totalCmpnt = sqrt((hori*hori) + (vert*vert));
-   
+
+   double totalCmpnt = sqrt((hori * hori) + (vert * vert));
+
    return totalCmpnt;
 }
 
@@ -257,8 +257,8 @@ void testComputeTotalComponent()
    double totalCmpnt = 28.284271247462;
    double hori = 20;
    double vert = 20;
-   
-    assert (computeTotalComponent(hori, vert) - (totalCmpnt) <= 0.00001);
+
+   assert(computeTotalComponent(hori, vert) - (totalCmpnt) <= 0.00001);
 }
 
 /*************************************************
@@ -304,7 +304,7 @@ double prompt(string text)
    double input;
 
    cout << text << endl;
-   cin  >> input;
+   cin >> input;
 
    cin.ignore(); // clear input buffer
 
@@ -317,12 +317,10 @@ double prompt(string text)
  **************************************************/
 void testRunner()
 {
-
    testComputeDistance();
    testComputeVelocity();
    testComputeVerticalComponent();
    testComputeHorizontalComponent();
-   
 
    testComputeAcceleration();
    testComputeDegreestoRadians();
@@ -339,13 +337,20 @@ void testRunner()
 int main()
 {
    testRunner();
+   
+   // double dx = prompt("What is your horizontal velocity (m/s)? ");
+   // double dy = prompt("What is your vertical velocity (m/s)? ");
+   // double y = prompt("What is your altitude (m)? ");
+   // double x = prompt("What is your position (m)? ");
+   // double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
+   // double t = prompt("What is the time interval (s)? ");
 
-   double dx = prompt("What is your horizontal velocity (m/s)? ");
-   double dy = prompt("What is your vertical velocity (m/s)? ");
-   double y = prompt("What is your altitude (m)? ");
-   double x = prompt("What is your position (m)? ");
-   double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
-   double t = prompt("What is the time interval (s)? ");
+   double dx = 0.0;
+   double dy = -10.3;
+   double y = 58.2;
+   double x = 83.0;
+   double aDegrees = -45.0;
+   double t = 1.5;
 
    double aRadians;           // Angle in radians
    double accelerationThrust; // Acceleration due to thrust
@@ -355,15 +360,35 @@ int main()
    double ddy;                // Total vertical acceleration
    double v;                  // Total velocity
 
+   ddxThrust = computeAcceleration(THRUST, WEIGHT);
+   ddyThrust = computeAcceleration(THRUST + GRAVITY, WEIGHT);
+   aRadians = computeDegreestoRadians(aDegrees);
+
    // Go through the simulator five times
-   // your code goes here
+   //while (y > 0.0)
+   for (int i = 0; i < 6; i++)
+   {
+      ddx = computeVelocity(dx, 0, t);
+      ddy = computeVelocity(dy, 0, t);
 
-   // Output
-   cout.setf(ios::fixed | ios::showpoint);
-   cout.precision(2);
-   cout << "\tNew position:   (" << x << ", " << y << ")m\n";
-   cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
-   cout << "\tTotal velocity:  " << v << "m/s\n\n";
+      // compute velocity
+      dx = computeHorizontalComponent(ddx, aRadians);
+      dy = computeVerticalComponent(ddy, aRadians);
+      v = computeTotalComponent(dx, dy);
+      
+      // total accel
+      //ddx = computeHorizontalComponent(ddxThrust, aRadians);
+      //ddy = computeVerticalComponent(ddyThrust, aRadians);
+      
+      x = computeDistance(x, dx, ddx, t);
+      y = computeDistance(y, dy, ddx, t);
 
+      // Output
+      cout.setf(ios::fixed | ios::showpoint);
+      cout.precision(2);
+      cout << "\tNew position:   (" << x << ", " << y << ")m\n";
+      cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
+      cout << "\tTotal velocity:  " << v << "m/s\n\n";
+   }
    return 0;
 }
