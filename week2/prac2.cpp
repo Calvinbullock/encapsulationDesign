@@ -6,9 +6,10 @@
  * 3. Assignment Description:
  *      Compute how the Apollo lander will move across the screen
  * 4. What was the hardest part? Be as specific as possible.
- *      TODO -a paragraph or two about how the assignment went for you-
+ *       Figuring out the physics in the main function. AKA the order to call
+ *          the functions and what parameters to pass into each function.
  * 5. How long did it take for you to complete the assignment?
- *      TODO -total time in hours: reading the assignment, submitting, etc.
+ *       ~5.5 hours.
  **************************************************************/
 
 #include <cassert>
@@ -34,16 +35,14 @@ using namespace std;
  * OUTPUT
  *     s : new position, in meters
  **************************************************/
-double computeDistance(double startPos, double velocity, double accel, double time)
+double computeDistance(double s, double v, double a, double t)
 {
-   double endPos;
-   endPos = startPos + velocity * time + .5 * accel * (time * time);
-   return endPos;
+   double newPos = s + v * t + .5 * a * (t * t);
+   return newPos;
 }
 
 /***************************************************
  * TEST COMPUTE DISTANCE
- * Tests compute distance
  ***************************************************/
 void testComputeDistance()
 {
@@ -74,18 +73,16 @@ void testComputeDistance()
  * OUTPUT
  *     a : acceleration, in meters/second^2
  ***************************************************/
-// your function goes here
-double computeAcceleration(double force, double mass)
+double computeAcceleration(double f, double m)
 {
    // to find acceleration we need to change the
    // formula to accel = force/mass
-   double accel = force / mass;
-   return accel;
+   double a = f / m;
+   return a;
 }
 
 /**************************************************
  * TEST COMPUTE ACCELERATION
- * test the F=MA calculations are correct
  ***************************************************/
 void testComputeAcceleration()
 {
@@ -110,11 +107,10 @@ void testComputeAcceleration()
  * OUTPUT
  *     v : new velocity, in meters/second
  ***********************************************/
-double computeVelocity(double vel, double accel, double time)
+double computeVelocity(double v, double a, double t)
 {
-   double endVel;
-   endVel = vel + accel * time;
-   return endVel;
+   double newVel = v + a * t;
+   return newVel;
 }
 
 /***********************************************
@@ -154,9 +150,9 @@ void testComputeVelocity()
  * OUTPUT
  *     y : the vertical component of the total
  ***********************************************/
-double computeVerticalComponent(double total, double angle)
+double computeVerticalComponent(double total, double a)
 {
-   double y = cos(angle) * total;
+   double y = cos(a) * total;
    return y;
 }
 
@@ -196,10 +192,10 @@ void testComputeVerticalComponent()
  * OUTPUT
  *     x : the vertical component of the total
  ***********************************************/
-double computeHorizontalComponent(double total, double angle)
+double computeHorizontalComponent(double total, double a)
 {
    double x;
-   x = sin(angle) * total;
+   x = sin(a) * total;
    return x;
 }
 
@@ -241,19 +237,15 @@ void testComputeHorizontalComponent()
  ***********************************************/
 double computeTotalComponent(double x, double y)
 {
-
-   double total= sqrt((x * x) + (y * y));
-
+   double total = sqrt((x * x) + (y * y));
    return total;
 }
 
 /**************************************************
  * TEST RADIANS FROM DEGEES
- * tests the math in radians to degrees
  ***************************************************/
 void testComputeTotalComponent()
 {
-
    double totalCmpnt = 28.284271247462;
    double hori = 20;
    double vert = 20;
@@ -270,18 +262,14 @@ void testComputeTotalComponent()
  * OUTPUT
  *     r : radians from 0 to 2pi
  **************************************************/
-// your function goes here
-
 double computeDegreestoRadians(double d)
 {
    double r = (2 * M_PI) * (d / 360);
-
    return r;
 }
 
 /**************************************************
  * TEST RADIANS FROM DEGEES
- * tests the math in radians to degrees
  ***************************************************/
 void testComputeDegreestoRadians()
 {
@@ -303,11 +291,10 @@ double prompt(string text)
 {
    double input;
 
-   cout << text << endl;
-   cin >> input;
+   cout << text;
+   cin  >> input;
 
    cin.ignore(); // clear input buffer
-
    return input;
 }
 
@@ -336,21 +323,21 @@ void testRunner()
  ****************************************************************/
 int main()
 {
-   testRunner();
-   
-   // double dx = prompt("What is your horizontal velocity (m/s)? ");
-   // double dy = prompt("What is your vertical velocity (m/s)? ");
-   // double y = prompt("What is your altitude (m)? ");
-   // double x = prompt("What is your position (m)? ");
-   // double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
-   // double t = prompt("What is the time interval (s)? ");
+   // testRunner();
 
-   double dx = 0.0;
-   double dy = -10.3;
-   double x = 83.0;
-   double y = 58.2;
-   double aDegrees = -45.0;
-   double t = 1.5;
+   double dx = prompt("What is your horizontal velocity (m/s)? ");
+   double dy = prompt("What is your vertical velocity (m/s)? ");
+   double y = prompt("What is your altitude (m)? ");
+   double x = prompt("What is your position (m)? ");
+   double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
+   double t = prompt("What is the time interval (s)? ");
+
+   // double dx = 0.0;
+   // double dy = -10.3;
+   // double x = 83.0;
+   // double y = 58.2;
+   // double aDegrees = -45.0;
+   // double t = 1.5;
 
    double aRadians;           // Angle in radians
    double accelerationThrust; // Acceleration due to thrust
@@ -360,30 +347,24 @@ int main()
    double ddy;                // Total vertical acceleration
    double v;                  // Total velocity
 
-   
-   double accel = computeAcceleration(THRUST, WEIGHT);
+   accelerationThrust = computeAcceleration(THRUST, WEIGHT);
    aRadians = computeDegreestoRadians(aDegrees);
 
-   ddy = computeVerticalComponent(accel, aRadians);
-   ddx = computeHorizontalComponent(accel, aRadians);
+   ddy = computeVerticalComponent(accelerationThrust, aRadians);
+   ddx = computeHorizontalComponent(accelerationThrust, aRadians);
 
    ddy += GRAVITY;
-   
 
-   // Go through the simulator five times
+   // Go through the simulator until the lander touches ground
    while (y > 0.0)
-   //for (int i = 0; i < 5; i++)
    {
       x = computeDistance(x, dx, ddx, t);
       y = computeDistance(y, dy, ddy, t);
 
       dx = computeVelocity(dx, ddx, t);
       dy = computeVelocity(dy, ddy, t);
-      
-      // compute velocity
+
       v = computeTotalComponent(dx, dy);
-      
-      
 
       // Output
       cout.setf(ios::fixed | ios::showpoint);
