@@ -34,10 +34,10 @@ using namespace std;
  * OUTPUT
  *     s : new position, in meters
  **************************************************/
-double computeDistance(double startPos, double velocity, double aceel, double time)
+double computeDistance(double startPos, double velocity, double accel, double time)
 {
    double endPos;
-   endPos = startPos + velocity * time + .5 * aceel * (time * time);
+   endPos = startPos + velocity * time + .5 * accel * (time * time);
    return endPos;
 }
 
@@ -347,8 +347,8 @@ int main()
 
    double dx = 0.0;
    double dy = -10.3;
-   double y = 58.2;
    double x = 83.0;
+   double y = 58.2;
    double aDegrees = -45.0;
    double t = 1.5;
 
@@ -360,28 +360,30 @@ int main()
    double ddy;                // Total vertical acceleration
    double v;                  // Total velocity
 
-   ddxThrust = computeAcceleration(THRUST, WEIGHT);
-   ddyThrust = computeAcceleration(THRUST + GRAVITY, WEIGHT);
+   
+   double accel = computeAcceleration(THRUST, WEIGHT);
    aRadians = computeDegreestoRadians(aDegrees);
 
-   // Go through the simulator five times
-   //while (y > 0.0)
-   for (int i = 0; i < 6; i++)
-   {
-      ddx = computeVelocity(dx, 0, t);
-      ddy = computeVelocity(dy, 0, t);
+   ddy = computeVerticalComponent(accel, aRadians);
+   ddx = computeHorizontalComponent(accel, aRadians);
 
+   ddy += GRAVITY;
+   
+
+   // Go through the simulator five times
+   while (y > 0.0)
+   //for (int i = 0; i < 5; i++)
+   {
+      x = computeDistance(x, dx, ddx, t);
+      y = computeDistance(y, dy, ddy, t);
+
+      dx = computeVelocity(dx, ddx, t);
+      dy = computeVelocity(dy, ddy, t);
+      
       // compute velocity
-      dx = computeHorizontalComponent(ddx, aRadians);
-      dy = computeVerticalComponent(ddy, aRadians);
       v = computeTotalComponent(dx, dy);
       
-      // total accel
-      //ddx = computeHorizontalComponent(ddxThrust, aRadians);
-      //ddy = computeVerticalComponent(ddyThrust, aRadians);
       
-      x = computeDistance(x, dx, ddx, t);
-      y = computeDistance(y, dy, ddx, t);
 
       // Output
       cout.setf(ios::fixed | ios::showpoint);
