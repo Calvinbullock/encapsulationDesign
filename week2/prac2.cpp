@@ -325,19 +325,19 @@ int main()
 {
    // testRunner();
 
-   double dx = prompt("What is your horizontal velocity (m/s)? ");
-   double dy = prompt("What is your vertical velocity (m/s)? ");
-   double y = prompt("What is your altitude (m)? ");
-   double x = prompt("What is your position (m)? ");
-   double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
-   double t = prompt("What is the time interval (s)? ");
+   // double dx = prompt("What is your horizontal velocity (m/s)? ");
+   // double dy = prompt("What is your vertical velocity (m/s)? ");
+   // double y = prompt("What is your altitude (m)? ");
+   // double x = prompt("What is your position (m)? ");
+   // double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
+   // double t = prompt("What is the time interval (s)? ");
 
-   // double dx = 0.0;
-   // double dy = -10.3;
-   // double x = 83.0;
-   // double y = 58.2;
-   // double aDegrees = -45.0;
-   // double t = 1.5;
+   double dx = 0.0;
+   double dy = -10.3;
+   double x = 83.0;
+   double y = 58.2;
+   double aDegrees = -45.0;
+   double t = 1.5;
 
    double aRadians;           // Angle in radians
    double accelerationThrust; // Acceleration due to thrust

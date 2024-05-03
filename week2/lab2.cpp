@@ -291,7 +291,7 @@ double prompt(string text)
    double input;
 
    cout << text;
-   cin  >> input;
+   cin >> input;
 
    cin.ignore(); // clear input buffer
    return input;
@@ -329,15 +329,23 @@ int main()
    // double y = prompt("What is your altitude (m)? ");
    // double x = prompt("What is your position (m)? "); // will be 0
    // double t = prompt("What is the time interval (s)? ");
-   
-    double dx = 0.0;
-    double dy = -10.3;
-    double x = 0.0;
-    double y = 58.2;
-    double aDegrees = -45.0;
-    double t = 1;
-   
-   int timeInterval;
+
+   // calc inputs
+   //  double dx = 0.0;
+   //  double dy = -10.3;
+   //  double x = 83;
+   //  double y = 58.2;
+   //  double aDegrees = -45.0;
+   //  double t = 1.5;
+
+   //  physics inputs
+   double dx = -10.0;
+   double dy = -9;
+   double x = 0.0;
+   double y = 100;
+   double aDegrees = 60.0;
+   double t = 1;
+
    double aRadians;           // Angle in radians
    double accelerationThrust; // Acceleration due to thrust
    double ddxThrust;          // Horizontal acceleration due to thrust
@@ -346,10 +354,11 @@ int main()
    double ddy;                // Total vertical acceleration
    double v;                  // Total velocity
 
-   // Go through the simulator until the lander touches ground
-   while (y > 0.0) {
-      double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
+   while (y > 0.0)
+   {
 
+      cout << "angle: ";
+      cin >> aDegrees;
       accelerationThrust = computeAcceleration(THRUST, WEIGHT);
       aRadians = computeDegreestoRadians(aDegrees);
 
@@ -358,8 +367,8 @@ int main()
 
       ddy += GRAVITY;
 
-      // Go through the simulator 5 times (5 secs)
-      for (timeInterval = 0; timeInterval < 6;timeInterval++)
+      // Go through the simulator until the lander touches ground
+      for (int i = 0; i < 5; i++)
       {
          x = computeDistance(x, dx, ddx, t);
          y = computeDistance(y, dy, ddy, t);
