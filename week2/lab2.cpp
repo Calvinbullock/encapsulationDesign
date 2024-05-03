@@ -304,9 +304,9 @@ double prompt(string text)
  **************************************************/
 void physicsEngine(double dx, double dy, double y)
 {
-//inital values
+   //inital values
    double x = 0.0;
-   double t = 1;
+   double t = 1.0;
 
    double aDegrees;
    double aRadians;           // Angle in radians
@@ -341,15 +341,18 @@ void physicsEngine(double dx, double dy, double y)
          dy = computeVelocity(dy, ddy, t);
 
          v = computeTotalComponent(dx, dy);
-
-         // Output
+         
+         // cout round too two decimals
          cout.setf(ios::fixed | ios::showpoint);
          cout.precision(2);
-         cout << sec << "s - x,y:(" << x << ", " << y << ")m"
-              << "  dx,dy:(" << dx << ", " << dy << ")m/s"
-              << "  speed:" << v << "m/s  angle:" << aDegrees << "deg"
-              << endl;
 
+         // Output
+         cout << sec << "s - "
+                     << "x,y:(" << x << ", " << y << ")m  "
+                     << "dx,dy:(" << dx << ", " << dy << ")m/s  "
+                     << "speed:" << v << "m/s  angle:"
+                     << aDegrees << "deg"
+                     << endl;
       }
       cout << endl;
    }
@@ -361,7 +364,7 @@ void physicsEngine(double dx, double dy, double y)
 void testPhysicsEngine(){
    physicsEngine( 10.53, -13.959, 106.08);
    physicsEngine( -35.0, -15.0, 207.77);
-   physicsEngine(10, -10, 62.7);
+   physicsEngine(10.0, -10.0, 62.7);
 }
 
 /**************************************************
@@ -379,13 +382,11 @@ void testRunner()
    testComputeDegreestoRadians();
    testComputeTotalComponent();
 
-   testPhysicsEngine();
+   //testPhysicsEngine();
 
    cout << "testing Completed\n"
         << endl;
 }
-
-
 
 /****************************************************************
  * MAIN
@@ -394,7 +395,7 @@ void testRunner()
 int main()
 {
    // testRunner();
-   testPhysicsEngine();
+   // testPhysicsEngine();
    
    // double dy = prompt("What is your vertical velocity (m/s)? ");
    // double dx = prompt("What is your horizontal velocity (m/s)? ");
@@ -404,8 +405,8 @@ int main()
    double dx = -10.0;
    double dy = -9;
    double y = 100;
-   
-   //physicsEngine(dx, dy, y);
+    
+   physicsEngine(dx, dy, y);
    
    return 0;
 }
