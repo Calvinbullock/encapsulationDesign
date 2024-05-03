@@ -324,20 +324,20 @@ int main()
 {
    // testRunner();
 
-   double dx = prompt("What is your horizontal velocity (m/s)? ");
-   double dy = prompt("What is your vertical velocity (m/s)? ");
-   double y = prompt("What is your altitude (m)? ");
-   double x = prompt("What is your position (m)? "); // will be 0
-   double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
-   double t = prompt("What is the time interval (s)? ");
-
-   // double dx = 0.0;
-   // double dy = -10.3;
-   // double x = 83.0;
-   // double y = 58.2;
-   // double aDegrees = -45.0;
-   // double t = 1.5;
-
+   // double dx = prompt("What is your horizontal velocity (m/s)? ");
+   // double dy = prompt("What is your vertical velocity (m/s)? ");
+   // double y = prompt("What is your altitude (m)? ");
+   // double x = prompt("What is your position (m)? "); // will be 0
+   // double t = prompt("What is the time interval (s)? ");
+   
+    double dx = 0.0;
+    double dy = -10.3;
+    double x = 0.0;
+    double y = 58.2;
+    double aDegrees = -45.0;
+    double t = 1;
+   
+   int timeInterval;
    double aRadians;           // Angle in radians
    double accelerationThrust; // Acceleration due to thrust
    double ddxThrust;          // Horizontal acceleration due to thrust
@@ -346,31 +346,36 @@ int main()
    double ddy;                // Total vertical acceleration
    double v;                  // Total velocity
 
-   accelerationThrust = computeAcceleration(THRUST, WEIGHT);
-   aRadians = computeDegreestoRadians(aDegrees);
-
-   ddy = computeVerticalComponent(accelerationThrust, aRadians);
-   ddx = computeHorizontalComponent(accelerationThrust, aRadians);
-
-   ddy += GRAVITY;
-
    // Go through the simulator until the lander touches ground
-   while (y > 0.0)
-   {
-      x = computeDistance(x, dx, ddx, t);
-      y = computeDistance(y, dy, ddy, t);
+   while (y > 0.0) {
+      double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
 
-      dx = computeVelocity(dx, ddx, t);
-      dy = computeVelocity(dy, ddy, t);
+      accelerationThrust = computeAcceleration(THRUST, WEIGHT);
+      aRadians = computeDegreestoRadians(aDegrees);
 
-      v = computeTotalComponent(dx, dy);
+      ddy = computeVerticalComponent(accelerationThrust, aRadians);
+      ddx = computeHorizontalComponent(accelerationThrust, aRadians);
 
-      // Output
-      cout.setf(ios::fixed | ios::showpoint);
-      cout.precision(2);
-      cout << "\tNew position:   (" << x << ", " << y << ")m\n";
-      cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
-      cout << "\tTotal velocity:  " << v << "m/s\n\n";
+      ddy += GRAVITY;
+
+      // Go through the simulator 5 times (5 secs)
+      for (timeInterval = 0; timeInterval < 6;timeInterval++)
+      {
+         x = computeDistance(x, dx, ddx, t);
+         y = computeDistance(y, dy, ddy, t);
+
+         dx = computeVelocity(dx, ddx, t);
+         dy = computeVelocity(dy, ddy, t);
+
+         v = computeTotalComponent(dx, dy);
+
+         // Output
+         cout.setf(ios::fixed | ios::showpoint);
+         cout.precision(2);
+         cout << "\tNew position:   (" << x << ", " << y << ")m\n";
+         cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
+         cout << "\tTotal velocity:  " << v << "m/s\n\n";
+      }
    }
    return 0;
 }
