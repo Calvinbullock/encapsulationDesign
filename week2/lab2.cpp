@@ -298,6 +298,73 @@ double prompt(string text)
 }
 
 /**************************************************
+ * PHYSICS ENGINE
+ * Runs all physics calculations
+ *  and outputs to the console. 
+ **************************************************/
+void physicsEngine(double dx, double dy, double y)
+{
+//inital values
+   double x = 0.0;
+   double t = 1;
+
+   double aDegrees;
+   double aRadians;           // Angle in radians
+   double accelerationThrust; // Acceleration due to thrust
+   double ddxThrust;          // Horizontal acceleration due to thrust
+   double ddyThrust;          // Vertical acceleration due to thrust
+   double ddx;                // Total horizontal acceleration
+   double ddy;                // Total vertical acceleration
+   double v;                  // Total velocity
+
+   while (y > 0.0)
+   {
+      cout << "What is the new angle of the LM where 0 is up (degrees)? ";
+      cin  >> aDegrees;
+      cout << endl;
+
+      accelerationThrust = computeAcceleration(THRUST, WEIGHT);
+      aRadians = computeDegreestoRadians(aDegrees);
+
+      ddy = computeVerticalComponent(accelerationThrust, aRadians);
+      ddx = computeHorizontalComponent(accelerationThrust, aRadians);
+
+      ddy += GRAVITY;
+
+      // Go through the simulator until the lander touches ground
+      for (int sec = 1; sec < 6; sec++)
+      {
+         x = computeDistance(x, dx, ddx, t);
+         y = computeDistance(y, dy, ddy, t);
+
+         dx = computeVelocity(dx, ddx, t);
+         dy = computeVelocity(dy, ddy, t);
+
+         v = computeTotalComponent(dx, dy);
+
+         // Output
+         cout.setf(ios::fixed | ios::showpoint);
+         cout.precision(2);
+         cout << sec << "s - x,y:(" << x << ", " << y << ")m"
+              << "  dx,dy:(" << dx << ", " << dy << ")m/s"
+              << "  speed:" << v << "m/s  angle:" << aDegrees << "deg"
+              << endl;
+
+      }
+      cout << endl;
+   }
+}
+
+/**************************************************
+ * TEST PHYSICS ENGINE 
+ **************************************************/
+void testPhysicsEngine(){
+   physicsEngine( 10.53, -13.959, 106.08);
+   physicsEngine( -35.0, -15.0, 207.77);
+   physicsEngine(10, -10, 62.7);
+}
+
+/**************************************************
  * TEST RUNNER
  * Runs all the test functions
  **************************************************/
@@ -312,9 +379,13 @@ void testRunner()
    testComputeDegreestoRadians();
    testComputeTotalComponent();
 
+   testPhysicsEngine();
+
    cout << "testing Completed\n"
         << endl;
 }
+
+
 
 /****************************************************************
  * MAIN
@@ -323,68 +394,18 @@ void testRunner()
 int main()
 {
    // testRunner();
-
-   // double dx = prompt("What is your horizontal velocity (m/s)? ");
+   testPhysicsEngine();
+   
    // double dy = prompt("What is your vertical velocity (m/s)? ");
+   // double dx = prompt("What is your horizontal velocity (m/s)? ");
    // double y = prompt("What is your altitude (m)? ");
-   // double x = prompt("What is your position (m)? "); // will be 0
-   // double t = prompt("What is the time interval (s)? ");
-
-   // calc inputs
-   //  double dx = 0.0;
-   //  double dy = -10.3;
-   //  double x = 83;
-   //  double y = 58.2;
-   //  double aDegrees = -45.0;
-   //  double t = 1.5;
-
-   //  physics inputs
+   
+   //test values
    double dx = -10.0;
    double dy = -9;
-   double x = 0.0;
    double y = 100;
-   double aDegrees = 60.0;
-   double t = 1;
-
-   double aRadians;           // Angle in radians
-   double accelerationThrust; // Acceleration due to thrust
-   double ddxThrust;          // Horizontal acceleration due to thrust
-   double ddyThrust;          // Vertical acceleration due to thrust
-   double ddx;                // Total horizontal acceleration
-   double ddy;                // Total vertical acceleration
-   double v;                  // Total velocity
-
-   while (y > 0.0)
-   {
-
-      cout << "angle: ";
-      cin >> aDegrees;
-      accelerationThrust = computeAcceleration(THRUST, WEIGHT);
-      aRadians = computeDegreestoRadians(aDegrees);
-
-      ddy = computeVerticalComponent(accelerationThrust, aRadians);
-      ddx = computeHorizontalComponent(accelerationThrust, aRadians);
-
-      ddy += GRAVITY;
-
-      // Go through the simulator until the lander touches ground
-      for (int i = 0; i < 5; i++)
-      {
-         x = computeDistance(x, dx, ddx, t);
-         y = computeDistance(y, dy, ddy, t);
-
-         dx = computeVelocity(dx, ddx, t);
-         dy = computeVelocity(dy, ddy, t);
-
-         v = computeTotalComponent(dx, dy);
-
-         // Output
-         cout.setf(ios::fixed | ios::showpoint);
-         cout.precision(2);
-         cout << "\tNew position:   (" << x << ", " << y << ")m\n";
-         cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
-         cout << "\tTotal velocity:  " << v << "m/s\n\n";
-      }
-   }
+   
+   //physicsEngine(dx, dy, y);
+   
    return 0;
 }
