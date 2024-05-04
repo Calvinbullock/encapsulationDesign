@@ -356,14 +356,18 @@ void physicsEngine(double dx, double dy, double y)
       }
       cout << endl;
    }
+   // cout << "\ntouchdown!!!" << endl;
 }
 
 /**************************************************
  * TEST PHYSICS ENGINE 
  **************************************************/
 void testPhysicsEngine(){
+   cout << "\n---------TEST 1 HARD LANDING---------" << endl;
    physicsEngine( 10.53, -13.959, 106.08);
+   cout << "\n---------TEST 2 CRASH---------" << endl;
    physicsEngine( -35.0, -15.0, 207.77);
+   cout << "\n---------TEST 3 ARMSTRONG---------" << endl;
    physicsEngine(10.0, -10.0, 62.7);
 }
 
@@ -395,7 +399,7 @@ void testRunner()
 int main()
 {
    // testRunner();
-   // testPhysicsEngine();
+   testPhysicsEngine();
    
    // double dy = prompt("What is your vertical velocity (m/s)? ");
    // double dx = prompt("What is your horizontal velocity (m/s)? ");
@@ -406,7 +410,7 @@ int main()
    double dy = -9;
    double y = 100;
     
-   physicsEngine(dx, dy, y);
+   //physicsEngine(dx, dy, y);
    
    return 0;
 }
