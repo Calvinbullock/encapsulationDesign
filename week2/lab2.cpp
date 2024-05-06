@@ -263,7 +263,7 @@ void testComputeTotalComponent()
  **************************************************/
 double computeDegreestoRadians(double d)
 {
-   double r = (2 * M_PI) * (d / 360);
+   double r = (2.0 * M_PI) * (d / 360.0);
    return r;
 }
 
