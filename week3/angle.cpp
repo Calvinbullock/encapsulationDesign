@@ -2,7 +2,7 @@
  * Source File:
  *    ANGLE
  * Author:
- *    Br. Helfrich
+ *    Calvin, Hyrum
  * Summary:
  *    Everything we need to know about a direction
  ************************************************************************/
@@ -14,30 +14,29 @@ using namespace std;
 
 
 
-
-   /************************************
+/************************************
     * ANGLE : CONVERT TO DEGREES
     ************************************/
-   double Angle::convertToDegrees(double r) const
-   {
-      double d = r * (180.0 / M_PI);
-      return d;
-   }
+double Angle::convertToDegrees(double r) const
+{
+    double d = r * (180.0 / M_PI);
+    return d;
+}
 
-   /************************************
+/************************************
     * ANGLE : CONVERT TO RADIANS
     ************************************/
-   double Angle::convertToRadians(double d) const
-   {
-      double r = (2 * M_PI) * (d / 360);
-      return r;
-   }
+double Angle::convertToRadians(double d) const
+{
+    double r = (2.0 * M_PI) * (d / 360.0);
+    return r;
+}
 
-   /************************************
+/************************************
     * ANGLE : NORMALIZE
     ************************************/
-   double Angle::normalize(double radians) const
-   {
-      
-      return -99.9;
-   }
+double Angle::normalize(double radians) const
+{
+
+    return -99.9;
+}

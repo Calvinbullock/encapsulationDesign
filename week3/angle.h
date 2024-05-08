@@ -2,7 +2,7 @@
  * Header File:
  *    ANGLE
  * Author:
- *    Br. Helfrich
+ *    Calvin, Hyrum
  * Summary:
  *    Everything we need to know about a direction
  ************************************************************************/
@@ -30,23 +30,24 @@ public:
    friend TestLander;
    
    // Constructors
-   Angle()                 : radians(-99.9)  {}
-   Angle(const Angle& rhs) : radians(-99.9)  {}
-   Angle(double degrees)   : radians(-99.9)  {}
+   Angle()                 : radians(0.0)  {}
+   Angle(const Angle& rhs) : radians(rhs.radians)  {}
+   Angle(double degrees)   : radians(degrees)  {}
 
    // Getters
-   double getDegrees() const { return convertToDegrees(this -> radians); }
-   double getRadians() const { return this -> radians; }
+   double getDegrees() const { return convertToDegrees(this->radians); }
+   double getRadians() const { return this->radians; }
 
    // Setters
-   void setDegrees(double degrees) {this -> radians = convertToRadians(degrees); }
-   void setRadians(double radians) {this -> radians; }
-   void setUp()                    {this -> radians = convertToRadians(0.0); }
-   void setDown()                  {this -> radians =  convertToRadians(180.0); }
-   void setRight()                 {this -> radians =  convertToRadians(90.0); }
-   void setLeft()                  {this -> radians =  convertToRadians(270.0); }
+   void setDegrees(double degrees) {this->radians = convertToRadians(degrees); }
+   void setRadians(double radians) {this->radians = radians; }
+   void setUp()                    {this->radians = convertToRadians(0.0); }
+   void setDown()                  {this->radians =  convertToRadians(180.0); }
+   void setRight()                 {this->radians =  convertToRadians(90.0); }
+   void setLeft()                  {this->radians =  convertToRadians(270.0); }
    void reverse()                  { }
    Angle& add(double delta) { radians = -99.9; return *this; }
+   //Angle& add(double delta) { this->radians += delta; return this->radians; } // BUG not done yet
 
 private:
    double convertToDegrees(double radians) const;
