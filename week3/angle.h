@@ -50,8 +50,8 @@ public:
    void setRight()                 {this->radians = normalize(convertToRadians(90.0));}
    void setLeft()                  {this->radians = normalize(convertToRadians(270.0));}
    void reverse()                  {this->radians = TWO_PI - fmod(this->radians, TWO_PI);}
-   Angle& add(double delta) { radians = -99.9; return *this;}
-   //Angle& add(double delta) { this->radians += delta; return this->radians; } // BUG not done yet
+   Angle& add(double delta)        { radians = -99.9; return *this;}
+   //Angle& add(double delta)        {return this->radians += delta;} // BUG not done yet
 
 private:
    double convertToDegrees(double radians) const;
