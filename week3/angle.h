@@ -9,8 +9,12 @@
 
 #pragma once
 
+#include <cmath>
+#include <string>
 #define _USE_MATH_DEFINES
 #include <math.h>   // for M_PI which is 3.14159
+//
+#define TWO_PI (2.0 * M_PI)
 
 class TestPosition;
 class TestVelocity;
@@ -32,21 +36,21 @@ public:
    // Constructors
    Angle()                 : radians(0.0)  {}
    Angle(const Angle& rhs) : radians(rhs.radians)  {}
-   Angle(double degrees)   : radians(degrees)  {}
+   Angle(double degrees)   : radians()  {this->radians = normalize(convertToRadians(degrees));}
 
    // Getters
-   double getDegrees() const { return convertToDegrees(this->radians); }
-   double getRadians() const { return this->radians; }
+   double getDegrees() const { return convertToDegrees(this->radians);}
+   double getRadians() const { return this->radians;}
 
    // Setters
-   void setDegrees(double degrees) {this->radians = convertToRadians(degrees); }
-   void setRadians(double radians) {this->radians = radians; }
-   void setUp()                    {this->radians = convertToRadians(0.0); }
-   void setDown()                  {this->radians =  convertToRadians(180.0); }
-   void setRight()                 {this->radians =  convertToRadians(90.0); }
-   void setLeft()                  {this->radians =  convertToRadians(270.0); }
-   void reverse()                  { }
-   Angle& add(double delta) { radians = -99.9; return *this; }
+   void setDegrees(double degrees) {this->radians = normalize(convertToRadians(degrees));}
+   void setRadians(double radians) {this->radians = normalize(radians);}
+   void setUp()                    {this->radians = normalize(convertToRadians(0.0));}
+   void setDown()                  {this->radians = normalize(convertToRadians(180.0));}
+   void setRight()                 {this->radians = normalize(convertToRadians(90.0));}
+   void setLeft()                  {this->radians = normalize(convertToRadians(270.0));}
+   void reverse()                  {this->radians = TWO_PI - fmod(this->radians, TWO_PI);}
+   Angle& add(double delta) { radians = -99.9; return *this;}
    //Angle& add(double delta) { this->radians += delta; return this->radians; } // BUG not done yet
 
 private:

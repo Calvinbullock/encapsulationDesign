@@ -8,35 +8,47 @@
  ************************************************************************/
 
 #include "angle.h"
-#include <math.h> // for floor()
 #include <cassert>
+#include <math.h> // for floor()
 using namespace std;
 
-
-
 /************************************
-    * ANGLE : CONVERT TO DEGREES
-    ************************************/
+ * ANGLE : CONVERT TO DEGREES
+ ************************************/
 double Angle::convertToDegrees(double r) const
 {
-    double d = r * (180.0 / M_PI);
-    return d;
+   double d = r * (180.0 / M_PI);
+   return d;
 }
 
 /************************************
-    * ANGLE : CONVERT TO RADIANS
-    ************************************/
+ * ANGLE : CONVERT TO RADIANS
+ ************************************/
 double Angle::convertToRadians(double d) const
 {
-    double r = (2.0 * M_PI) * (d / 360.0);
-    return r;
+   double r = (2.0 * M_PI) * (d / 360.0);
+   return r;
 }
 
 /************************************
-    * ANGLE : NORMALIZE
-    ************************************/
+ * ANGLE : NORMALIZE
+ ************************************/
 double Angle::normalize(double radians) const
 {
+   double normalizedRadians;
 
-    return -99.9;
+   // check if radians needs to be normalized
+   if (radians > TWO_PI)
+   {
+      normalizedRadians = fmod(radians, TWO_PI);
+   }
+   else if (radians < 0)
+   {
+      normalizedRadians = radians + TWO_PI;
+   }
+   else
+   {
+      normalizedRadians = radians;
+   }
+   return normalizedRadians;
 }

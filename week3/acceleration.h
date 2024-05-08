@@ -5,6 +5,8 @@
  *    Calvin, Hyrum
  * Summary:
  *    Everything we need to know about acceleration
+ *    Handles the changes to acceleration and stores the values for change
+ *      in acceleration.
  ************************************************************************/
 
 
