@@ -35,12 +35,12 @@ public:
    Angle(double degrees)   : radians(-99.9)  {}
 
    // Getters
-   double getDegrees() const { return -99.9; }
-   double getRadians() const { return -99.9; }
+   double getDegrees() const { return convertToDegrees(this -> radians); }
+   double getRadians() const { return this -> radians; }
 
    // Setters
-   void setDegrees(double degrees) { }
-   void setRadians(double radians) { }
+   void setDegrees(double degrees) {this -> convertToRadians(radians); }
+   void setRadians(double radians) {this -> radians; }
    void setUp()                    { }
    void setDown()                  { }
    void setRight()                 { }
@@ -49,6 +49,8 @@ public:
    Angle& add(double delta) { radians = -99.9; return *this; }
 
 private:
+   double convertToDegrees(double radians) const;
+   double convertToRadians(double degrees) const;
    double normalize(double radians) const;
 
    double radians;   // 360 degrees equals 2 PI radians
