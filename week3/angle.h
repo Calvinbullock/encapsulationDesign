@@ -39,12 +39,12 @@ public:
    double getRadians() const { return this -> radians; }
 
    // Setters
-   void setDegrees(double degrees) {this -> convertToRadians(radians); }
+   void setDegrees(double degrees) {this -> convertToRadians(degrees); }
    void setRadians(double radians) {this -> radians; }
-   void setUp()                    { }
-   void setDown()                  { }
-   void setRight()                 { }
-   void setLeft()                  { }
+   void setUp()                    {this -> convertToRadians(0.0); }
+   void setDown()                  {this -> convertToRadians(180.0); }
+   void setRight()                 {this -> convertToRadians(90.0); }
+   void setLeft()                  {this -> convertToRadians(270.0); }
    void reverse()                  { }
    Angle& add(double delta) { radians = -99.9; return *this; }
 
