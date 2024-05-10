@@ -35,20 +35,6 @@ double Angle::convertToRadians(double d) const
  ************************************/
 double Angle::normalize(double radians) const
 {
-   double normalizedRadians;
-
-   // check if radians needs to be normalized
-   if (radians > TWO_PI)
-   {
-      normalizedRadians = fmod(radians, TWO_PI);
-   }
-   else if (radians < 0)
-   {
-      normalizedRadians = radians + TWO_PI;
-   }
-   else
-   {
-      normalizedRadians = radians;
-   }
-   return normalizedRadians;
+      radians = fmod(radians, TWO_PI);
+   return radians;
 }
