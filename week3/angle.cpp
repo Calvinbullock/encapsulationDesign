@@ -35,6 +35,19 @@ double Angle::convertToRadians(double d) const
  ************************************/
 double Angle::normalize(double radians) const
 {
+   // double normalizedRadians;
+
+   // check if radians needs to be normalized
+   if (radians > TWO_PI)
+   {
       radians = fmod(radians, TWO_PI);
+   }
+
+   while(radians < 0)
+   {
+      radians = radians + TWO_PI;
+   }
+
+   
    return radians;
 }
