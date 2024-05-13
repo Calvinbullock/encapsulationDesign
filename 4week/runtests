@@ -1,4 +1,4 @@
 
 make -f maketest
 ./runMe
-make clean
+make -f maketest clean
