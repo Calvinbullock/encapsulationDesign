@@ -22,7 +22,7 @@ INCLUDES = -I/path/to/glfw/include
 
 # Linker flags (link with OpenGL and GLFW libraries)
 # You might need to adjust the library paths depending on your system
-LDFLAGS = -lGL -lglfw3
+LDFLAGS = -lGL -lglfw
 
 # Rule to compile a source file (.cpp) into an object file (.o)
 %.o: %.cpp $(HDRS)
