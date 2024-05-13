@@ -8,7 +8,7 @@ CXX = g++
 CXXFLAGS = -O2
 
 # Source files (cpp)
-SRCS = test.cpp position.cpp velocity.cpp angle.cpp acceleration.cpp main.cpp
+SRCS = test.cpp position.cpp velocity.cpp angle.cpp acceleration.cpp mainT.cpp
 
 # Object files (created from source files)
 OBJS = $(SRCS:.cpp=.o)

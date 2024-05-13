@@ -1,0 +1,4 @@
+
+make -f maketest
+./runMe
+make clean
