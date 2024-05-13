@@ -8,21 +8,29 @@ CXX = g++
 CXXFLAGS = -O2
 
 # Source files (cpp)
-SRCS = test.cpp position.cpp velocity.cpp angle.cpp acceleration.cpp main.cpp
+SRCS = acceleration.cpp ground.cpp simulator.cpp uiDraw.cpp velocity.cpp angle.cpp position.cpp test.cpp uiInteract.cpp
 
 # Object files (created from source files)
 OBJS = $(SRCS:.cpp=.o)
 
 # Header files (include for compilation)
-HDRS = position.h velocity.h testPosition.h testVelocity.h unitTest.h acceleration.h angle.h testAcceleration.h testAngle.h unitTest.h
+HDRS = acceleration.h position.h test.h uiDraw.h velocity.h angle.h testAcceleration.h testPosition.h uiInteract.h ground.h testAngle.h testVelocity.h unitTest.h
+
+# Include directories (add path to GLFW header if needed)
+# You might need to adjust this path depending on your GLFW installation
+INCLUDES = -I/path/to/glfw/include 
+
+# Linker flags (link with OpenGL and GLFW libraries)
+# You might need to adjust the library paths depending on your system
+LDFLAGS = -lGL -lglfw3
 
 # Rule to compile a source file (.cpp) into an object file (.o)
 %.o: %.cpp $(HDRS)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 # Rule to link object files into the final executable
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJS) -o $(TARGET)
 
 # Rule to clean up object files and the executable
 clean:
