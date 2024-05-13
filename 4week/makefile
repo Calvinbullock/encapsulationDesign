@@ -8,13 +8,13 @@ CXX = g++
 CXXFLAGS = -O2
 
 # Source files (cpp)
-SRCS = main.cpp test.cpp acceleration.cpp angle.cpp 
+SRCS = test.cpp position.cpp velocity.cpp angle.cpp acceleration.cpp main.cpp
 
 # Object files (created from source files)
 OBJS = $(SRCS:.cpp=.o)
 
 # Header files (include for compilation)
-HDRS = acceleration.h angle.h testAcceleration.h testAngle.h unitTest.h
+HDRS = position.h velocity.h testPosition.h testVelocity.h unitTest.h acceleration.h angle.h testAcceleration.h testAngle.h unitTest.h
 
 # Rule to compile a source file (.cpp) into an object file (.o)
 %.o: %.cpp $(HDRS)

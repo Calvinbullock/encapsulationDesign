@@ -2,23 +2,52 @@
  * Source File:
  *    ANGLE
  * Author:
- *    Br. Helfrich
+ *    Calvin, Hyrum
  * Summary:
  *    Everything we need to know about a direction
  ************************************************************************/
 
 #include "angle.h"
-#include <math.h>  // for floor()
 #include <cassert>
+#include <math.h> // for floor()
 using namespace std;
 
- /************************************
-  * ANGLE : NORMALIZE
-  ************************************/
-double Angle::normalize(double radians) const
+/************************************
+ * ANGLE : CONVERT TO DEGREES
+ ************************************/
+double Angle::convertToDegrees(double r) const
 {
-   return -99.9;
+   double d = r * (180.0 / M_PI);
+   return d;
 }
 
+/************************************
+ * ANGLE : CONVERT TO RADIANS
+ ************************************/
+double Angle::convertToRadians(double d) const
+{
+   double r = (2.0 * M_PI) * (d / 360.0);
+   return r;
+}
 
+/************************************
+ * ANGLE : NORMALIZE
+ ************************************/
+double Angle::normalize(double radians) const
+{
+   // double normalizedRadians;
 
+   // check if radians needs to be normalized
+   if (radians > TWO_PI)
+   {
+      radians = fmod(radians, TWO_PI);
+   }
+
+   while(radians < 0)
+   {
+      radians = radians + TWO_PI;
+   }
+
+   
+   return radians;
+}
