@@ -8,13 +8,13 @@ CXX = g++
 CXXFLAGS = -O2
 
 # Source files (cpp)
-#SRCS = acceleration.cpp ground.cpp simulator.cpp uiDraw.cpp velocity.cpp angle.cpp position.cpp test.cpp uiInteract.cpp
+SRCS = acceleration.cpp ground.cpp simulator.cpp uiDraw.cpp velocity.cpp angle.cpp position.cpp test.cpp uiInteract.cpp
 
 # Object files (created from source files)
 OBJS = $(SRCS:.cpp=.o)
 
 # Header files (include for compilation)
-#HDRS = acceleration.h position.h test.h uiDraw.h velocity.h angle.h testAcceleration.h testPosition.h uiInteract.h ground.h testAngle.h testVelocity.h unitTest.h
+HDRS = acceleration.h position.h test.h uiDraw.h velocity.h angle.h testAcceleration.h testPosition.h uiInteract.h ground.h testAngle.h testVelocity.h unitTest.h
 
 # Include directories (add path to GLFW header if needed)
 # You might need to adjust this path depending on your GLFW installation
@@ -22,7 +22,8 @@ OBJS = $(SRCS:.cpp=.o)
 
 # Linker flags (link with OpenGL and GLFW libraries)
 # You might need to adjust the library paths depending on your system
-LDFLAGS = -lglut -lGL -lGLU -lGLEW
+# BUG 
+#LDFLAGS = -lglut -lGL -lGLU -lGLEW
 #LDFLAGS = -lGL -lglut -O2
 
 # Rule to compile a source file (.cpp) into an object file (.o)
