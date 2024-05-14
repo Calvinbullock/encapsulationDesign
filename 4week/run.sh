@@ -1,11 +1,9 @@
-
-# NOTE  FOR GUI compile
+# FOR GUI compile
 # make 
+# ./exe
 # make clean
-# ./runMe
 
-# just test compileing
+# testing no gui
 make -f maketest
-make -f maketest clean
 ./runMe
-
+make -f maketest clean

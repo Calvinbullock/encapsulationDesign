@@ -16,15 +16,8 @@ OBJS = $(SRCS:.cpp=.o)
 # Header files (include for compilation)
 HDRS = acceleration.h position.h test.h uiDraw.h velocity.h angle.h testAcceleration.h testPosition.h uiInteract.h ground.h testAngle.h testVelocity.h unitTest.h
 
-# Include directories (add path to GLFW header if needed)
-# You might need to adjust this path depending on your GLFW installation
-#INCLUDES = /usr/lib/x86_64-linux-gnu/libGLU.so
-
 # Linker flags (link with OpenGL and GLFW libraries)
-# You might need to adjust the library paths depending on your system
-# BUG 
-#LDFLAGS = -lglut -lGL -lGLU -lGLEW
-#LDFLAGS = -lGL -lglut -O2
+LDFLAGS = -lglut -lGL -lGLU -lGLEW
 
 # Rule to compile a source file (.cpp) into an object file (.o)
 %.o: %.cpp $(HDRS)
@@ -32,8 +25,8 @@ HDRS = acceleration.h position.h test.h uiDraw.h velocity.h angle.h testAccelera
 
 # Rule to link object files into the final executable
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJS) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET) $(LDFLAGS)
 
 # Rule to clean up object files and the executable
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(TARGET)
