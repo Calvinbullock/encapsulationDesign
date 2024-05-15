@@ -7,6 +7,8 @@
  *    Everything we need to know about a location on the screen.
  ************************************************************************/
 
+#include <iostream>
+
 #pragma once
 
 
@@ -35,11 +37,11 @@ public:
    double getY() const { return this->y; }
    bool operator == (const Position & rhs) const
    {
-      return false;
+      return (this->x == rhs.x) && (this->y == rhs.y);
    }
    bool operator != (const Position & rhs) const
    {
-      return false;
+      return (this->x != rhs.x) || (this->y != rhs.y);
    }
 
    // setters
