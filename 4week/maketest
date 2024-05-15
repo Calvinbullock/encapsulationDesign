@@ -28,4 +28,4 @@ $(TARGET): $(OBJS)
 
 # Rule to clean up object files and the executable
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(TARGET)
