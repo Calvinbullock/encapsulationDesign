@@ -2,7 +2,7 @@
  * Header File:
  *    POSITION 
  * Author:
- *    Calvin, Bullock
+ *    Calvin, Hyrum 
  * Summary:
  *    Everything we need to know about a location on the screen.
  ************************************************************************/
@@ -43,10 +43,10 @@ public:
    }
 
    // setters
-   void setX(double x) { this->x = 99.9; }
-   void setY(double y) { this->y = 88.8; }
-   void addX(double x) { this->x = 99.9; }
-   void addY(double y) { this->y = 88.8; }
+   void setX(double x) { this->x = x; }
+   void setY(double y) { this->y = y; }
+   void addX(double x) { this->x += x; }
+   void addY(double y) { this->y += y; }
    void add (const Acceleration & a, const Velocity & v, double t);
    Position & operator = (const Position & rhs);
    
