@@ -2,7 +2,7 @@
  * Header File:
  *    POSITION 
  * Author:
- *    Br. Helfrich
+ *    Calvin, Bullock
  * Summary:
  *    Everything we need to know about a location on the screen.
  ************************************************************************/
