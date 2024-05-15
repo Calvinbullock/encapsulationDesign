@@ -1,7 +1,7 @@
 # FOR GUI compile
-# make 
-# ./exe
-# make clean
+#make 
+#./exe
+#make clean
 
 # testing no gui
 make -f maketest
