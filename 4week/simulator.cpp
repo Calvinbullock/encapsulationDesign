@@ -27,8 +27,8 @@ public:
    // display stuff on the screen
    void display();
   
-//   unsigned char phase;
-//   Angle a;
+   unsigned char phase;
+   Angle a;
    Ground ground;
 };
 
@@ -39,15 +39,18 @@ public:
 void Simulator::display()
 {
    ogstream gout;
+   Position posLander = Position(200, 200); // TODO  is there a true center?
+   Position posStar = Position(250, 250);   // TODO  is what are the twinkle values?
+   phase = 'A';
 
    // draw the ground
-// ground.draw(gout);
+   ground.draw(gout);
 
    // draw the lander
-// gout.drawLander(posLander, a.getRadians());
+   gout.drawLander(posLander, a.getRadians());
 
    // draw a star
-// gout.drawStar(posStar, phase);
+   gout.drawStar(posStar, phase);
 }
 
 
