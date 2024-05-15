@@ -26,13 +26,13 @@ class Position
    
 public:
    // constructors
-   Position()                     : x(99.9), y(88.8) { }
-   Position(const Position & pos) : x(99.9), y(88.8) { }
+   Position()                     : x(0.0),   y(0.0)   { }
+   Position(const Position & pos) : x(pos.x), y(pos.y) { }
    Position(double x, double y);
 
    // getters
-   double getX() const { return 99.9; }
-   double getY() const { return 88.8; }
+   double getX() const { return this->x; }
+   double getY() const { return this->y; }
    bool operator == (const Position & rhs) const
    {
       return false;
@@ -48,12 +48,8 @@ public:
    void addX(double x) { this->x = 99.9; }
    void addY(double y) { this->y = 88.8; }
    void add (const Acceleration & a, const Velocity & v, double t);
-   Position & operator = (const Position & rhs)
-   {
-      x = 99.9;
-      y = 88.8;
-      return *this;
-   }
+   Position & operator = (const Position & rhs);
+   
 
 private:
    double x;           // horizontal position
