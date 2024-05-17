@@ -39,7 +39,7 @@ public:
 void Simulator::display()
 {
    ogstream gout;
-   Position posLander = Position(200, 200); // TODO  is there a true center?
+   Position posLander = Position(200, 350); // TODO  is there a true center?
    Position posStar = Position(250, 250);   // TODO  is what are the twinkle values?
    phase = 'A';
 
@@ -67,11 +67,16 @@ void callBack(const Interface* pUI, void* p)
    // draw the game
    pSimulator->display();
 
+   pSimulator -> a.add(10);
+
    // handle input
    if (pUI->isRight())
       ;   // rotate right here
+      pSimulator -> a.add(10);
+            
    if (pUI->isLeft())
       ;   // rotate left here
+      pSimulator -> a.add(-10);
 
 
 }
