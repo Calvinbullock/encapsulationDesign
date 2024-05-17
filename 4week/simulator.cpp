@@ -67,16 +67,14 @@ void callBack(const Interface* pUI, void* p)
    // draw the game
    pSimulator->display();
 
-   pSimulator -> a.add(10);
 
    // handle input
    if (pUI->isRight())
-      ;   // rotate right here
-      pSimulator -> a.add(10);
+   pSimulator -> a.add(10); // rotate right here
+   
             
    if (pUI->isLeft())
-      ;   // rotate left here
-      pSimulator -> a.add(-10);
+      pSimulator -> a.add(-10); // rotate left here
 
 
 }
