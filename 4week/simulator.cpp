@@ -11,6 +11,7 @@
 #include "test.h"        // for the unit tests
 #include <cmath>         // for SQRT
 #include <cassert>       // for ASSERT
+#include <iostream> // WARN  removes this
 using namespace std;
 
 
@@ -39,18 +40,23 @@ public:
 void Simulator::display()
 {
    ogstream gout;
-   Position posLander = Position(200, 350); // TODO  is there a true center?
-   Position posStar = Position(250, 250);   // TODO  is what are the twinkle values?
-   phase = 'A';
+   Position posLander = Position(200, 350);
+   Position posStar = Position(250, 250);
+   phase = 0;
 
    // draw the ground
    ground.draw(gout);
 
    // draw the lander
    gout.drawLander(posLander, a.getRadians());
-
-   // draw a star
-   gout.drawStar(posStar, phase);
+    
+   // TODO  
+   // change the stars phase
+   for (phase = 0; (int)phase < 255; phase++)
+   {
+       // draw a star
+       gout.drawStar(posStar, phase);
+   }
 }
 
 
