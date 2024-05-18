@@ -76,11 +76,11 @@ void callBack(const Interface* pUI, void* p)
 
    // handle input
    if (pUI->isRight())
-   pSimulator -> a.add(10); // rotate right here
+   pSimulator -> a.add(.5); // rotate right here
    
             
    if (pUI->isLeft())
-      pSimulator -> a.add(-10); // rotate left here
+      pSimulator -> a.add(-.5); // rotate left here
 
 
 }
