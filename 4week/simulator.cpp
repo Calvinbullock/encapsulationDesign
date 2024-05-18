@@ -56,6 +56,11 @@ void Simulator::display()
    {
        // draw a star
        gout.drawStar(posStar, phase);
+       if (phase >= 255)
+       {
+          phase = 0;
+       }
+        cout << phase << endl;
    }
 }
 
@@ -76,7 +81,7 @@ void callBack(const Interface* pUI, void* p)
 
    // handle input
    if (pUI->isRight())
-   pSimulator -> a.add(.5); // rotate right here
+       pSimulator -> a.add(.5); // rotate right here
    
             
    if (pUI->isLeft())
