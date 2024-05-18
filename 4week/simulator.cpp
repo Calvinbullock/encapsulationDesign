@@ -3,17 +3,15 @@
  * Lunar Lander simulation. This is the Game class and main()
  **********************************************************************/
 
-#include "position.h"    // everything should have a point
-#include "angle.h"       // angle of the lander
-#include "uiInteract.h"  // for INTERFACE
-#include "uiDraw.h"      // for RANDOM and DRAW*
-#include "ground.h"      // for GROUND
-#include "test.h"        // for the unit tests
-#include <cmath>         // for SQRT
-#include <cassert>       // for ASSERT
-#include <iostream> // WARN  removes this
+#include "angle.h"      // angle of the lander
+#include "ground.h"     // for GROUND
+#include "position.h"   // everything should have a point
+#include "test.h"       // for the unit tests
+#include "uiDraw.h"     // for RANDOM and DRAW*
+#include "uiInteract.h" // for INTERFACE
+#include <cassert>      // for ASSERT
+#include <cmath>        // for SQRT
 using namespace std;
-
 
 /*************************************************************************
  * SIMULATOR
@@ -21,13 +19,13 @@ using namespace std;
  *************************************************************************/
 class Simulator
 {
-public:
+ public:
    // set up the simulator
-   Simulator(const Position & posUpperRight) : ground(posUpperRight) {}
-       
+   Simulator(const Position &posUpperRight) : ground(posUpperRight) {}
+
    // display stuff on the screen
    void display();
-  
+
    unsigned char phase;
    Angle a;
    Ground ground;
@@ -49,45 +47,31 @@ void Simulator::display()
 
    // draw the lander
    gout.drawLander(posLander, a.getRadians());
-    
-   // TODO  
-   // change the stars phase
-   for (phase = 0; (int)phase < 255; phase++)
-   {
-       // draw a star
-       gout.drawStar(posStar, phase);
-       if (phase >= 255)
-       {
-          phase = 0;
-       }
-        cout << phase << endl;
-   }
-}
 
+   // twinkle the star
+   phase = random(0, 210);
+   gout.drawStar(posStar, phase);
+}
 
 /*************************************
  * CALLBACK
  * Handle one frame of the simulator
  **************************************/
-void callBack(const Interface* pUI, void* p)
+void callBack(const Interface *pUI, void *p)
 {
    // the first step is to cast the void pointer into a game object. This
-   // is the first step of every single callback function in OpenGL. 
-   Simulator * pSimulator = (Simulator *)p;
+   // is the first step of every single callback function in OpenGL.
+   Simulator *pSimulator = (Simulator *)p;
 
    // draw the game
    pSimulator->display();
 
-
    // handle input
    if (pUI->isRight())
-       pSimulator -> a.add(.5); // rotate right here
-   
-            
+      pSimulator->a.add(.5); // rotate right here
+
    if (pUI->isLeft())
-      pSimulator -> a.add(-.5); // rotate left here
-
-
+      pSimulator->a.add(-.5); // rotate left here
 }
 
 /*********************************
@@ -102,14 +86,13 @@ int WINAPI WinMain(
    _In_opt_ HINSTANCE hPrevInstance,
    _In_ LPSTR pCmdLine,
    _In_ int nCmdShow)
-#else // !_WIN32
-int main(int argc, char** argv)
+#else  // !_WIN32
+int main(int argc, char **argv)
 #endif // !_WIN32
 {
    // Run the unit tests
    testRunner();
 
-   
    // Initialize OpenGL
    Position posUpperRight(400, 400);
    Interface ui("Lunar Lander", posUpperRight);
