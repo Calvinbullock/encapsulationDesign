@@ -1,7 +1,7 @@
 # FOR GUI compile
 make 
 ./runMe
-# make clean
+make clean
 
 # testing no gui
 #make -f maketest
