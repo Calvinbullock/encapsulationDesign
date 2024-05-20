@@ -2,7 +2,7 @@
  * Source File:
  *    LANDER
  * Author:
- *    Br. Helfrich
+ *    Calvin, Bullock
  * Summary:
  *    All the information about the lunar lander
  ************************************************************************/
