@@ -40,7 +40,7 @@ public:
    }
 
    // reflect what is firing
-   bool isMain()    const { return mainEngine;  }
+   bool isMain()    const { return mainEngine;       }
    bool isClock()   const { return clockwise;        }
    bool isCounter() const { return counterClockwise; }
 
