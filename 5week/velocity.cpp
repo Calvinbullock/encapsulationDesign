@@ -11,6 +11,8 @@
 #include "acceleration.h"
 #include "angle.h"
 
+#include <iostream>
+
 #include <math.h>  // for sqrt()
 
 /*********************************************
@@ -19,8 +21,8 @@
  *********************************************/
 void Velocity::add(const Acceleration& acceleration, double time)
 {
-   dx = 99.9;
-   dy = 88.8;
+   this->dx = dx + acceleration.getDDX()*time;
+   this->dy = dy + acceleration.getDDY()*time;
 }
 
 /*********************************************
@@ -29,7 +31,7 @@ void Velocity::add(const Acceleration& acceleration, double time)
  *********************************************/
 double Velocity::getSpeed() const
 {
-   return -11.1;
+   return sqrt((dx * dx) + (dy * dy));
 }
 
 /*********************************************
@@ -37,7 +39,7 @@ double Velocity::getSpeed() const
  *  set from angle and direction
  *********************************************/
 void Velocity::set(const Angle & angle, double magnitude)
-{
-   dx = 99.9;
-   dy = 88.8;
+{  
+   this->dx = magnitude * sin(angle.getRadians());
+   this->dy = magnitude * cos(angle.getRadians());
 }

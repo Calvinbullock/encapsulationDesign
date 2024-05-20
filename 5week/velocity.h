@@ -2,7 +2,7 @@
  * Header File:
  *    VELOCITY
  * Author:
- *    Br. Helfrich
+ *     Calvin, Hyrum
  * Summary:
  *    Everything we need to know about speed
  ************************************************************************/
@@ -32,20 +32,20 @@ class Velocity
    
 public:
    // constructors
-   Velocity()                     : dx(99.9), dy(88.8) { }
-   Velocity(double dx, double dy) : dx(99.9), dy(88.8) { }
+   Velocity()                     : dx(0.0), dy(0.0) { }
+   Velocity(double dx, double dy) : dx(dx), dy(dy) { }
 
    // getters
-   double getDX()       const { return 99.9; }
-   double getDY()       const { return 88.8; }
+   double getDX()       const { return this->dx; }
+   double getDY()       const { return this->dy; }
    double getSpeed()    const;
 
    // setters
-   void setDX(double dx) { this->dx = 99.9; }
-   void setDY(double dy) { this->dy = 88.8; }
+   void setDX(double dx) { this->dx = dx; }
+   void setDY(double dy) { this->dy = dy; }
    void set(const Angle & angle, double magnitude);
-   void addDX(double dx) { this->dx = 99.9; }
-   void addDY(double dy) { this->dy = 88.8; }
+   void addDX(double dx) { this->dx = this->dx + dx; }
+   void addDY(double dy) { this->dy = this->dy + dy; }
    void add(const Acceleration & acceleration, double time);
 
 private:
