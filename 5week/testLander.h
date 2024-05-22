@@ -13,6 +13,7 @@
 #include "lander.h"
 #include "position.h"
 #include "acceleration.h"
+#include "unitTest.h"
 
 /*******************************
  * TEST LANDER
