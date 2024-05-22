@@ -8,8 +8,8 @@
  ************************************************************************/
 
 #pragma once
-#include "position.h"   // for POSITION
-#include "uiDraw.h"     // for RANDOM and DRAWSTAR
+#include "position.h" // for POSITION
+#include "uiDraw.h"   // for RANDOM and DRAWSTAR
 
 /*****************************************************
  * STAR
@@ -18,5 +18,25 @@
 class Star
 {
 public:
+    double reset(double width, double height)
+    {
+        pos = Position(width, height);
+    }
 
+    void draw(ogstream gout)
+    {
+        gout.drawStar(pos, phase);
+        if (phase > 215)
+        {
+            phase = 0;
+        }
+        else
+        {
+            phase += 1;
+        }
+    }
+
+private:
+    Position pos;
+    unsigned phase;
 };
