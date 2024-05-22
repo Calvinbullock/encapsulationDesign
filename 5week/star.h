@@ -18,7 +18,7 @@
 class Star
 {
 public:
-    double reset(double width, double height)
+    void reset(double width, double height)
     {
         pos = Position(width, height);
     }
