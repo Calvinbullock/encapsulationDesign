@@ -35,13 +35,13 @@ public:
   void reset(const Position& posUpperRight);
 
   // get the status of the lander
-  bool     isDead()         const { return true; }
-  bool     isLanded()       const { return true; }
-  bool     isFlying()       const { return true; }
-  Position getPosition()    const { return pos;  }
-  double   getSpeed()       const { return 99.9; }
-  int      getFuel()        const { return -99;  }
-  int      getWidth()       const { return 99;   }
+  bool     isDead()         const { return status == DEAD; }
+  bool     isLanded()       const { return status == SAFE; }
+  bool     isFlying()       const { return status == PLAYING; }
+  Position getPosition()    const { return pos; }
+  double   getSpeed()       const { return velocity.getSpeed(); }
+  int      getFuel()        const { return fuel; }
+  int      getWidth()       const { return 20; } // WARN  might not be right
   double   getMaxSpeed()    const { return 99.9; }
 
   // draw the lander on the screen
