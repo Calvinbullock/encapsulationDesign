@@ -30,14 +30,19 @@ public:
    // Get rotation in radians per second
    double rotation() const
    {
-      if (clockwise)
+      if (clockwise && counterClockwise)
       {
-         return 0.1;
+         return 0.0;
       }
-      else
+      else if (counterClockwise)
       {
          return -0.1;
       }
+      else if (clockwise)
+      {
+         return 0.1;
+      }
+      return 0.0;
    }
 
    // get main engine thrust in  m / s ^ 2
