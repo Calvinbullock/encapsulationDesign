@@ -2,7 +2,7 @@
  * Header File:
  *    Thrust : Represents activation of thrusters
  * Author:
- *    Br. Helfrich
+ *    Calvin, Bullock
  * Summary:
  *    down, clockwise, and counterclockwise
  ************************************************************************/
@@ -30,13 +30,20 @@ public:
    // Get rotation in radians per second
    double rotation() const
    {
-      return 99.9;
+      if (clockwise)
+      {
+         return 0.1;
+      }
+      else
+      {
+         return -0.1;
+      }
    }
 
    // get main engine thrust in  m / s ^ 2
    double mainEngineThrust() const
    {
-      return 99.9;
+      return 1;
    }
 
    // reflect what is firing
@@ -47,14 +54,31 @@ public:
    // set the thrusters
    void set(const Interface *pUI)
    {
-      if (pUI->isDown()){ mainEngine = true; }
-      else{               mainEngine = false;}
+      if (pUI->isDown())
+      {
+         mainEngine = true;
+      }
+      else
+      {
+         mainEngine = false;
+      }
+      if (pUI->isLeft())
+      {
+         clockwise = true;
+      }
+      else
+      {
+         clockwise = false;
+      }
 
-      if (pUI->isLeft()) { clockwise = true; }
-      else{                clockwise = false;}
-
-      if (pUI->isRight()) { counterClockwise = true; }
-      else{                 counterClockwise = false;}
+      if (pUI->isRight())
+      {
+         counterClockwise = true;
+      }
+      else
+      {
+         counterClockwise = false;
+      }
    }
 
 private:

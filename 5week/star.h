@@ -2,7 +2,7 @@
  * Header File:
  *    STAR
  * Author:
- *    Br. Helfrich
+ *    Calvin, Bullock
  * Summary:
  *    A single star that twinkles
  ************************************************************************/
