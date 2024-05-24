@@ -60,17 +60,17 @@ public:
 
   // straighten the lander and put it on the ground
   void land()  
-    {
-        angle.setUp();
-        status = SAFE;
-    }
+  {
+     angle.setUp();
+     status = SAFE;
+  }
 
   // we are dead. Draw the lander upside down
   void crash() 
-    {
-        angle.setDown();
-        status = DEAD;
-    }
+  {
+     angle.setDown();
+     status = DEAD;
+  }
 
 private:
    Status   status;      // are we dead or not?
