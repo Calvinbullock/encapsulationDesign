@@ -9,32 +9,39 @@
 
 #include "lander.h"
 #include "acceleration.h"
+#include <iostream>
 
- /***************************************************************
-  * RESET
-  * Reset the lander and its position to start the game over
-  ***************************************************************/
-void Lander :: reset(const Position & posUpperRight)
+/***************************************************************
+ * RESET
+ * Reset the lander and its position to start the game over
+ ***************************************************************/
+void Lander ::reset(const Position &posUpperRight)
 {
-   status = DEAD;
+   status = PLAYING;
 }
 
 /***************************************************************
  * DRAW
  * Draw the lander on the screen
  ***************************************************************/
-void Lander :: draw(const Thrust & thrust, ogstream & gout) const
+void Lander ::draw(const Thrust &thrust, ogstream &gout) const
 {
+   Position startPos = Position(300, 300);
+   Angle a = Angle(0);
+   gout.drawLander(pos, a.getDegrees());
 }
 
 /***************************************************************
  * INPUT
  * Accept input from the Neil Armstrong
+ *  a = f / m
  ***************************************************************/
-Acceleration Lander :: input(const Thrust& thrust, double gravity)
+Acceleration Lander ::input(const Thrust &thrust, double gravity)
 {
-   pos.setX(-99.9);
-   return Acceleration();
+   double ddx = (gravity + velocity.getDX()) / MASS;
+   double ddy = velocity.getDX() / MASS;
+   Acceleration accel = Acceleration(ddx, ddy);
+   return accel;
 }
 
 /******************************************************************
@@ -53,8 +60,8 @@ void Lander ::coast(Acceleration &acceleration, double time)
    double currentPosY = pos.getY();
    double ddx = acceleration.getDDX();
    double ddy = acceleration.getDDY();
-   double dx  = velocity.getDX();
-   double dy  = velocity.getDY();
+   double dx = velocity.getDX();
+   double dy = velocity.getDY();
 
    // calculate new x/y position
    double newPosX = currentPosX + (dx * time) + (0.5 * ddx * (time * time));
