@@ -9,6 +9,7 @@
 
 #include "lander.h"
 #include "acceleration.h"
+#include <cmath>
 #include <iostream>
 
 /***************************************************************
