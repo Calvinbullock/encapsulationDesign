@@ -45,11 +45,9 @@ public:
       return 0.0;
    }
 
+   // WARN  not sure if this is right?
    // get main engine thrust in  m / s ^ 2
-   double mainEngineThrust() const
-   {
-      return 45000.00 / 15103.00 / 1 * 1; // WARN  not sure if this is right?
-   }
+   double mainEngineThrust() const { return 45000.00 / 15103.00 / 1 * 1; }
 
    // reflect what is firing
    bool isMain() const { return mainEngine; }
