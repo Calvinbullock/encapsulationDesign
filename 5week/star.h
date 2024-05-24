@@ -18,25 +18,29 @@
 class Star
 {
 public:
-    void reset(double width, double height)
-    {
-        pos = Position(width, height);
-    }
+   void reset(double width, double height)
+   {
 
-    void draw(ogstream gout)
-    {
-        gout.drawStar(pos, phase);
-        if (phase > 215)
-        {
-            phase = 0;
-        }
-        else
-        {
-            phase += 1;
-        }
-    }
+      double randX = random(0.0, width);
+      double randY = random(0.0, height);
+
+      pos = Position(randX, randY);
+   }
+
+   void draw(ogstream gout)
+   {
+      gout.drawStar(pos, phase);
+      if (phase > 215)
+      {
+         phase = 0;
+      }
+      else
+      {
+         phase += 1;
+      }
+   }
 
 private:
-    Position pos;
-    unsigned phase;
+   Position pos;
+   unsigned phase;
 };
