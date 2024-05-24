@@ -11,8 +11,7 @@
 
 #include "uiInteract.h" // for Interface
 
-#define THRUST 45000.00; // thrust in newtons
-#define WEIGHT 15103.00; // weight in kg
+#define THRUST 45000.00 / 15103.00; // thrust in newtons / weight in kg
 
 class TestLander;
 class TestThrust;
@@ -38,9 +37,7 @@ class Thrust
    }
 
    // get main engine thrust in  m / s ^ 2
-   double mainEngineThrust() const { return 45000.00 / 15103.00 / 1.0; }
-   // BUG  this const are troughing errors
-   // double mainEngineThrust() const { return THRUST / WEIGHT / 1.0; }
+   double mainEngineThrust() const { return THRUST; }
 
    // reflect what is firing
    bool isMain() const { return mainEngine; }

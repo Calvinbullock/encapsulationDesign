@@ -15,7 +15,7 @@
 #include "uiDraw.h"    // for DRAW* and RANDOM
 #include "angle.h"     // for ANGLE
 
-#define LANDERWIDTH 20.0; // width of the lander
+#define LANDERWIDTH 20; // width of the lander
 #define MAXSPEED 4.0; // 4 m/s
 
 enum Status { PLAYING, SAFE, DEAD };
