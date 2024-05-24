@@ -15,6 +15,9 @@
 #include "uiDraw.h"    // for DRAW* and RANDOM
 #include "angle.h"     // for ANGLE
 
+#define LANDERWIDTH 20.0; // width of the lander
+#define MAXSPEED 4.0; // 4 m/s
+
 enum Status { PLAYING, SAFE, DEAD };
 
 class TestLander;
@@ -41,8 +44,8 @@ public:
   Position getPosition()    const { return pos; }
   double   getSpeed()       const { return velocity.getSpeed(); }
   int      getFuel()        const { return fuel; }
-  int      getWidth()       const { return 20; } // WARN  might not be right
-  double   getMaxSpeed()    const { return 99.9; }
+  int      getWidth()       const { return LANDERWIDTH; }
+  double   getMaxSpeed()    const { return MAXSPEED; }
 
   // draw the lander on the screen
   void draw(const Thrust & thrust, ogstream & gout) const;

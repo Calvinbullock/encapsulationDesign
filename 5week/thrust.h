@@ -11,6 +11,9 @@
 
 #include "uiInteract.h" // for Interface
 
+#define THRUST 45000.00; // thrust in newtons
+#define WEIGHT 15103.00; // weight in kg
+
 class TestLander;
 class TestThrust;
 
@@ -30,24 +33,14 @@ class Thrust
    // Get rotation in radians per second
    double rotation() const
    {
-      if (clockwise && counterClockwise)
-      {
-         return 0.0;
-      }
-      else if (counterClockwise)
-      {
-         return -0.1;
-      }
-      else if (clockwise)
-      {
-         return 0.1;
-      }
-      return 0.0;
+      return clockwise ? (counterClockwise ? 0.0 : 0.1)
+                       : (counterClockwise ? -0.1 : 0.0);
    }
 
-   // WARN  not sure if this is right?
    // get main engine thrust in  m / s ^ 2
-   double mainEngineThrust() const { return 45000.00 / 15103.00 / 1 * 1; }
+   double mainEngineThrust() const { return 45000.00 / 15103.00 / 1.0; }
+   // BUG  this const are troughing errors
+   // double mainEngineThrust() const { return THRUST / WEIGHT / 1.0; }
 
    // reflect what is firing
    bool isMain() const { return mainEngine; }
@@ -57,32 +50,9 @@ class Thrust
    // set the thrusters
    void set(const Interface *pUI)
    {
-      if (pUI->isDown())
-      {
-         mainEngine = true;
-      }
-      else
-      {
-         mainEngine = false;
-      }
-
-      if (pUI->isLeft())
-      {
-         clockwise = true;
-      }
-      else
-      {
-         clockwise = false;
-      }
-
-      if (pUI->isRight())
-      {
-         counterClockwise = true;
-      }
-      else
-      {
-         counterClockwise = false;
-      }
+      mainEngine = pUI->isDown() ? true : false;
+      clockwise = pUI->isLeft() ? true : false;
+      counterClockwise = pUI->isRight() ? true : false;
    }
 
  private:
