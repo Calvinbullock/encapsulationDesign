@@ -48,7 +48,7 @@ public:
    // get main engine thrust in  m / s ^ 2
    double mainEngineThrust() const
    {
-      return 1;
+      return 45000.00 / 15103.00 / 1 * 1; // WARN  not sure if this is right?
    }
 
    // reflect what is firing
