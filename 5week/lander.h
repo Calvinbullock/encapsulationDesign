@@ -16,7 +16,9 @@
 #include "angle.h"     // for ANGLE
 
 #define LANDERWIDTH 20; // width of the lander
-#define MAXSPEED 4.0; // 4 m/s
+#define MASS 15103.0;   // mass of the lander in kg
+#define MAXSPEED 4.0;   // 4 m/s
+
 
 enum Status { PLAYING, SAFE, DEAD };
 
