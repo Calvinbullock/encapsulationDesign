@@ -11,7 +11,7 @@
 
 #include "uiInteract.h" // for Interface
 
-#define THRUST 45000.00 / 15103.00; // thrust in newtons / weight in kg
+#define THRUST 2.9795404 // thrust in newtons / weight in kg
 
 class TestLander;
 class TestThrust;
