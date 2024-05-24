@@ -59,10 +59,18 @@ public:
   void coast(Acceleration & acceleration, double time);
 
   // straighten the lander and put it on the ground
-  void land()  { angle.setUp();}
+  void land()  
+    {
+        angle.setUp();
+        status = SAFE;
+    }
 
   // we are dead. Draw the lander upside down
-  void crash() {angle.setDown();}
+  void crash() 
+    {
+        angle.setDown();
+        status = DEAD;
+    }
 
 private:
    Status   status;      // are we dead or not?
