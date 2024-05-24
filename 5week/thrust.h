@@ -23,12 +23,27 @@ class Thrust
    friend TestLander;
    friend TestThrust;
 
-public:
+ public:
    // Thrust is initially turned off
    Thrust() : mainEngine(false), clockwise(false), counterClockwise(false) {}
 
    // Get rotation in radians per second
-   double rotation() const;
+   double rotation() const
+   {
+      if (clockwise && counterClockwise)
+      {
+         return 0.0;
+      }
+      else if (counterClockwise)
+      {
+         return -0.1;
+      }
+      else if (clockwise)
+      {
+         return 0.1;
+      }
+      return 0.0;
+   }
 
    // WARN  not sure if this is right?
    // get main engine thrust in  m / s ^ 2
@@ -40,9 +55,37 @@ public:
    bool isCounter() const { return counterClockwise; }
 
    // set the thrusters
-   void set(const Interface *pUI);
+   void set(const Interface *pUI)
+   {
+      if (pUI->isDown())
+      {
+         mainEngine = true;
+      }
+      else
+      {
+         mainEngine = false;
+      }
 
-private:
+      if (pUI->isLeft())
+      {
+         clockwise = true;
+      }
+      else
+      {
+         clockwise = false;
+      }
+
+      if (pUI->isRight())
+      {
+         counterClockwise = true;
+      }
+      else
+      {
+         counterClockwise = false;
+      }
+   }
+
+ private:
    bool mainEngine;
    bool clockwise;
    bool counterClockwise;
