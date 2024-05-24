@@ -38,8 +38,50 @@ void Lander ::draw(const Thrust &thrust, ogstream &gout) const
  ***************************************************************/
 Acceleration Lander ::input(const Thrust &thrust, double gravity)
 {
-   double ddx = (gravity + velocity.getDX()) / MASS;
-   double ddy = velocity.getDX() / MASS;
+   double thr = thrust.mainEngineThrust();
+    std::cout << "th " << thr << std::endl;
+   double deg = angle.getDegrees();
+   double ddx;
+   double ddy;
+
+   if (fuel > 0 && (thrust.isMain() == true || thrust.isClock() == true || thrust.isCounter() == true))
+   {
+      fuel--;
+      angle.add(thrust.rotation());
+
+      if (deg == 0 || deg == 180)
+      {
+         // y thrust
+         ddx = sin(angle.getRadians()) * (velocity.getDX());
+         ddy = cos(angle.getRadians()) * (thr + velocity.getDY() + gravity);
+      }
+      else if (deg > 90 || deg > 270)
+      {
+         // x thrust
+         ddx = sin(angle.getRadians()) * (thr + velocity.getDX());
+         ddy = cos(angle.getRadians()) * velocity.getDY() + gravity;
+    std::cout << ddx << std::endl;
+    std::cout << ddy << std::endl;
+      }
+      else if ((deg > 0 && deg < 90) || (deg > 180 && deg < 270))
+      {
+         // (x,y)+ || (x,y)-
+         ddx = sin(angle.getRadians()) * (thr + velocity.getDX());
+         ddy = cos(angle.getRadians()) * (thr + velocity.getDY() + gravity);
+      }
+      else if ((deg > 90 && deg < 180) || (deg > 270 && deg < 360))
+      {
+         // x+,y- || x-,y+
+         ddy = cos(angle.getRadians()) * (thr + velocity.getDY() + gravity);
+         ddx = sin(angle.getRadians()) * (thr + velocity.getDX());
+      }
+   }
+   else
+   {
+      ddx = sin(angle.getRadians()) * velocity.getDX();
+      ddy = cos(angle.getRadians()) * velocity.getDY() + gravity;
+   }
+
    Acceleration accel = Acceleration(ddx, ddy);
    return accel;
 }
