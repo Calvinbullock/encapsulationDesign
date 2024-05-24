@@ -61,6 +61,6 @@ void Lander ::coast(Acceleration &acceleration, double time)
    double newPosY = currentPosY + (dy * time) + (0.5 * ddy * (time * time));
 
    // set new position
-   this->pos.setX(newPosX);
-   this->pos.setY(newPosY);
+   pos.setX(newPosX);
+   pos.setY(newPosY);
 }
