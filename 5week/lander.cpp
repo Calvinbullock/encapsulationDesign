@@ -33,6 +33,7 @@ void Lander ::draw(const Thrust &thrust, ogstream &gout) const
    Position startPos = Position(pos.getX(), pos.getY());
    Angle a = Angle(angle.getRadians());
    gout.drawLander(pos, a.getDegrees());
+   gout.drawLanderFlames(pos, a.getDegrees(), thrust.isMain());
 }
 
 /***************************************************************
