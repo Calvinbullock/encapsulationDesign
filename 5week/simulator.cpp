@@ -3,17 +3,17 @@
  * Lunar Lander simulation. This is the Game class and main()
  **********************************************************************/
 
-#include "position.h"    // everything should have a point
-#include "acceleration.h"// for ACCELERATION
-#include "lander.h"      // for LANDER
-#include "star.h"        // for STAR
+#include "acceleration.h" // for ACCELERATION
+#include "ground.h"       // for GROUND
+#include "lander.h"       // for LANDER
+#include "position.h"     // everything should have a point
+#include "star.h"         // for STAR
+#include "test.h"         // for the unit tests
 #include "thrust.h"
-#include "uiInteract.h"  // for INTERFACE
-#include "uiDraw.h"      // for RANDOM and DRAW*
-#include "ground.h"      // for GROUND
-#include "test.h"        // for the unit tests
-#include <cmath>         // for SQRT
-#include <cassert>       // for ASSERT
+#include "uiDraw.h"     // for RANDOM and DRAW*
+#include "uiInteract.h" // for INTERFACE
+#include <cassert>      // for ASSERT
+#include <cmath>        // for SQRT
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -26,57 +26,64 @@ using namespace std;
  *************************************************************************/
 class Simulator
 {
-public:
-   Simulator(const Position & posUpperRight) : ground(posUpperRight) {}
+ public:
+   Simulator(const Position &posUpperRight) : ground(posUpperRight)
+   {
+      // create 50 stars add them to star list
+      for (int i = 0; i <= 50; i++)
+      {
+         Star temp = Star(startingPos);
+         temp.reset(400, 400);
+         starList.push_back(temp);
+      }
+   }
    Ground ground;
 
-   // pSimulator->lander 
+   // pSimulator->lander
    Position startingPos = Position(400, 400);
    Lander lander = Lander(startingPos);
+
+   // star list
+   std::vector<Star> starList = {};
 };
-
-
 
 /*************************************
  * CALLBACK
  * Handle one frame of the simulator
  **************************************/
-void callBack(const Interface* pUI, void* p)
+void callBack(const Interface *pUI, void *p)
 {
    // the first step is to cast the void pointer into a game object. This
-   // is the first step of every single callback function in OpenGL. 
-   Simulator * pSimulator = (Simulator *)p;
+   // is the first step of every single callback function in OpenGL.
+   Simulator *pSimulator = (Simulator *)p;
 
+   // declerations
    ogstream gout;
    Thrust t = Thrust();
    Acceleration accel;
 
-   // draw the ground
-   pSimulator->ground.draw(gout);
-
-   // reset pSimulator->lander if spacebar is activated
-   if (pUI->isSpace()) 
+   // reset lander if spacebar is activated
+   if (pUI->isSpace())
    {
       pSimulator->lander.reset(pSimulator->startingPos);
    }
 
-   // draw pSimulator->lander
+   // draw lander
    pSimulator->lander.draw(t, gout);
-    
-   // thrust direction
+
+   // get thrust direction
    t.set(pUI);
    accel = pSimulator->lander.input(t, GRAVITY);
    pSimulator->lander.coast(accel, .1);
-    
-    // draw star WARN  broken
-    std::vector<Star> starList = {};
-    for (int i = 0; i <= 50; i++)
-    {
-        Star temp = Star(pSimulator->startingPos);
-        temp.draw(gout);
-        starList.push_back(temp);
-    }
 
+   // draw 50 star
+   for (int i = 0; i <= 50; i++)
+   {
+      pSimulator->starList[i].draw(gout);
+   }
+
+   // draw the ground
+   pSimulator->ground.draw(gout);
 }
 
 /*********************************
@@ -91,14 +98,13 @@ int WINAPI WinMain(
    _In_opt_ HINSTANCE hPrevInstance,
    _In_ LPSTR pCmdLine,
    _In_ int nCmdShow)
-#else // !_WIN32
-int main(int argc, char** argv)
+#else  // !_WIN32
+int main(int argc, char **argv)
 #endif // !_WIN32
 {
    // Run the unit tests
    testRunner();
 
-   
    // Initialize OpenGL
    Position posUpperRight(400, 400);
    Interface ui("Lunar Lander", posUpperRight);

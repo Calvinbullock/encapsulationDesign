@@ -18,22 +18,22 @@
 class Star
 {
 public:
-    Star(Position pos) : pos(pos), phase() {}
+    Star(Position pos) : pos(pos), phase() {phase = random(1, 215);}
    void reset(double width, double height)
    {
 
       double randX = random(0.0, width);
-      double randY = random(0.0, height);
+      double randY = random(200.0, height);
 
       pos = Position(randX, randY);
    }
 
-   void draw(ogstream gout)
+   void draw(ogstream &gout)
    {
       gout.drawStar(pos, phase);
       if (phase > 215)
       {
-         phase = 0;
+         phase = 1;
       }
       else
       {
