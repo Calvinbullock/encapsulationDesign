@@ -68,23 +68,14 @@ void callBack(const Interface* pUI, void* p)
    accel = pSimulator->lander.input(t, GRAVITY);
    pSimulator->lander.coast(accel, .1);
     
-    // did pSimulator->lander crash
-    if (!pSimulator->lander.isFlying()) 
-    {
-        if (pSimulator->lander.isDead())
-            pSimulator->lander.crash();
-        else if (pSimulator->lander.isLanded())
-            pSimulator->lander.land();
-    }
-
     // draw star WARN  broken
-    /*std::vector<Star> starList = {};*/
-    /*for (int i = 0; i <= 50; i++)*/
-    /*{*/
-    /*    Star temp = Star(pos);*/
-    /*    temp.draw();*/
-    /*    starList.push_back(temp);*/
-    /*}*/
+    std::vector<Star> starList = {};
+    for (int i = 0; i <= 50; i++)
+    {
+        Star temp = Star(pSimulator->startingPos);
+        temp.draw(gout);
+        starList.push_back(temp);
+    }
 
 }
 

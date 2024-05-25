@@ -18,6 +18,7 @@
 class Star
 {
 public:
+    Star(Position pos) : pos(pos), phase() {}
    void reset(double width, double height)
    {
 
