@@ -10,6 +10,7 @@
 #include "lander.h"
 #include "acceleration.h"
 #include <iostream>
+#include <iterator>
 
 /***************************************************************
  * RESET
@@ -46,19 +47,19 @@ Acceleration Lander ::input(const Thrust &thrust, double gravity)
    double ddx = 0.0;
    double ddy = 0.0;
 
-   // check if rotating
+   // check if rotating - fire rcs and use fuel
    if (fuel >= 1 && (thrust.isClock() == true || thrust.isCounter() == true))
    {
       fuel--;
       angle.add(thrust.rotation());
    }
 
-   // use main thruster
+   // use main thruster - fire main thruster and use fuel
    if (fuel >= 10 && (thrust.isMain() == true))
    {
       fuel -= 10;
-      ddx = -1 * (sin(angle.getRadians()) * (thr + velocity.getDX()));
-      ddy = cos(angle.getRadians()) * (thr + velocity.getDY());
+      ddx += -1 * sin(angle.getRadians()) * thr;
+      ddy += cos(angle.getRadians()) * thr;
    }
 
    ddy += gravity;
