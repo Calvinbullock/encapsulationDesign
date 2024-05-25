@@ -9,7 +9,6 @@
 
 #include "lander.h"
 #include "acceleration.h"
-#include <cmath>
 
 /***************************************************************
  * RESET
@@ -17,7 +16,11 @@
  ***************************************************************/
 void Lander ::reset(const Position &posUpperRight)
 {
+   angle.setRadians(0.0);
+   pos = Position(99.0, random(75.0, 95.0));
+   velocity = Velocity(random(-10.0, -4.0), random(-2.0, 2.0));
    status = PLAYING;
+   fuel = 5000;
 }
 
 /***************************************************************
