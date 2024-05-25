@@ -5,7 +5,7 @@ TARGET = runMe
 CXX = g++
 
 # C++ compiler flags (optimize for speed)
-CXXFLAGS = -O2
+CXXFLAGS = -O2 -Wall
 
 # Source files (cpp)
 SRCS = acceleration.cpp ground.cpp simulator.cpp uiDraw.cpp velocity.cpp angle.cpp position.cpp test.cpp uiInteract.cpp lander.cpp

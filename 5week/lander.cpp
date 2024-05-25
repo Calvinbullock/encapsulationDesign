@@ -9,6 +9,7 @@
 
 #include "lander.h"
 #include "acceleration.h"
+#include <iostream>
 
 /***************************************************************
  * RESET
@@ -41,9 +42,8 @@ void Lander ::draw(const Thrust &thrust, ogstream &gout) const
 Acceleration Lander ::input(const Thrust &thrust, double gravity)
 {
    double thr = thrust.mainEngineThrust();
-   double deg = angle.getDegrees();
-   double ddx;
-   double ddy;
+   double ddx = 0.0;
+   double ddy = 0.0;
 
    // check if rotating
    if (fuel >= 1 && (thrust.isClock() == true || thrust.isCounter() == true))
