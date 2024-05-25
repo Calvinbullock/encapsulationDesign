@@ -68,15 +68,12 @@ void callBack(const Interface *pUI, void *p)
       pSimulator->lander.reset(pSimulator->startingPos);
    }
 
-   // draw lander
-   pSimulator->lander.draw(t, gout);
-
    // get thrust direction
    t.set(pUI);
    accel = pSimulator->lander.input(t, GRAVITY);
    pSimulator->lander.coast(accel, .1);
 
-   // draw 50 star
+   // draw 50 stars
    for (int i = 0; i <= 50; i++)
    {
       pSimulator->starList[i].draw(gout);
@@ -84,6 +81,9 @@ void callBack(const Interface *pUI, void *p)
 
    // draw the ground
    pSimulator->ground.draw(gout);
+
+   // draw lander
+   pSimulator->lander.draw(t, gout);
 }
 
 /*********************************
