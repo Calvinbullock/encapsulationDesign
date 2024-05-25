@@ -7,14 +7,18 @@
 #include "acceleration.h"// for ACCELERATION
 #include "lander.h"      // for LANDER
 #include "star.h"        // for STAR
+#include "thrust.h"
 #include "uiInteract.h"  // for INTERFACE
 #include "uiDraw.h"      // for RANDOM and DRAW*
 #include "ground.h"      // for GROUND
 #include "test.h"        // for the unit tests
 #include <cmath>         // for SQRT
 #include <cassert>       // for ASSERT
+#include <iostream>
+#include <vector>
 using namespace std;
 
+#define GRAVITY -1.62 // gravity of the moon m/s^2
 
 /*************************************************************************
  * SIMULATOR
@@ -25,6 +29,10 @@ class Simulator
 public:
    Simulator(const Position & posUpperRight) : ground(posUpperRight) {}
    Ground ground;
+
+   // pSimulator->lander 
+   Position startingPos = Position(400, 400);
+   Lander lander = Lander(startingPos);
 };
 
 
@@ -40,9 +48,44 @@ void callBack(const Interface* pUI, void* p)
    Simulator * pSimulator = (Simulator *)p;
 
    ogstream gout;
+   Thrust t = Thrust();
+   Acceleration accel;
 
    // draw the ground
    pSimulator->ground.draw(gout);
+
+   // reset pSimulator->lander if spacebar is activated
+   if (pUI->isSpace()) 
+   {
+      pSimulator->lander.reset(pSimulator->startingPos);
+   }
+
+   // draw pSimulator->lander
+   pSimulator->lander.draw(t, gout);
+    
+   // thrust direction
+   t.set(pUI);
+   accel = pSimulator->lander.input(t, GRAVITY);
+   pSimulator->lander.coast(accel, .1);
+    
+    // did pSimulator->lander crash
+    if (!pSimulator->lander.isFlying()) 
+    {
+        if (pSimulator->lander.isDead())
+            pSimulator->lander.crash();
+        else if (pSimulator->lander.isLanded())
+            pSimulator->lander.land();
+    }
+
+    // draw star WARN  broken
+    /*std::vector<Star> starList = {};*/
+    /*for (int i = 0; i <= 50; i++)*/
+    /*{*/
+    /*    Star temp = Star(pos);*/
+    /*    temp.draw();*/
+    /*    starList.push_back(temp);*/
+    /*}*/
+
 }
 
 /*********************************

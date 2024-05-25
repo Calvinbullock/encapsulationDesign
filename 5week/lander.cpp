@@ -18,7 +18,7 @@
 void Lander ::reset(const Position &posUpperRight)
 {
    angle.setRadians(0.0);
-   pos = Position(99.0, random(75.0, 95.0));
+   pos = Position(posUpperRight.getX()*.99, random(posUpperRight.getY()*.75, posUpperRight.getY()*.95));
    velocity = Velocity(random(-10.0, -4.0), random(-2.0, 2.0));
    status = PLAYING;
    fuel = 5000;
@@ -30,8 +30,8 @@ void Lander ::reset(const Position &posUpperRight)
  ***************************************************************/
 void Lander ::draw(const Thrust &thrust, ogstream &gout) const
 {
-   Position startPos = Position(300, 300);
-   Angle a = Angle(0);
+   Position startPos = Position(pos.getX(), pos.getY());
+   Angle a = Angle(angle.getRadians());
    gout.drawLander(pos, a.getDegrees());
 }
 
