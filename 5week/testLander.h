@@ -14,7 +14,6 @@
 #include "position.h"
 #include "acceleration.h"
 #include "unitTest.h"
-#include <iostream>
 
 /*******************************
  * TEST LANDER
@@ -898,7 +897,6 @@ private:
       double gravity = -1.0; // gravity
       
       // exercise
-    std::cout << "pop ----------------------------" << std::endl;
       a = l.input(t, gravity);
       
       // verify
