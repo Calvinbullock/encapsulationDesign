@@ -1,6 +1,11 @@
 /**********************************************************************
  * LAB 06
- * Lunar Lander simulation. This is the Game class and main()
+ *
+ * Author:
+ *    Calvin, Hyrum Bullock
+ * Summary:
+ *    Lunar Lander simulation. This is the Game class and main()
+ * 
  **********************************************************************/
 
 #include "acceleration.h" // for ACCELERATION
@@ -14,7 +19,6 @@
 #include "uiInteract.h" // for INTERFACE
 #include <cassert>      // for ASSERT
 #include <cmath>        // for SQRT
-#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -26,7 +30,7 @@ using namespace std;
  *************************************************************************/
 class Simulator
 {
- public:
+public:
    Simulator(const Position &posUpperRight) : ground(posUpperRight)
    {
       // create 50 stars add them to star list
@@ -36,7 +40,9 @@ class Simulator
          temp.reset(400, 400);
          starList.push_back(temp);
       }
+      lander.reset(startingPos);
    }
+
    Ground ground;
 
    // pSimulator->lander
@@ -66,6 +72,7 @@ void callBack(const Interface *pUI, void *p)
    if (pUI->isSpace())
    {
       pSimulator->lander.reset(pSimulator->startingPos);
+      pSimulator->ground.reset();
    }
 
    // get thrust direction
@@ -94,10 +101,10 @@ void callBack(const Interface *pUI, void *p)
 #ifdef _WIN32
 #include <windows.h>
 int WINAPI WinMain(
-   _In_ HINSTANCE hInstance,
-   _In_opt_ HINSTANCE hPrevInstance,
-   _In_ LPSTR pCmdLine,
-   _In_ int nCmdShow)
+    _In_ HINSTANCE hInstance,
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPSTR pCmdLine,
+    _In_ int nCmdShow)
 #else  // !_WIN32
 int main(int argc, char **argv)
 #endif // !_WIN32

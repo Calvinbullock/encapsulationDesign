@@ -2,7 +2,7 @@
  * Header File:
  *    STAR
  * Author:
- *    Calvin, Bullock
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    A single star that twinkles
  ************************************************************************/
@@ -18,7 +18,7 @@
 class Star
 {
 public:
-    Star(Position pos) : pos(pos), phase() {phase = random(1, 215);}
+   Star(Position pos) : pos(pos), phase() { phase = random(1, 215); }
    void reset(double width, double height)
    {
 

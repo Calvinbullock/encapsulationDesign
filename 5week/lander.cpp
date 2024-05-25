@@ -2,14 +2,13 @@
  * Source File:
  *    LANDER
  * Author:
- *    Calvin, Bullock
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    All the information about the lunar lander
  ************************************************************************/
 
 #include "lander.h"
 #include "acceleration.h"
-#include <iostream>
 #include <iterator>
 
 /***************************************************************
@@ -19,10 +18,11 @@
 void Lander ::reset(const Position &posUpperRight)
 {
    angle.setRadians(0.0);
-   pos = Position(posUpperRight.getX()*.99, random(posUpperRight.getY()*.75, posUpperRight.getY()*.95));
+
+   pos      = Position(posUpperRight.getX() * .99, random(posUpperRight.getY() * .75, posUpperRight.getY() * .95));
    velocity = Velocity(random(-10.0, -4.0), random(-2.0, 2.0));
-   status = PLAYING;
-   fuel = 5000;
+   status   = PLAYING;
+   fuel     = 5000;
 }
 
 /***************************************************************
@@ -32,8 +32,9 @@ void Lander ::reset(const Position &posUpperRight)
 void Lander ::draw(const Thrust &thrust, ogstream &gout) const
 {
    Position startPos = Position(pos.getX(), pos.getY());
-   Angle a = Angle(angle.getRadians());
-   gout.drawLander(pos, a.getDegrees());
+   Angle a           = Angle(angle.getRadians());
+
+   gout.drawLander      (pos, a.getDegrees());
    gout.drawLanderFlames(pos, a.getDegrees(), thrust.isMain(), thrust.isClock(), thrust.isCounter());
 }
 
@@ -57,13 +58,14 @@ Acceleration Lander ::input(const Thrust &thrust, double gravity)
    // use main thruster - fire main thruster and use fuel
    if (fuel >= 10 && (thrust.isMain() == true))
    {
-      fuel -= 10;
-      ddx += -1 * sin(angle.getRadians()) * thr;
-      ddy += cos(angle.getRadians()) * thr;
+      fuel  -= 10;
+      ddx   += -1 * sin(angle.getRadians()) * thr;
+      ddy   +=      cos(angle.getRadians()) * thr;
    }
 
    ddy += gravity;
    Acceleration accel = Acceleration(ddx, ddy);
+   
    return accel;
 }
 
@@ -79,12 +81,12 @@ void Lander ::coast(Acceleration &acceleration, double time)
 
    // get variables
    // NOTE We decided on readability over memory efficiency
-   double currentPosX = pos.getX();
-   double currentPosY = pos.getY();
+   double currentPosX =    pos.getX();
+   double currentPosY =    pos.getY();
    double ddx = acceleration.getDDX();
    double ddy = acceleration.getDDY();
-   double dx = velocity.getDX();
-   double dy = velocity.getDY();
+   double dx =       velocity.getDX();
+   double dy =       velocity.getDY();
 
    // calculate new x/y position
    double newPosX = currentPosX + (dx * time) + (0.5 * ddx * (time * time));

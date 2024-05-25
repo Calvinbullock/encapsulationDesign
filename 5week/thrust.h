@@ -2,7 +2,7 @@
  * Header File:
  *    Thrust : Represents activation of thrusters
  * Author:
- *    Calvin, Bullock
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    down, clockwise, and counterclockwise
  ************************************************************************/
@@ -25,7 +25,7 @@ class Thrust
    friend TestLander;
    friend TestThrust;
 
- public:
+public:
    // Thrust is initially turned off
    Thrust() : mainEngine(false), clockwise(false), counterClockwise(false) {}
 
@@ -40,19 +40,19 @@ class Thrust
    double mainEngineThrust() const { return THRUST; }
 
    // reflect what is firing
-   bool isMain() const { return mainEngine; }
-   bool isClock() const { return clockwise; }
+   bool isMain   () const { return mainEngine;       }
+   bool isClock  () const { return clockwise;        }
    bool isCounter() const { return counterClockwise; }
 
    // set the thrusters
    void set(const Interface *pUI)
    {
-      mainEngine = pUI->isDown() ? true : false;
-      clockwise = pUI->isLeft() ? true : false;
+      mainEngine       = pUI->isDown()  ? true : false;
+      clockwise        = pUI->isLeft()  ? true : false;
       counterClockwise = pUI->isRight() ? true : false;
    }
 
- private:
+private:
    bool mainEngine;
    bool clockwise;
    bool counterClockwise;
