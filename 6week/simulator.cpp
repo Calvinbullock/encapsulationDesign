@@ -62,6 +62,7 @@ void callBack(const Interface *pUI, void *p)
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL.
    Simulator *pSimulator = (Simulator *)p;
+   Position pos(10, 380);
 
    // declerations
    ogstream gout;
@@ -88,6 +89,12 @@ void callBack(const Interface *pUI, void *p)
 
    // draw the ground
    pSimulator->ground.draw(gout);
+
+   gout = pos;
+   gout << "Fuel: " << pSimulator->lander.getFuel() 
+        << "\nAltitude: " << pSimulator->ground.getElevation(pSimulator->lander.getPosition()) 
+        << "\nSpeed: " << pSimulator->lander.getSpeed();
+
 
    // draw lander
    pSimulator->lander.draw(t, gout);
