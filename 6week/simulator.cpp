@@ -76,9 +76,10 @@ void callBack(const Interface *pUI, void *p)
       pSimulator->ground.reset();
    }
 
-   // get thrust direction
+   // check if lander has hit the ground
    if (pSimulator->lander.isFlying() != PLAYING )
    {
+      // get thrust direction
       t.set(pUI);
       accel = pSimulator->lander.input(t, GRAVITY);
       pSimulator->lander.coast(accel, .1);
@@ -102,6 +103,7 @@ void callBack(const Interface *pUI, void *p)
    
    pSimulator->lander.draw(t, gout);
 
+   // check if lander has hit the ground
    if (pSimulator->ground.getElevation(pSimulator->lander.getPosition()) < 0.0)
       pSimulator->lander.crash();
 
