@@ -91,6 +91,16 @@ void callBack(const Interface *pUI, void *p)
 
    // draw lander
    pSimulator->lander.draw(t, gout);
+
+
+   // TODO 
+   // in ground.h/cpp 
+   // - hitground
+   // - onplatform
+   // - get elavation
+   // printing to screen
+   // - gout = pos(x, y)
+   // - gout << "hello"
 }
 
 /*********************************
