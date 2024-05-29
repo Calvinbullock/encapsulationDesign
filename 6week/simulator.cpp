@@ -100,7 +100,6 @@ void callBack(const Interface *pUI, void *p)
         << "\nSpeed: " << pSimulator->lander.getSpeed();
 
    // draw lander
-   
    pSimulator->lander.draw(t, gout);
 
    // check if lander has hit the ground
