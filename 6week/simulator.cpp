@@ -77,9 +77,10 @@ void callBack(const Interface *pUI, void *p)
    }
 
    // get thrust direction
-   t.set(pUI);
-   accel = pSimulator->lander.input(t, GRAVITY);
-   pSimulator->lander.coast(accel, .1);
+   if (pSimulator->lander.isFlying() != PLAYING )
+      t.set(pUI);
+      accel = pSimulator->lander.input(t, GRAVITY);
+      pSimulator->lander.coast(accel, .1);
 
    // draw 50 stars
    for (int i = 0; i <= 50; i++)
@@ -95,10 +96,15 @@ void callBack(const Interface *pUI, void *p)
         << "\nAltitude: " << pSimulator->ground.getElevation(pSimulator->lander.getPosition()) 
         << "\nSpeed: " << pSimulator->lander.getSpeed();
 
-
    // draw lander
+   
    pSimulator->lander.draw(t, gout);
 
+   if (pSimulator->ground.getElevation(pSimulator->lander.getPosition()) < 0.0)
+   
+      pSimulator->lander.crash();
+
+      
 
    // TODO 
    // in ground.h/cpp 
