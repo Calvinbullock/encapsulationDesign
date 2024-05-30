@@ -94,22 +94,29 @@ void callBack(const Interface *pUI, void *p)
    // draw the ground
    pSimulator->ground.draw(gout);
 
+   // get reused lander variables after lander movement update
+   Position landerPos = pSimulator->lander.getPosition();
+   int landerWidth = pSimulator->lander.getWidth();
+
+   // display lander stats in gui window
    gout = pos;
    gout << "Fuel: " << pSimulator->lander.getFuel()
-        << "\nAltitude: " << pSimulator->ground.getElevation(pSimulator->lander.getPosition())
+        << "\nAltitude: " 
+         << pSimulator->ground.getElevation(landerPos)
         << "\nSpeed: " << pSimulator->lander.getSpeed();
 
    // draw lander
    pSimulator->lander.draw(t, gout);
-   
+
    // check if lander hit ground or platform
-   if (pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()) 
+   if (pSimulator->ground.onPlatform(landerPos, landerWidth)
       && pSimulator->lander.getSpeed() <= pSimulator->lander.getMaxSpeed())
    {
       // land if lander is on platform and at right speed
       pSimulator->lander.land();
    }
-   else if (pSimulator->ground.getElevation(pSimulator->lander.getPosition()) < 0.0)
+   else if (pSimulator->ground.getElevation(landerPos) < 0.0 
+      || pSimulator->ground.hitGround(landerPos, landerWidth))
    {
       // crash if lander hits the ground
       pSimulator->lander.crash();
