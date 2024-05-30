@@ -5,7 +5,7 @@
  *    Calvin, Hyrum Bullock
  * Summary:
  *    Lunar Lander simulation. This is the Game class and main()
- * 
+ *
  **********************************************************************/
 
 #include "acceleration.h" // for ACCELERATION
@@ -77,7 +77,7 @@ void callBack(const Interface *pUI, void *p)
    }
 
    // check if lander has hit the ground
-   if (pSimulator->lander.isFlying() != PLAYING )
+   if (pSimulator->lander.isFlying() != PLAYING)
    {
       // get thrust direction
       t.set(pUI);
@@ -95,19 +95,28 @@ void callBack(const Interface *pUI, void *p)
    pSimulator->ground.draw(gout);
 
    gout = pos;
-   gout << "Fuel: " << pSimulator->lander.getFuel() 
-        << "\nAltitude: " << pSimulator->ground.getElevation(pSimulator->lander.getPosition()) 
+   gout << "Fuel: " << pSimulator->lander.getFuel()
+        << "\nAltitude: " << pSimulator->ground.getElevation(pSimulator->lander.getPosition())
         << "\nSpeed: " << pSimulator->lander.getSpeed();
 
    // draw lander
    pSimulator->lander.draw(t, gout);
-
-   // check if lander has hit the ground
-   if (pSimulator->ground.getElevation(pSimulator->lander.getPosition()) < 0.0)
+   
+   // check if lander hit ground or platform
+   if (pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()) 
+      && pSimulator->lander.getSpeed() <= pSimulator->lander.getMaxSpeed())
+   {
+      // land if lander is on platform and at right speed
+      pSimulator->lander.land();
+   }
+   else if (pSimulator->ground.getElevation(pSimulator->lander.getPosition()) < 0.0)
+   {
+      // crash if lander hits the ground
       pSimulator->lander.crash();
+   }
 
-   // TODO 
-   // in ground.h/cpp 
+   // TODO
+   // in ground.h/cpp
    // - hitground
    // - onplatform
    // - get elavation
@@ -124,10 +133,10 @@ void callBack(const Interface *pUI, void *p)
 #ifdef _WIN32
 #include <windows.h>
 int WINAPI WinMain(
-    _In_ HINSTANCE hInstance,
-    _In_opt_ HINSTANCE hPrevInstance,
-    _In_ LPSTR pCmdLine,
-    _In_ int nCmdShow)
+   _In_ HINSTANCE hInstance,
+   _In_opt_ HINSTANCE hPrevInstance,
+   _In_ LPSTR pCmdLine,
+   _In_ int nCmdShow)
 #else  // !_WIN32
 int main(int argc, char **argv)
 #endif // !_WIN32
