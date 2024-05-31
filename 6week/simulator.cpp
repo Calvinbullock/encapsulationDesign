@@ -80,6 +80,29 @@ public:
            << ground.getElevation(lander.getPosition())
            << "\nSpeed: " << lander.getSpeed();
    }
+
+   void landerCollisionCheck(ogstream &gout)
+   {
+      Position centerPos(100, 200); // BUG  not completly centered
+
+      // check if lander hit ground or platform safely
+      if (ground.onPlatform(lander.getPosition(), lander.getWidth())
+         && lander.getSpeed() <= lander.getMaxSpeed())
+      {
+         // land if lander is on platform and at right speed
+         lander.land();
+         gout = centerPos;
+         gout << "one small step for man,\none giant leap for mankind";
+      }
+      else if (ground.getElevation(lander.getPosition()) < 0.0 
+         || ground.hitGround(lander.getPosition(), lander.getWidth()))
+      {
+         // crash if lander hits the ground
+         lander.crash();
+         gout = centerPos;
+         gout << "Houston, we have a problem";
+      }
+   }
 };
 
 /*************************************
@@ -91,7 +114,6 @@ void callBack(const Interface *pUI, void *p)
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL.
    Simulator *pSimulator = (Simulator *)p;
-   Position centerPos(100, 200);
    ogstream gout;
    Thrust t = Thrust();
    Acceleration accel;
@@ -118,29 +140,9 @@ void callBack(const Interface *pUI, void *p)
    pSimulator->ground.draw(gout); // BUG  this needs to be after the stars that should not be
    pSimulator->drawLanderStats(gout);
    pSimulator->lander.draw(t, gout);
-
-   // get often used variables
-   Position landerPos = pSimulator->lander.getPosition();
-   int landerWidth = pSimulator->lander.getWidth();
-
-   // TODO  make this a member func **??**
-   // check if lander hit ground or platform safely
-   if (pSimulator->ground.onPlatform(landerPos, landerWidth)
-      && pSimulator->lander.getSpeed() <= pSimulator->lander.getMaxSpeed())
-   {
-      // land if lander is on platform and at right speed
-      pSimulator->lander.land();
-      gout = centerPos; // BUG  not completly centered
-      gout << "one small step for man,\none giant leap for mankind";
-   }
-   else if (pSimulator->ground.getElevation(landerPos) < 0.0 
-      || pSimulator->ground.hitGround(landerPos, landerWidth))
-   {
-      // crash if lander hits the ground
-      pSimulator->lander.crash();
-      gout = centerPos; // BUG  not completly centered
-      gout << "Houston, we have a problem";
-   }
+   
+   // check if lander hits the ground / platform
+   pSimulator->landerCollisionCheck(gout);
 }
 
 /*********************************
