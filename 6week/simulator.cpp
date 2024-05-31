@@ -108,7 +108,7 @@ void callBack(const Interface *pUI, void *p)
    // draw lander
    pSimulator->lander.draw(t, gout);
 
-   // check if lander hit ground or platform
+   // check if lander hit ground or platform safely
    if (pSimulator->ground.onPlatform(landerPos, landerWidth)
       && pSimulator->lander.getSpeed() <= pSimulator->lander.getMaxSpeed())
    {
