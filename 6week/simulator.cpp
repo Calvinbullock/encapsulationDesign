@@ -121,15 +121,6 @@ void callBack(const Interface *pUI, void *p)
       // crash if lander hits the ground
       pSimulator->lander.crash();
    }
-
-   // TODO
-   // in ground.h/cpp
-   // - hitground
-   // - onplatform
-   // - get elavation
-   // printing to screen
-   // - gout = pos(x, y)
-   // - gout << "hello"
 }
 
 /*********************************
