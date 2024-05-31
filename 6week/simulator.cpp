@@ -69,7 +69,7 @@ void callBack(const Interface *pUI, void *p)
    Thrust t = Thrust();
    Acceleration accel;
    
-   // TODO  make this a member func
+   // TODO  make this a member func **resetGame()**
    // reset lander if spacebar is activated
    if (pUI->isSpace())
    {
@@ -77,7 +77,7 @@ void callBack(const Interface *pUI, void *p)
       pSimulator->ground.reset();
    }
 
-   // TODO  make this a member func
+   // TODO  make this a member func **thrustDirection()**
    // check if lander has hit the ground
    if (pSimulator->lander.isFlying() != PLAYING)
    {
@@ -87,7 +87,7 @@ void callBack(const Interface *pUI, void *p)
       pSimulator->lander.coast(accel, .1);
    }
 
-   // TODO  make this a member func
+   // TODO  make this a member func **drawStars(int num)**
    // draw 50 stars
    for (int i = 0; i <= 50; i++)
    {
@@ -101,6 +101,7 @@ void callBack(const Interface *pUI, void *p)
    Position landerPos = pSimulator->lander.getPosition();
    int landerWidth = pSimulator->lander.getWidth();
 
+   // TODO  make this a member func **drawLanderStats()**
    // display lander stats in gui window
    gout = pos;
    gout << "Fuel: " << pSimulator->lander.getFuel()
@@ -111,7 +112,7 @@ void callBack(const Interface *pUI, void *p)
    // draw lander
    pSimulator->lander.draw(t, gout);
 
-   // TODO  make this a member func
+   // TODO  make this a member func **??**
    // check if lander hit ground or platform safely
    if (pSimulator->ground.onPlatform(landerPos, landerWidth)
       && pSimulator->lander.getSpeed() <= pSimulator->lander.getMaxSpeed())
