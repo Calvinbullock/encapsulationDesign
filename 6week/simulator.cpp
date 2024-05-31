@@ -35,7 +35,7 @@ public:
    Simulator(const Position &posUpperRight) : ground(posUpperRight)
    {
       // TODO  maybe add a diffrent way to add X stars
-      // create 50 stars add them to star list
+      // create 50 stars add them to starList
       for (int i = 0; i <= 50; i++)
       {
          Star temp = Star(startingPos);
@@ -96,7 +96,8 @@ void callBack(const Interface *pUI, void *p)
    ogstream gout;
    Thrust t = Thrust();
    Acceleration accel;
-   
+      
+   // TODO  should this spce key ceck be in the resest func??/
    // reset simulator if spacebar is activated
    if (pUI->isSpace())
    {
