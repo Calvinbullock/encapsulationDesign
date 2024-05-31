@@ -32,9 +32,9 @@ using namespace std;
 class Simulator
 {
 public:
-   Simulator(const Position &posUpperRight) : ground(posUpperRight)
+   Simulator(const Position &posUpperRight, int starCount) : ground(posUpperRight)
    {
-      makeStars(50);
+      makeStars(starCount);
       lander.reset(upperRightCorner);
    }
 
@@ -53,6 +53,17 @@ public:
       {
          lander.reset(upperRightCorner);
          ground.reset();
+      }
+   }
+
+   void thrsutInput(const Interface *pUI, Thrust &landerThrust)
+   {
+      if (lander.isFlying() != PLAYING)
+      {
+         // get thrust direction
+         landerThrust.set(pUI);
+         Acceleration accel = lander.input(landerThrust, GRAVITY);
+         lander.coast(accel, .1);
       }
    }
 
@@ -88,7 +99,7 @@ public:
 
    void landerCollisionCheck(ogstream &gout)
    {
-      Position centerPos(100, 200); // BUG  not completly centered
+      Position centerPos(100, 200);
 
       // check if lander hit ground or platform safely
       if (ground.onPlatform(lander.getPosition(), lander.getWidth()) 
@@ -125,15 +136,8 @@ void callBack(const Interface *pUI, void *p)
    // reset simulator if spacebar is activated
    pSimulator->resetSimulator(pUI);
 
-   // TODO  make this a member func **thrustDirection()**
    // check if lander has hit the ground
-   if (pSimulator->lander.isFlying() != PLAYING)
-   {
-      // get thrust direction
-      landerThrust.set(pUI);
-      Acceleration accel = pSimulator->lander.input(landerThrust, GRAVITY);
-      pSimulator->lander.coast(accel, .1);
-   }
+   pSimulator->thrsutInput(pUI, landerThrust);
 
    // draw sim entities
    pSimulator->drawStars(gout);
@@ -168,8 +172,8 @@ int main(int argc, char **argv)
    Position posUpperRight(400, 400);
    Interface ui("Lunar Lander", posUpperRight);
 
-   // Initialize the game class
-   Simulator simulator(posUpperRight);
+   // Initialize the game class, create 50 stars to draw
+   Simulator simulator(posUpperRight, 50);
 
    // set everything into action
    ui.run(callBack, (void *)&simulator);
