@@ -115,8 +115,7 @@ void callBack(const Interface *pUI, void *p)
    // is the first step of every single callback function in OpenGL.
    Simulator *pSimulator = (Simulator *)p;
    ogstream gout;
-   Thrust t = Thrust();
-   Acceleration accel;
+   Thrust t = Thrust(); // TODO  rename??
       
    // TODO  should this spce key ceck be in the resest func??/
    // reset simulator if spacebar is activated
@@ -131,7 +130,7 @@ void callBack(const Interface *pUI, void *p)
    {
       // get thrust direction
       t.set(pUI);
-      accel = pSimulator->lander.input(t, GRAVITY);
+      Acceleration accel = pSimulator->lander.input(t, GRAVITY);
       pSimulator->lander.coast(accel, .1);
    }
    
