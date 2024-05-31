@@ -19,6 +19,7 @@
 #include "uiInteract.h" // for INTERFACE
 #include <cassert>      // for ASSERT
 #include <cmath>        // for SQRT
+#include <csignal>
 #include <vector>
 using namespace std;
 
@@ -33,6 +34,7 @@ class Simulator
 public:
    Simulator(const Position &posUpperRight) : ground(posUpperRight)
    {
+      // TODO  maybe add a diffrent way to add X stars
       // create 50 stars add them to star list
       for (int i = 0; i <= 50; i++)
       {
@@ -43,14 +45,41 @@ public:
       lander.reset(startingPos);
    }
 
-   Ground ground;
-
-   // pSimulator->lander
-   Position startingPos = Position(400, 400);
-   Lander lander = Lander(startingPos);
+   Ground   ground;
+   Position startingPos = Position(400, 400); // TODO rename?
+   Lander   lander      = Lander(startingPos);
 
    // star list
    std::vector<Star> starList = {};
+
+   /*************************************
+   *  METHODS
+   **************************************/
+
+   void resetSimulator() 
+   {
+      lander.reset(startingPos);
+      ground.reset();
+   }
+
+   void drawStars(ogstream &gout) 
+   {
+      for (int i = 0; i <= 50; i++) // TODO make this length more configurable
+      {
+         starList[i].draw(gout);
+      }
+   }
+
+   void drawLanderStats(ogstream &gout) 
+   {
+      Position pos(10, 380);
+
+      // display lander stats in gui window
+      gout = pos;
+      gout << "Fuel: " << lander.getFuel() << "\nAltitude: " 
+           << ground.getElevation(lander.getPosition())
+           << "\nSpeed: " << lander.getSpeed();
+   }
 };
 
 /*************************************
@@ -62,19 +91,16 @@ void callBack(const Interface *pUI, void *p)
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL.
    Simulator *pSimulator = (Simulator *)p;
-   Position pos(10, 380);
    Position centerPos(100, 200);
    // declerations
    ogstream gout;
    Thrust t = Thrust();
    Acceleration accel;
    
-   // TODO  make this a member func **resetGame()**
-   // reset lander if spacebar is activated
+   // reset simulator if spacebar is activated
    if (pUI->isSpace())
    {
-      pSimulator->lander.reset(pSimulator->startingPos);
-      pSimulator->ground.reset();
+      pSimulator->resetSimulator();
    }
 
    // TODO  make this a member func **thrustDirection()**
@@ -86,31 +112,16 @@ void callBack(const Interface *pUI, void *p)
       accel = pSimulator->lander.input(t, GRAVITY);
       pSimulator->lander.coast(accel, .1);
    }
-
-   // TODO  make this a member func **drawStars(int num)**
-   // draw 50 stars
-   for (int i = 0; i <= 50; i++)
-   {
-      pSimulator->starList[i].draw(gout);
-   }
-
-   // draw the ground
-   pSimulator->ground.draw(gout);
+   
+   // draw sim entities
+   pSimulator->drawStars(gout);
+   pSimulator->ground.draw(gout); // BUG  this needs to be after the stars that should not be
+   pSimulator->drawLanderStats(gout);
+   pSimulator->lander.draw(t, gout);
 
    // get often used variables
    Position landerPos = pSimulator->lander.getPosition();
    int landerWidth = pSimulator->lander.getWidth();
-
-   // TODO  make this a member func **drawLanderStats()**
-   // display lander stats in gui window
-   gout = pos;
-   gout << "Fuel: " << pSimulator->lander.getFuel()
-        << "\nAltitude: " 
-         << pSimulator->ground.getElevation(landerPos)
-        << "\nSpeed: " << pSimulator->lander.getSpeed();
-
-   // draw lander
-   pSimulator->lander.draw(t, gout);
 
    // TODO  make this a member func **??**
    // check if lander hit ground or platform safely
