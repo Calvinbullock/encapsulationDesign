@@ -63,7 +63,7 @@ void callBack(const Interface *pUI, void *p)
    // is the first step of every single callback function in OpenGL.
    Simulator *pSimulator = (Simulator *)p;
    Position pos(10, 380);
-
+   Position cntrPos(100, 200);
    // declerations
    ogstream gout;
    Thrust t = Thrust();
@@ -114,12 +114,16 @@ void callBack(const Interface *pUI, void *p)
    {
       // land if lander is on platform and at right speed
       pSimulator->lander.land();
+      gout = cntrPos;
+      gout << "one small step for man,\none giant leap for mankind";
    }
    else if (pSimulator->ground.getElevation(landerPos) < 0.0 
       || pSimulator->ground.hitGround(landerPos, landerWidth))
    {
       // crash if lander hits the ground
       pSimulator->lander.crash();
+      gout = cntrPos;
+      gout << "Houston, we have a problem";
    }
 }
 
