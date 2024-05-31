@@ -45,24 +45,22 @@ public:
       lander.reset(startingPos);
    }
 
-   Ground   ground;
-   Position startingPos = Position(400, 400); // TODO rename?
-   Lander   lander      = Lander(startingPos);
-
-   // star list
-   std::vector<Star> starList = {};
+   Ground            ground;
+   Position          startingPos = Position(400, 400); // TODO rename?
+   Lander            lander      = Lander(startingPos);
+   std::vector<Star> starList    = {};
 
    /*************************************
    *  METHODS
    **************************************/
 
-   void resetSimulator() 
+   void resetSimulator()
    {
       lander.reset(startingPos);
       ground.reset();
    }
 
-   void drawStars(ogstream &gout) 
+   void drawStars(ogstream &gout)
    {
       for (int i = 0; i <= 50; i++) // TODO make this length more configurable
       {
@@ -70,13 +68,13 @@ public:
       }
    }
 
-   void drawLanderStats(ogstream &gout) 
+   void drawLanderStats(ogstream &gout)
    {
       Position pos(10, 380);
 
       // display lander stats in gui window
       gout = pos;
-      gout << "Fuel: " << lander.getFuel() << "\nAltitude: " 
+      gout << "Fuel: " << lander.getFuel() << "\nAltitude: "
            << ground.getElevation(lander.getPosition())
            << "\nSpeed: " << lander.getSpeed();
    }
@@ -86,16 +84,14 @@ public:
       Position centerPos(100, 200); // BUG  not completly centered
 
       // check if lander hit ground or platform safely
-      if (ground.onPlatform(lander.getPosition(), lander.getWidth())
-         && lander.getSpeed() <= lander.getMaxSpeed())
+      if (ground.onPlatform(lander.getPosition(), lander.getWidth()) && lander.getSpeed() <= lander.getMaxSpeed())
       {
          // land if lander is on platform and at right speed
          lander.land();
          gout = centerPos;
          gout << "one small step for man,\none giant leap for mankind";
       }
-      else if (ground.getElevation(lander.getPosition()) < 0.0 
-         || ground.hitGround(lander.getPosition(), lander.getWidth()))
+      else if (ground.getElevation(lander.getPosition()) < 0.0 || ground.hitGround(lander.getPosition(), lander.getWidth()))
       {
          // crash if lander hits the ground
          lander.crash();
@@ -116,7 +112,7 @@ void callBack(const Interface *pUI, void *p)
    Simulator *pSimulator = (Simulator *)p;
    ogstream gout;
    Thrust t = Thrust(); // TODO  rename??
-      
+
    // TODO  should this spce key ceck be in the resest func??/
    // reset simulator if spacebar is activated
    if (pUI->isSpace())
@@ -133,13 +129,13 @@ void callBack(const Interface *pUI, void *p)
       Acceleration accel = pSimulator->lander.input(t, GRAVITY);
       pSimulator->lander.coast(accel, .1);
    }
-   
+
    // draw sim entities
    pSimulator->drawStars(gout);
    pSimulator->ground.draw(gout); // BUG  this needs to be after the stars that should not be
    pSimulator->drawLanderStats(gout);
    pSimulator->lander.draw(t, gout);
-   
+
    // check if lander hits the ground / platform
    pSimulator->landerCollisionCheck(gout);
 }
