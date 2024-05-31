@@ -68,7 +68,8 @@ void callBack(const Interface *pUI, void *p)
    ogstream gout;
    Thrust t = Thrust();
    Acceleration accel;
-
+   
+   // TODO  make this a member func
    // reset lander if spacebar is activated
    if (pUI->isSpace())
    {
@@ -76,6 +77,7 @@ void callBack(const Interface *pUI, void *p)
       pSimulator->ground.reset();
    }
 
+   // TODO  make this a member func
    // check if lander has hit the ground
    if (pSimulator->lander.isFlying() != PLAYING)
    {
@@ -85,6 +87,7 @@ void callBack(const Interface *pUI, void *p)
       pSimulator->lander.coast(accel, .1);
    }
 
+   // TODO  make this a member func
    // draw 50 stars
    for (int i = 0; i <= 50; i++)
    {
@@ -108,6 +111,7 @@ void callBack(const Interface *pUI, void *p)
    // draw lander
    pSimulator->lander.draw(t, gout);
 
+   // TODO  make this a member func
    // check if lander hit ground or platform safely
    if (pSimulator->ground.onPlatform(landerPos, landerWidth)
       && pSimulator->lander.getSpeed() <= pSimulator->lander.getMaxSpeed())
