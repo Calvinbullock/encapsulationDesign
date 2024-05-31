@@ -92,7 +92,6 @@ void callBack(const Interface *pUI, void *p)
    // is the first step of every single callback function in OpenGL.
    Simulator *pSimulator = (Simulator *)p;
    Position centerPos(100, 200);
-   // declerations
    ogstream gout;
    Thrust t = Thrust();
    Acceleration accel;
