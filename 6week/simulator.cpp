@@ -84,14 +84,16 @@ public:
       Position centerPos(100, 200); // BUG  not completly centered
 
       // check if lander hit ground or platform safely
-      if (ground.onPlatform(lander.getPosition(), lander.getWidth()) && lander.getSpeed() <= lander.getMaxSpeed())
+      if (ground.onPlatform(lander.getPosition(), lander.getWidth()) 
+         && lander.getSpeed() <= lander.getMaxSpeed())
       {
          // land if lander is on platform and at right speed
          lander.land();
          gout = centerPos;
          gout << "one small step for man,\none giant leap for mankind";
       }
-      else if (ground.getElevation(lander.getPosition()) < 0.0 || ground.hitGround(lander.getPosition(), lander.getWidth()))
+      else if (ground.getElevation(lander.getPosition()) < 0.0 
+         || ground.hitGround(lander.getPosition(), lander.getWidth()))
       {
          // crash if lander hits the ground
          lander.crash();
