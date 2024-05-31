@@ -34,35 +34,42 @@ class Simulator
 public:
    Simulator(const Position &posUpperRight) : ground(posUpperRight)
    {
-      // TODO  maybe add a diffrent way to add X stars
-      // create 50 stars add them to starList
-      for (int i = 0; i <= 50; i++)
-      {
-         Star temp = Star(startingPos);
-         temp.reset(400, 400);
-         starList.push_back(temp);
-      }
-      lander.reset(startingPos);
+      makeStars(50);
+      lander.reset(upperRightCorner);
    }
 
    Ground            ground;
-   Position          startingPos = Position(400, 400); // TODO rename?
-   Lander            lander      = Lander(startingPos);
+   Position          upperRightCorner = Position(400, 400);
+   Lander            lander      = Lander(upperRightCorner);
    std::vector<Star> starList    = {};
 
    /*************************************
    *  METHODS
    **************************************/
 
-   void resetSimulator()
+   void resetSimulator(const Interface *pUI)
    {
-      lander.reset(startingPos);
-      ground.reset();
+      if (pUI->isSpace())
+      {
+         lander.reset(upperRightCorner);
+         ground.reset();
+      }
+   }
+
+   void makeStars(int starCount)
+   {
+      // create X stars add them to starList
+      for (int i = 0; i <= starCount; i++)
+      {
+         Star temp = Star(upperRightCorner);
+         temp.reset(400, 400);
+         starList.push_back(temp);
+      }
    }
 
    void drawStars(ogstream &gout)
    {
-      for (int i = 0; i <= 50; i++) // TODO make this length more configurable
+      for (int i = 0; i <= starList.size(); i++)
       {
          starList[i].draw(gout);
       }
@@ -113,30 +120,26 @@ void callBack(const Interface *pUI, void *p)
    // is the first step of every single callback function in OpenGL.
    Simulator *pSimulator = (Simulator *)p;
    ogstream gout;
-   Thrust t = Thrust(); // TODO  rename??
+   Thrust landerThrust = Thrust();
 
-   // TODO  should this spce key ceck be in the resest func??/
    // reset simulator if spacebar is activated
-   if (pUI->isSpace())
-   {
-      pSimulator->resetSimulator();
-   }
+   pSimulator->resetSimulator(pUI);
 
    // TODO  make this a member func **thrustDirection()**
    // check if lander has hit the ground
    if (pSimulator->lander.isFlying() != PLAYING)
    {
       // get thrust direction
-      t.set(pUI);
-      Acceleration accel = pSimulator->lander.input(t, GRAVITY);
+      landerThrust.set(pUI);
+      Acceleration accel = pSimulator->lander.input(landerThrust, GRAVITY);
       pSimulator->lander.coast(accel, .1);
    }
 
    // draw sim entities
    pSimulator->drawStars(gout);
-   pSimulator->ground.draw(gout); // BUG  this needs to be after the stars that should not be
+   pSimulator->ground.draw(gout);
    pSimulator->drawLanderStats(gout);
-   pSimulator->lander.draw(t, gout);
+   pSimulator->lander.draw(landerThrust, gout);
 
    // check if lander hits the ground / platform
    pSimulator->landerCollisionCheck(gout);
