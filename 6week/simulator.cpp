@@ -94,7 +94,7 @@ void callBack(const Interface *pUI, void *p)
    // draw the ground
    pSimulator->ground.draw(gout);
 
-   // get reused lander variables after lander movement update
+   // get often used variables
    Position landerPos = pSimulator->lander.getPosition();
    int landerWidth = pSimulator->lander.getWidth();
 
