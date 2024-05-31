@@ -130,7 +130,7 @@ void callBack(const Interface *pUI, void *p)
    {
       // land if lander is on platform and at right speed
       pSimulator->lander.land();
-      gout = centerPos;
+      gout = centerPos; // BUG  not completly centered
       gout << "one small step for man,\none giant leap for mankind";
    }
    else if (pSimulator->ground.getElevation(landerPos) < 0.0 
@@ -138,7 +138,7 @@ void callBack(const Interface *pUI, void *p)
    {
       // crash if lander hits the ground
       pSimulator->lander.crash();
-      gout = centerPos;
+      gout = centerPos; // BUG  not completly centered
       gout << "Houston, we have a problem";
    }
 }
