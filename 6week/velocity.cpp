@@ -2,7 +2,7 @@
  * Source File:
  *    VELOCITY
  * Author:
- *    Br. Helfrich
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    Everything we need to know about speed
  ************************************************************************/ 
