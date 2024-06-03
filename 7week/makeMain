@@ -8,7 +8,7 @@ CXX = g++
 CXXFLAGS = -O2 -Wall
 
 # Source files (cpp)
-SRCS = position.cpp
+SRCS = position.cpp main.cpp
 
 # Object files (created from source files)
 OBJS = $(SRCS:.cpp=.o)
