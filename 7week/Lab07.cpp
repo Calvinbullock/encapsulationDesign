@@ -156,9 +156,10 @@ int main(int argc, char** argv)
 
    // Initialize the demo
    Demo demo(ptUpperRight);
-
+   
+   // WARN  GUI is turned off here
    // set everything into action
-   ui.run(callBack, &demo);
+   /*ui.run(callBack, &demo);*/ 
 
 
    return 0;
