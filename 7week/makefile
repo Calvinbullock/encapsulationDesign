@@ -8,7 +8,7 @@ CXX = g++
 CXXFLAGS = -O2 -Wall
 
 # Source files (cpp)
-SRCS = ground.cpp position.cpp  uiDraw.cpp Lab07.cpp test.cpp uiInteract.cpp
+SRCS = ground.cpp position.cpp uiDraw.cpp Lab07.cpp test.cpp uiInteract.cpp
 
 # Object files (created from source files)
 OBJS = $(SRCS:.cpp=.o)
