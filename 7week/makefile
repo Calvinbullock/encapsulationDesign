@@ -8,13 +8,13 @@ CXX = g++
 CXXFLAGS = -O2 -Wall
 
 # Source files (cpp)
-SRCS = ?.cpp
+SRCS = ground.cpp position.cpp  uiDraw.cpp Lab07.cpp test.cpp uiInteract.cpp
 
 # Object files (created from source files)
 OBJS = $(SRCS:.cpp=.o)
 
 # Header files (include for compilation)
-HDRS = ?.h
+HDRS = ground.h testGround.h testPosition.h uiInteract.h position.h test.h uiDraw.h
 
 # Linker flags (link with OpenGL and GLFW libraries)
 LDFLAGS = -lglut -lGL -lGLU -lGLEW
