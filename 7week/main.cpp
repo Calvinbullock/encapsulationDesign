@@ -30,7 +30,13 @@ class Acceleration
 {
 
 public:
-   Acceleration(double angle, double vel)
+   Acceleration() : ddx(0.0), ddy(0.0) {}
+   Acceleration(double ddx, double ddy) : ddx(ddx), ddy(ddy) {}
+
+   double getDDX() const { return this->ddx; }
+   double getDDY() const { return this->ddy; }
+
+   void set(double angle, double vel)
    {
       ddx = sin(angle) * vel;
       ddy = cos(angle) * vel;
@@ -63,10 +69,13 @@ int main(int argc, char *argv[])
    double angle = 1.309; // 75 in rad
 
    Position pos;
-   Acceleration accel();
+   Acceleration accel;
+
+   accel.set(angle, vel);
 
    for (double i = 0; i <= 20; i++)
    {
+      
       cout << "Distance: " << pos.getMetersX() << "Altitude: " << pos.getMetersY() << endl;
    };
 
