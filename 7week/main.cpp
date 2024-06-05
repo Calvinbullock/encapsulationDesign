@@ -40,7 +40,7 @@ private:
 /* ******************************************** 
  * TODO  fill in class header
  * ***************************************** */
-class simulater {
+class Shell {
 
 public:
 
