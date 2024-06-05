@@ -62,6 +62,13 @@ int main (int argc, char *argv[]) {
    double vel = 827.0; // speed of shell when leaving barrel
    double angle = 1.309; // 75 in rad
 
+   Acceleration accel(); 
+
+   for (double i = 0; i <= 20; i++)
+   {
+   };
+   
+
    cout << "pop" << endl;
    return 0;
 }
