@@ -79,6 +79,7 @@ private:
  * TODO  main header
  * ***************************************** */
 Position newPos(Position currPos, Velocity vel, double time) {
+   // WARN  does not acount for angle
    currPos.setMetersX((currPos.getMetersX() + vel.getVel()) * time);
    currPos.setMetersY((currPos.getMetersY() + vel.getVel()) * time);
    return currPos;
