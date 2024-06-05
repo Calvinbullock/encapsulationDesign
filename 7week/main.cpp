@@ -3,6 +3,8 @@
  * ***************************************** */
  
 #include "position.h"
+#include <iostream>
+using namespace std;
 
 #define GRAVITY -9.8 // m/s^2
 
@@ -53,5 +55,6 @@ private:
  * TODO  main header
  * ***************************************** */
 int main (int argc, char *argv[]) {
+   cout << "pop" << endl;
    return 0;
 }
