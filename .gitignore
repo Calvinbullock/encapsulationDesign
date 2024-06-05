@@ -3,7 +3,6 @@ testDir/*
 */.exrc
 .exrc
 a.out
-.clang-format
 */runMe
 */*.o
 deleteMe.cpp
