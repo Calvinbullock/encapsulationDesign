@@ -36,8 +36,8 @@ public:
    }
 
 private:
-   double accel; // degrees
-      
+   double ddx;
+   double ddy;
 };
 
 
