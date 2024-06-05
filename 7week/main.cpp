@@ -23,6 +23,21 @@ private:
    double angle; // degrees
 };
 
+
+/* ********************************************
+ * TODO  fill in class header
+ * ***************************************** */
+class Velocity
+{
+
+public:
+   Velocity(double vel) : vel(vel) {}
+   double getVel() {return vel;}
+
+private:
+   double vel;
+};
+
 /* ********************************************
  * TODO  fill in class header
  * ***************************************** */
@@ -63,20 +78,29 @@ private:
 /* ********************************************
  * TODO  main header
  * ***************************************** */
+Position newPos(Position currPos, Velocity vel, double time) {
+   currPos.setMetersX((currPos.getMetersX() + vel.getVel()) * time);
+   currPos.setMetersY((currPos.getMetersY() + vel.getVel()) * time);
+   return currPos;
+}
+
+/* ********************************************
+ * TODO  main header
+ * ***************************************** */
 int main(int argc, char *argv[])
 {
-   double vel = 827.0;   // speed of shell when leaving barrel
+   Velocity vel = Velocity(827.0);
    double angle = 1.309; // 75 in rad
 
    Position pos;
    Acceleration accel;
 
-   accel.set(angle, vel);
+   accel.set(angle, vel.getVel());
 
    for (double i = 0; i <= 20; i++)
    {
-      
-      cout << "Distance: " << pos.getMetersX() << "Altitude: " << pos.getMetersY() << endl;
+      cout << "Distance: " << pos.getMetersX() << ", Altitude: " << pos.getMetersY() << endl;
+      pos = newPos(pos, vel, 1);
    };
 
    cout << "pop" << endl;
