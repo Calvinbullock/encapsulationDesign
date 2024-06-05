@@ -15,7 +15,8 @@ using namespace std;
 class Angle {
 
 public:
-   Angle() {}
+   Angle() {
+   }
 
 private:
    double angle; // degrees
@@ -29,7 +30,10 @@ private:
 class Acceleration {
 
 public:
-   Acceleration() {}
+   Acceleration(double angle, double vel ) {
+   ddx = sin(angle) * vel; 
+   ddy = cos(angle) * vel;
+   }
 
 private:
    double accel; // degrees
@@ -55,6 +59,9 @@ private:
  * TODO  main header
  * ***************************************** */
 int main (int argc, char *argv[]) {
+   double vel = 827.0; // speed of shell when leaving barrel
+   double angle = 1.309; // 75 in rad
+
    cout << "pop" << endl;
    return 0;
 }
