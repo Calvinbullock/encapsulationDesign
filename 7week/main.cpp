@@ -23,7 +23,6 @@ private:
    double angle; // degrees
 };
 
-
 /* ********************************************
  * TODO  fill in class header
  * ***************************************** */
@@ -32,7 +31,7 @@ class Velocity
 
 public:
    Velocity(double vel) : vel(vel) {}
-   double getVel() {return vel;}
+   double getVel() { return vel; }
 
 private:
    double vel;
@@ -48,8 +47,8 @@ public:
    Acceleration() : ddx(0.0), ddy(0.0) {}
    Acceleration(double ddx, double ddy) : ddx(ddx), ddy(ddy) {}
 
-   double getDDX() const { return this->ddx; }
-   double getDDY() const { return this->ddy; }
+   double getDDX() const { return ddx; }
+   double getDDY() const { return ddy; }
 
    void set(double angle, double vel)
    {
@@ -63,26 +62,20 @@ private:
 };
 
 /* ********************************************
- * TODO  fill in class header
+ * TODO
  * ***************************************** */
-class Shell
-{
-
-public:
-private:
-   Angle angle;
-   Acceleration accel;
-   Position pos;
-};
+double computeAcceleration(double force, double mass) {
+   return force / mass;
+}
 
 /* ********************************************
- * TODO  main header
+ * CHANGE IN POSITION
+ *    Calculates the change in position - inertia
  * ***************************************** */
-Position newPos(Position currPos, Velocity vel, double time) {
-   // WARN  does not acount for angle
-   currPos.setMetersX((currPos.getMetersX() + vel.getVel()) * time);
-   currPos.setMetersY((currPos.getMetersY() + vel.getVel()) * time);
-   return currPos;
+void changeInPostion(Position *currPos, Acceleration *accel, double time)
+{
+   currPos->setMetersX((currPos->getMetersX() + accel->getDDX()) * time);
+   currPos->setMetersY((currPos->getMetersY() + accel->getDDY()) * time);
 }
 
 /* ********************************************
@@ -90,20 +83,24 @@ Position newPos(Position currPos, Velocity vel, double time) {
  * ***************************************** */
 int main(int argc, char *argv[])
 {
-   Velocity vel = Velocity(827.0);
-   double angle = 1.309; // 75 in rad
 
+   /*double mass = 46.7;*/
+   /*double force = 46.7 * 0;*/
+   /*double initialAccel = computeAcceleration(force, mass);*/
+
+   Velocity vel = Velocity(827.0);
    Position pos;
-   Acceleration accel;
+
+   double angle = 1.309; // 75 in rad
+   Acceleration accel = Acceleration();
 
    accel.set(angle, vel.getVel());
 
    for (double i = 0; i <= 20; i++)
    {
       cout << "Distance: " << pos.getMetersX() << ", Altitude: " << pos.getMetersY() << endl;
-      pos = newPos(pos, vel, 1);
+      accel.set(angle, vel.getVel());
+      changeInPostion(&pos, &accel, 1);
    };
-
-   cout << "pop" << endl;
    return 0;
 }
