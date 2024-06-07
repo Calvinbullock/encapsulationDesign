@@ -41,11 +41,19 @@ void changeInPostion(Position *pos, Acceleration *accel, double time)
 {
    pos->setMetersX((pos->getMetersX() + accel->getDDX()) * time);
    pos->setMetersY((pos->getMetersY() + accel->getDDY()) * time);
+         cout << "Accel " << accel->getDDY() << endl;
+
 
    // NOTE  this is the full distance formula - breaks the ans
    /*pos->setMetersX(pos->getMetersX() + vel * time + .5 * accel->getDDX() * (time * time));*/
    /*pos->setMetersY(pos->getMetersY() + vel * time + .5 * accel->getDDY() * (time * time));*/
 }
+
+double toRadians(double degree){
+   return (degree * M_PI) / 180;
+   
+}
+
 
 /* ********************************************
  * TODO  main header
@@ -59,7 +67,7 @@ int main(int argc, char *argv[])
    /*double initialAccel = computeAcceleration(force, mass);*/
 
    Position pos;
-   double angle = 1.309; // 75 degrees
+   double angle = toRadians(75);
    double vel = 827.0;
 
    Acceleration grav = Acceleration();
@@ -72,8 +80,10 @@ int main(int argc, char *argv[])
    for (double i = 0; i <= 20; i++)
    {
       cout << "Distance: " << pos.getMetersX() << ", Altitude: " << pos.getMetersY() << endl;
+
       accel.add(grav);
       changeInPostion(&pos, &accel, 1);
+
    };
 
    return 0;
