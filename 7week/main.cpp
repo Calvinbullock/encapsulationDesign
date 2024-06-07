@@ -16,10 +16,15 @@ public:
    double getDDX() const { return ddx; }
    double getDDY() const { return ddy; }
 
+   void add(double accelY)
+   {
+      ddy += accelY;
+   }
+
    void set(double angle, double vel, double gravity = 0)
    {
       ddx = sin(angle) * vel;
-      ddy = cos(angle) * vel;
+      ddy = cos(angle) * vel + gravity;
    }
 
 private:
@@ -63,7 +68,7 @@ int main(int argc, char *argv[])
    for (double i = 0; i <= 20; i++)
    {
       cout << "Distance: " << pos.getMetersX() << ", Altitude: " << pos.getMetersY() << endl;
-      accel.set(angle, vel);
+      accel.add(gravity);
       changeInPostion(&pos, &accel, 1);
    };
 

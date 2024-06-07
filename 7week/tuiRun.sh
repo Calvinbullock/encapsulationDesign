@@ -6,4 +6,4 @@
 # testing no gui
 make -f makeMain
 ./runMe
-#make -f maketest clean
+make -f makeMain clean
