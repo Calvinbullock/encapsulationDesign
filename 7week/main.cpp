@@ -20,6 +20,9 @@ public:
    {
       ddx += accel.getDDX();
       ddy += accel.getDDY();
+      cout << "acel add " << ddx << endl;
+      cout << "acel add " << ddy << "\n" << endl;
+
    }
 
    void set(double angle, double vel, double gravity = 0)
@@ -70,9 +73,7 @@ int main(int argc, char *argv[])
    double angle = toRadians(75);
    double vel = 827.0;
 
-   Acceleration grav = Acceleration();
-   grav.set(0, gravity);
-
+   Acceleration grav = Acceleration(0, gravity);
    Acceleration accel = Acceleration();
    accel.set(angle, vel);
 
