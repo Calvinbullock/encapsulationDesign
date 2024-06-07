@@ -16,15 +16,16 @@ public:
    double getDDX() const { return ddx; }
    double getDDY() const { return ddy; }
 
-   void add(double accelY)
+   void add(Acceleration &accel  )
    {
-      ddy += accelY;
+      ddx += accel.getDDX();
+      ddy += accel.getDDY();
    }
 
    void set(double angle, double vel, double gravity = 0)
    {
       ddx = sin(angle) * vel;
-      ddy = cos(angle) * vel + gravity;
+      ddy = cos(angle) * vel;
    }
 
 private:
@@ -61,6 +62,9 @@ int main(int argc, char *argv[])
    double angle = 1.309; // 75 degrees
    double vel = 827.0;
 
+   Acceleration grav = Acceleration();
+   grav.set(0, gravity);
+
    Acceleration accel = Acceleration();
    accel.set(angle, vel);
 
@@ -68,7 +72,7 @@ int main(int argc, char *argv[])
    for (double i = 0; i <= 20; i++)
    {
       cout << "Distance: " << pos.getMetersX() << ", Altitude: " << pos.getMetersY() << endl;
-      accel.add(gravity);
+      accel.add(grav);
       changeInPostion(&pos, &accel, 1);
    };
 
