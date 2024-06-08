@@ -49,6 +49,7 @@ private:
    double dy;
 };
 
+// TODO  move this into velocity class
 /* ********************************************
  * CALCULATE VELOCITY
  *    Adds the acceleration due to gravity
@@ -68,31 +69,35 @@ void changeInPostion(Position *pos, Velocity *vel, double time, double ddx, doub
 {
    pos->setMetersX(pos->getMetersX() + vel->getDX() * time + (.5 * ddx * (time * time)));
    pos->setMetersY(pos->getMetersY() + vel->getDY() * time + (.5 * ddy) * (time * time));
-   
 }
 
 /* ********************************************
- * TODO
+ * CALCULATE ACCELERATION
+ *    gets acceleration using newtons 2nd law
  * ***************************************** */
 double calcAcceleration(double force, double mass)
 {
    return force / mass;
 }
+
 /* ********************************************
- * TODO
+ * CALCULATE ACCELERATION COMPONENT X
+ *    Calculate horizontal component of
+ *    acceleration
  * ***************************************** */
 double calcAccelComponentX(double angle, double accel)
 {
    return -sin(angle) * accel;
 }
 /* ********************************************
- * TODO
+ * CALCULATE ACCELERATION COMPONENT Y
+ *    Calculate vertical component of
+ *    acceleration
  * ***************************************** */
 double calcAccelComponentY(double angle, double accel, double gravity)
 {
    return gravity - cos(angle) * accel;
 }
-
 
 /* ********************************************
  * DEGREES TO RADIANS
@@ -104,14 +109,17 @@ double toRadians(double degree)
 }
 
 /* ********************************************
- * LINEAR SEARCH TODO 
+ * LINEAR SEARCH
  *    Search a list for the value before the target
+ *
+ *    returns the index of the value, add one to get
+ *    the other pair
  * ***************************************** */
 int linearSearch(double targetValue, double list[], int listLength)
 {
    for (int i = 0; i < listLength; i++)
    {
-      //cout << "line, 100, " << list[i] << ", " << targetValue << endl;
+      // cout << "line, 100, " << list[i] << ", " << targetValue << endl;
       if (targetValue >= list[i] && targetValue <= list[i + 1])
       {
          return i;
@@ -125,17 +133,18 @@ int linearSearch(double targetValue, double list[], int listLength)
 
 /* ********************************************
  * LINEAR INTERPOLATION
- *    Calculates the value for x based on 
+ *    Calculates the value for x based on
  *    the given y between two points on a
  *    slope.
  * ***************************************** */
 double linearInterpalation(double xPos, double yPos, double xPos1, double yPos1, double givenYPos)
 {
-   return xPos + ((givenYPos - yPos )*(xPos1 - xPos))/(yPos1 - yPos);
+   return xPos + ((givenYPos - yPos) * (xPos1 - xPos)) / (yPos1 - yPos);
 }
 
 /* ********************************************
- * TODO
+ * CALCULATE SURFACE AREA
+ *    Calculates and returns the surface area
  * ***************************************** */
 double calcSurfaceArea(double radius)
 {
@@ -143,13 +152,13 @@ double calcSurfaceArea(double radius)
 }
 
 /* ********************************************
- * TODO
+ * CALCULATE DRAG FORCE
+ *    Calculates the drag force
  *    d = ½ c ρ v2 a
  * ***************************************** */
-double calcDragForce(double drag, double gasDensity, Velocity vel, double surArea)
+double calcDragForce(double drag, double gasDensity, Velocity *vel, double surArea)
 {
-   cout << vel.getDX() << endl;
-   return .5 * drag * gasDensity * (vel.getDX() * vel.getDX()) * surArea;
+   return .5 * drag * gasDensity * (vel->getDX() * vel->getDX()) * surArea;
 }
 
 /* ********************************************
@@ -170,26 +179,27 @@ int main(int argc, char *argv[])
    double airDensityTable[ENVIRONMENTALLENGTH] = {1.2250000, 1.1120000, 1.0070000, 0.9093000, 0.8194000, 0.7364000, 0.6601000, 0.5900000, 0.5258000, 0.4671000, 0.4135000, 0.1948000, 0.0889100, 0.0400800, 0.0184100, 0.0039960, 0.0010270, 0.0003097, 0.0000828, 0.0000185};
    */
 
+   // Shell stats - const
+   double mass = 46.7;                  // kg
+   double shellRadius = 0.015489 / 2.0; // m
+   double surArea = calcSurfaceArea(shellRadius);
+
+   // initial shell stats
    Position pos;
-   double time = 0.0;                  // sec
-   double initVel = 827.0;             // m/sec
-   
-   // temp
-   double drag = -0.3;                 // drag
-   double airDense = 0.6;              // kg/m^2
-   double shellRadius = 0.015489 / 2.0;  // m
-   double mass = 46.7;                 // kg
-   double surArea =calcSurfaceArea(shellRadius);
-
-   double timeInterval = 0.01;         // sec
-   double angle = toRadians(75);       // rad
-
+   double angle = toRadians(75); // rad
+   double initVel = 827.0;       // m/sec
    Velocity vel = Velocity();
    vel.setComponents(angle, initVel);
+
+   double time = 0.0;            // sec
+   double timeInterval = 0.01;   // sec
 
    // loop until we hit the ground
    while (pos.getMetersY() > -1)
    {
+      // variables that are set by the loop
+      double drag = -0.3;     // drag
+      double airDense = 0.6;  // kg/m^2
       double gravity;
       int altitudeIndex;
       time += timeInterval;
@@ -208,15 +218,13 @@ int main(int argc, char *argv[])
          gravity = -9.807;
       }
 
-      // WARN  the drag calculations are not 100% right 
-      double dragForce = calcDragForce(drag, airDense, vel, surArea);
+      // WARN  the drag calculations are not 100% right
+      double dragForce = calcDragForce(drag, airDense, &vel, surArea);
       double dragAccel = calcAcceleration(dragForce, mass);
 
       double ddx = calcAccelComponentX(angle, dragAccel);
       double ddy = calcAccelComponentY(angle, dragAccel, gravity);
 
-
-      // TODO make the variable order simmilerly
       calcVelocity(&vel, timeInterval, ddx, ddy);
       changeInPostion(&pos, &vel, timeInterval, ddx, ddy);
 
@@ -225,4 +233,3 @@ int main(int argc, char *argv[])
 
    return 0;
 }
-
