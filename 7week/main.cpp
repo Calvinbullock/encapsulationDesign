@@ -133,11 +133,12 @@ int main(int argc, char *argv[])
 
    Position pos;
    double time = 0.0;
+   double initVel = 827.0;
+
    double timeInterval = 0.01;
    double angle = toRadians(75);
-   double initVel = 827.0;
-   Velocity vel = Velocity();
 
+   Velocity vel = Velocity();
    vel.set(angle, initVel);
 
    // loop until we hit the ground
