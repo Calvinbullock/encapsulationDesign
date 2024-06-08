@@ -9,6 +9,7 @@
  *      TODO
  * 5. How long did it take for you to complete the assignment?
  *      TODO
+ *      also remember to clean up lines over 80
  *****************************************************************/
 
 #include "position.h"
@@ -176,7 +177,7 @@ double pythagoreanTheorem(double dx, double dy)
  *    Wraps the code to plug lists into
  *    linear interpolation function
  *
- *    returns the interpolated x value 
+ *    returns the interpolated x value
  *
  * ***************************************** */
 double linearInterpolationListWrapper(double listX[], double listY[], int listLength, double yTarget)
@@ -189,7 +190,8 @@ double linearInterpolationListWrapper(double listX[], double listY[], int listLe
  * MAIN
  *    this is the main man
  * ***************************************** */
-int main(int argc, char *argv[])
+// int main(int argc, char *argv[])
+int runSim(double angle)
 {
    // gravity table - altitude = x, gravity = y
    double altitudeTable[GRAVITYTABLELENGTH] = {0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 15000, 20000, 25000};
@@ -212,8 +214,8 @@ int main(int argc, char *argv[])
 
    // initial shell stats
    Position pos;
-   double angle = toRadians(75); // rad
-   double initVel = 827.0;       // m/sec
+   //double angle = toRadians(75); // rad
+   double initVel = 827.0; // m/sec
    Velocity vel = Velocity();
    vel.setComponents(angle, initVel);
 
@@ -232,8 +234,8 @@ int main(int argc, char *argv[])
       prevTime = time;
 
       // variables that are set by the loop
-      double dragCoefficient = -0.3;      // drag
-      double airDensity = 0.6; // kg/m^2
+      double dragCoefficient = -0.3; // drag
+      double airDensity = 0.6;       // kg/m^2
       double gravity;
       double speedOfSound;
       time += timeInterval;
@@ -272,14 +274,39 @@ int main(int argc, char *argv[])
 
       calcVelocity(&vel, timeInterval, ddx, ddy);
       changeInPostion(&pos, &vel, timeInterval, ddx, ddy);
-   
+
       timeOfImpact = linearInterpolation(prevTime, prevAltiude, time, pos.getMetersY(), 0);
-   
-      // TODO remove this 
-      cout << "Distance:  " << pos.getMetersX() << ",  Altitude: " << pos.getMetersY() << ", HangTime:  " << time << endl;
+
+      // TODO remove this
+ //     cout << "Distance:  " << pos.getMetersX() << ",  Altitude: " << pos.getMetersY() << ", HangTime:  " << time << endl;
    }
 
    cout << "Distance:  " << pos.getMetersX() << ", HangTime:  " << timeOfImpact << endl;
+
+   return 0;
+}
+
+/* ********************************************
+ * TEST RUNNER
+ * ***************************************** */
+int main(int argc, char *argv[])
+{
+   double angle = toRadians(75); // rad
+   runSim(angle);
+
+   // WARN  bork
+   angle = toRadians(0);
+   runSim(angle);
+
+   // WARN  bork
+   angle = toRadians(30);
+   runSim(angle);
+
+   angle = toRadians(60);
+   runSim(angle);
+
+   angle = toRadians(-45);
+   runSim(angle);
 
    return 0;
 }
