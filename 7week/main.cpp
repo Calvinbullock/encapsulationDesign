@@ -78,14 +78,14 @@ double toRadians(double degree)
 }
 
 /* ********************************************
- * TODO
- *    the return +1 gives the next value
+ * LINEAR SEARCH TODO 
+ *    Search a list for the value before the target
  * ***************************************** */
 int linearSearch(double targetValue, double list[], int listLength)
 {
    for (int i = 0; i < listLength; i++)
    {
-      cout << "line, 100, " << list[i] << ", " << targetValue << endl;
+      //cout << "line, 100, " << list[i] << ", " << targetValue << endl;
       if (targetValue >= list[i] && targetValue <= list[i + 1])
       {
          return i;
@@ -98,12 +98,21 @@ int linearSearch(double targetValue, double list[], int listLength)
 }
 
 /* ********************************************
- * TODO
+ * LINEAR INTERPOLATION
+ *    Calculates the value for x based on 
+ *    the given y between two points on a
+ *    slope.
  * ***************************************** */
-double gravatinalInterpalation(double xPos, double yPos, double xPos1, double yPos1)
+double linearInterpalation(double xPos, double yPos, double xPos1, double yPos1, double givenYPos)
 {
-   double ans = yPos + ((yPos1 - yPos) * (xPos - xPos1)) / (xPos1 - xPos);
-   return ans;
+   // WARN  this is not 100% right  
+   return yPos + ((yPos1 - yPos) * (givenYPos - xPos)) / (xPos1 - xPos);
+
+   /*cout <<endl;*/
+   /*cout << xPos + (yPos1 - yPos) / ((xPos1 - xPos) * (givenYPos - yPos)) << endl;*/
+   /*cout << ((yPos - yPos1) * xPos + (givenYPos - yPos) * xPos1) / yPos - yPos1 << endl;*/
+   /*cout <<endl;*/
+   /*return 1.0;*/
 }
 
 /* ********************************************
@@ -143,8 +152,8 @@ int main(int argc, char *argv[])
       {
          // determine the gravity according to the altitude
          altitudeIndex = linearSearch(pos.getMetersY(), altitudeTable, GRAVITYTABLELENGTH);
-         gravity = gravatinalInterpalation(
-            altitudeTable[altitudeIndex], gravityTable[altitudeIndex], altitudeTable[altitudeIndex + 1], gravityTable[altitudeIndex + 1]);
+         gravity = linearInterpalation(
+            altitudeTable[altitudeIndex], gravityTable[altitudeIndex], altitudeTable[altitudeIndex + 1], gravityTable[altitudeIndex + 1], pos.getMetersY());
       }
       else
       {
@@ -159,3 +168,4 @@ int main(int argc, char *argv[])
 
    return 0;
 }
+
