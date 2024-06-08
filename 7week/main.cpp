@@ -38,7 +38,7 @@ public:
    void setDX(double newDX) { dx = newDX; }
    void setDY(double newDY) { dy = newDY; }
 
-   void set(double angle, double vel)
+   void setComponents(double angle, double vel)
    {
       dx = sin(angle) * vel;
       dy = cos(angle) * vel;
@@ -54,20 +54,21 @@ private:
  *    Adds the acceleration due to gravity
  *    to the vertical velocity
  * ***************************************** */
-void calcVelocity(Velocity *vel, double grav, double drag, double time)
+void calcVelocity(Velocity *vel, double time, double ddx, double ddy)
 {
-   vel->setDX(vel->getDX() + (drag * time));
-   vel->setDY(vel->getDY() + (grav * time));
+   vel->setDX(vel->getDX() + (ddx * time));
+   vel->setDY(vel->getDY() + (ddy * time));
 }
 
 /* ********************************************
  * CHANGE IN POSITION
  *    Calculates the change in position - inertia
  * ***************************************** */
-void changeInPostion(Position *pos, Velocity *vel, double time, double grav)
+void changeInPostion(Position *pos, Velocity *vel, double time, double ddx, double ddy)
 {
-   pos->setMetersX(pos->getMetersX() + vel->getDX() * time + (.5 * 0 * (time * time)));
-   pos->setMetersY(pos->getMetersY() + vel->getDY() * time + (.5 * grav * (time * time)));
+   pos->setMetersX(pos->getMetersX() + vel->getDX() * time + (.5 * ddx * (time * time)));
+   pos->setMetersY(pos->getMetersY() + vel->getDY() * time + (.5 * ddy) * (time * time));
+   
 }
 
 /* ********************************************
@@ -77,6 +78,21 @@ double calcAcceleration(double force, double mass)
 {
    return force / mass;
 }
+/* ********************************************
+ * TODO
+ * ***************************************** */
+double calcAccelComponentX(double angle, double accel)
+{
+   return -sin(angle) * accel;
+}
+/* ********************************************
+ * TODO
+ * ***************************************** */
+double calcAccelComponentY(double angle, double accel, double gravity)
+{
+   return gravity - cos(angle) * accel;
+}
+
 
 /* ********************************************
  * DEGREES TO RADIANS
@@ -115,16 +131,7 @@ int linearSearch(double targetValue, double list[], int listLength)
  * ***************************************** */
 double linearInterpalation(double xPos, double yPos, double xPos1, double yPos1, double givenYPos)
 {
-   // WARN  this is not 100% right  
-   // return yPos + ((yPos1 - yPos) * (givenYPos - xPos)) / (xPos1 - xPos);
-
-
-
-   double x = xPos + ((givenYPos - yPos )*(xPos1 - xPos))/(yPos1 - yPos);
-   cout << xPos << ", " << yPos << endl;
-   cout << xPos1 << ", " << yPos1 << endl;
-   cout << x << ", " << givenYPos << endl;
-   return x;
+   return xPos + ((givenYPos - yPos )*(xPos1 - xPos))/(yPos1 - yPos);
 }
 
 /* ********************************************
@@ -170,16 +177,15 @@ int main(int argc, char *argv[])
    // temp
    double drag = -0.3;                 // drag
    double airDense = 0.6;              // kg/m^2
-   double shellRadius = 154.89 / 2.0;  // mm
+   double shellRadius = 0.015489 / 2.0;  // m
    double mass = 46.7;                 // kg
-   // surArea is divided by 1000 to convert from mm to m
-   double surArea = 1000 / calcSurfaceArea(shellRadius);
+   double surArea =calcSurfaceArea(shellRadius);
 
    double timeInterval = 0.01;         // sec
    double angle = toRadians(75);       // rad
 
    Velocity vel = Velocity();
-   vel.set(angle, initVel);
+   vel.setComponents(angle, initVel);
 
    // loop until we hit the ground
    while (pos.getMetersY() > -1)
@@ -206,8 +212,13 @@ int main(int argc, char *argv[])
       double dragForce = calcDragForce(drag, airDense, vel, surArea);
       double dragAccel = calcAcceleration(dragForce, mass);
 
-      calcVelocity(&vel, gravity, dragAccel, timeInterval);
-      changeInPostion(&pos, &vel, timeInterval, gravity);
+      double ddx = calcAccelComponentX(angle, dragAccel);
+      double ddy = calcAccelComponentY(angle, dragAccel, gravity);
+
+
+      // TODO make the variable order simmilerly
+      calcVelocity(&vel, timeInterval, ddx, ddy);
+      changeInPostion(&pos, &vel, timeInterval, ddx, ddy);
 
       cout << "Distance:  " << pos.getMetersX() << ",  Altitude: " << pos.getMetersY() << ", HangTime:  " << time << endl;
    }
