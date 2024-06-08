@@ -1,53 +1,50 @@
 #include "position.h"
 #include <iostream>
-#include <numeric>
 using namespace std;
 
 /* ********************************************
- * Acceleration class
- *    handles acceleration in the simulator
+ * Velocity class
+ *    handles velocity in the simulator
  * ***************************************** */
-class Acceleration
+class Velocity
 {
-
 public:
-   Acceleration() : ddx(0.0), ddy(0.0) {}
-   Acceleration(double ddx, double ddy) : ddx(ddx), ddy(ddy) {}
+   Velocity() : dx(0.0), dy(0.0) {}
+   Velocity(double dx, double dy) : dx(dx), dy(dy) {}
 
-   double getDDX() const { return ddx; }
-   double getDDY() const { return ddy; }
+   double getDX() const { return dx; }
+   double getDY() const { return dy; }
 
-   void add(Acceleration &accel)
+   void setDX(double newDX) { dx = newDX; }
+   void setDY(double newDY) { dy = newDY; }
+
+   void set(double angle, double vel)
    {
-      ddx += accel.getDDX();
-      ddy += accel.getDDY();
-      cout << "acel add " << ddx << endl;
-      cout << "acel add " << ddy << "\n" << endl;
-   }
-
-   void set(double angle, double vel, double gravity = 0)
-   {
-      ddx = sin(angle) * vel;
-      ddy = cos(angle) * vel;
+      dx = sin(angle) * vel;
+      dy = cos(angle) * vel;
    }
 
 private:
-   double ddx;
-   double ddy;
+   double dx;
+   double dy;
 };
+
+/*
+ * TODO   header CHANGE NAME
+ * */
+void calcAcceleration(Velocity *vel, double grav)
+{
+   vel->setDY(vel->getDY() + grav);
+}
 
 /* ********************************************
  * CHANGE IN POSITION
  *    Calculates the change in position - inertia
  * ***************************************** */
-void changeInPostion(Position *pos, Acceleration *accel, double time, Acceleration *grav)
+void changeInPostion(Position *pos, Velocity *vel, double time, double grav)
 {
-   /*pos->setMetersX(pos->getMetersX() + (accel->getDDX() * time));*/
-   /*pos->setMetersY(pos->getMetersY() + (accel->getDDY() * time));*/
-
-   // NOTE  this is the full distance formula - breaks the ans
-   pos->setMetersX(pos->getMetersX() + accel->getDDX() * time + .5 * 0 * (time * time));
-   pos->setMetersY(pos->getMetersY() + accel->getDDY() * time + .5 * grav->getDDY() * (time * time));
+   pos->setMetersX(pos->getMetersX() + vel->getDX() * time + .5 * 0 * (time * time));
+   pos->setMetersY(pos->getMetersY() + vel->getDY() * time + .5 * grav * (time * time));
 }
 
 /* ********************************************
@@ -63,27 +60,21 @@ double toRadians(double degree)
  * ***************************************** */
 int main(int argc, char *argv[])
 {
-   double gravity = -9.8;
-
-   /*double mass = 46.7;*/
-   /*double force = 46.7 * 0;*/
-   /*double initialAccel = computeAcceleration(force, mass);*/
-
    Position pos;
+   double gravity = -9.8;
    double angle = toRadians(75);
-   double vel = 827.0;
-   Acceleration grav = Acceleration(0, gravity);
-   Acceleration accel = Acceleration();
+   double initVel = 827.0;
+   Velocity vel = Velocity();
 
-   accel.set(angle, vel);
+   vel.set(angle, initVel);
 
    // sim loop, 20 "frames"
    for (double i = 0; i <= 20; i++)
    {
       cout << i << ", Distance: " << pos.getMetersX() << ", Altitude: " << pos.getMetersY() << endl;
 
-      accel.add(grav);
-      changeInPostion(&pos, &accel, 1, &grav);
+      calcAcceleration(&vel, gravity);
+      changeInPostion(&pos, &vel, 1, gravity);
    };
 
    return 0;
