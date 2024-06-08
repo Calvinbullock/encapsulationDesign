@@ -32,9 +32,9 @@ private:
 /*
  * TODO   header CHANGE NAME
  * */
-void calcAcceleration(Velocity *vel, double grav)
+void calcAcceleration(Velocity *vel, double grav, double time)
 {
-   vel->setDY(vel->getDY() + grav);
+   vel->setDY(vel->getDY() + (grav * time));
 }
 
 /* ********************************************
@@ -43,8 +43,8 @@ void calcAcceleration(Velocity *vel, double grav)
  * ***************************************** */
 void changeInPostion(Position *pos, Velocity *vel, double time, double grav)
 {
-   pos->setMetersX(pos->getMetersX() + vel->getDX() * time + .5 * 0 * (time * time));
-   pos->setMetersY(pos->getMetersY() + vel->getDY() * time + .5 * grav * (time * time));
+   pos->setMetersX(pos->getMetersX() + vel->getDX() * time + (.5 * 0 * (time * time)));
+   pos->setMetersY(pos->getMetersY() + vel->getDY() * time + (.5 * grav * (time * time)));
 }
 
 /* ********************************************
@@ -61,6 +61,8 @@ double toRadians(double degree)
 int main(int argc, char *argv[])
 {
    Position pos;
+   double time = 0.0;
+   double timeInterval = 0.01;
    double gravity = -9.8;
    double angle = toRadians(75);
    double initVel = 827.0;
@@ -68,14 +70,14 @@ int main(int argc, char *argv[])
 
    vel.set(angle, initVel);
 
-   // sim loop, 20 "frames"
-   for (double i = 0; i <= 20; i++)
+   while (pos.getMetersY() > -1)
    {
-      cout << i << ", Distance: " << pos.getMetersX() << ", Altitude: " << pos.getMetersY() << endl;
+      time += timeInterval;
+      calcAcceleration(&vel, gravity, timeInterval);
+      changeInPostion(&pos, &vel, timeInterval, gravity);
 
-      calcAcceleration(&vel, gravity);
-      changeInPostion(&pos, &vel, 1, gravity);
-   };
+      cout << "Distance:  " << pos.getMetersX() << ",  Altitude: " << pos.getMetersY() << ", HangTime:  " << time << endl;
+   } 
 
    return 0;
 }
