@@ -5,6 +5,7 @@ using namespace std;
 /* ********************************************
  * Velocity class
  *    handles velocity in the simulator
+ *    gives direction to magnitude
  * ***************************************** */
 class Velocity
 {
@@ -29,10 +30,12 @@ private:
    double dy;
 };
 
-/*
- * TODO   header CHANGE NAME
- * */
-void calcAcceleration(Velocity *vel, double grav, double time)
+/* ********************************************
+ * CALCULATE VELOCITY
+ *    Adds the acceleration due to gravity 
+ *    to the vertical velocity
+ * ***************************************** */
+void calcVelocity(Velocity *vel, double grav, double time)
 {
    vel->setDY(vel->getDY() + (grav * time));
 }
@@ -48,7 +51,8 @@ void changeInPostion(Position *pos, Velocity *vel, double time, double grav)
 }
 
 /* ********************************************
- * TODO  header
+ * DEGREES TO RADIANS
+ *    converts degrees to radians
  * ***************************************** */
 double toRadians(double degree)
 {
@@ -56,7 +60,8 @@ double toRadians(double degree)
 }
 
 /* ********************************************
- * TODO  main header
+ * MAIN
+ *    this is the main man
  * ***************************************** */
 int main(int argc, char *argv[])
 {
@@ -73,7 +78,7 @@ int main(int argc, char *argv[])
    while (pos.getMetersY() > -1)
    {
       time += timeInterval;
-      calcAcceleration(&vel, gravity, timeInterval);
+      calcVelocity(&vel, gravity, timeInterval);
       changeInPostion(&pos, &vel, timeInterval, gravity);
 
       cout << "Distance:  " << pos.getMetersX() << ",  Altitude: " << pos.getMetersY() << ", HangTime:  " << time << endl;
