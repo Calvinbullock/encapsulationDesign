@@ -182,8 +182,22 @@ double pythagoreanTheorem(double dx, double dy)
  * ***************************************** */
 double linearInterpolationListWrapper(double listX[], double listY[], int listLength, double yTarget)
 {
-   int index = linearSearch(yTarget, listY, listLength);
-   return linearInterpolation(listX[index], listY[index], listX[index + 1], listY[index + 1], yTarget);
+   if (yTarget < listY[0])
+   {
+      // if yTarget is smaller then bounds of list output first value in listX
+      return listX[0];
+   }
+   else if (yTarget > listY[listLength - 1])
+   {
+      // if yTarget is larger then bounds of list output last value in listX
+      return listX[listLength - 1];
+   }
+   else
+   {
+      // in list bounds
+      int index = linearSearch(yTarget, listY, listLength);
+      return linearInterpolation(listX[index], listY[index], listX[index + 1], listY[index + 1], yTarget);
+   }
 }
 
 /* ********************************************
@@ -214,7 +228,7 @@ int runSim(double angle)
 
    // initial shell stats
    Position pos;
-   //double angle = toRadians(75); // rad
+   // double angle = toRadians(75); // rad
    double initVel = 827.0; // m/sec
    Velocity vel = Velocity();
    vel.setComponents(angle, initVel);
@@ -240,30 +254,21 @@ int runSim(double angle)
       double speedOfSound;
       time += timeInterval;
 
-      // Check if we hit the ground
-      if (pos.getMetersY() >= 0)
-      {
-         // determine the gravity according to the altitude
-         gravity = linearInterpolationListWrapper(gravityTable, altitudeTable, GRAVITYTABLELENGTH, pos.getMetersY());
+      // determine the gravity according to the altitude
+      gravity = linearInterpolationListWrapper(gravityTable, altitudeTable, GRAVITYTABLELENGTH, pos.getMetersY());
 
-         // determine the air density according to the altitude
-         airDensity = linearInterpolationListWrapper(airDensityTable, highAltitudeTable, ENVIRONMENTALTABLELENGTH, pos.getMetersY());
+      // determine the air density according to the altitude
+      airDensity = linearInterpolationListWrapper(airDensityTable, highAltitudeTable, ENVIRONMENTALTABLELENGTH, pos.getMetersY());
 
-         // determine the speed of sound according to the altitude
-         speedOfSound = linearInterpolationListWrapper(speedOfSoundTable, highAltitudeTable, ENVIRONMENTALTABLELENGTH, pos.getMetersY());
+      // determine the speed of sound according to the altitude
+      speedOfSound = linearInterpolationListWrapper(speedOfSoundTable, highAltitudeTable, ENVIRONMENTALTABLELENGTH, pos.getMetersY());
 
-         // determine mach
-         double totalVel = pythagoreanTheorem(vel.getDX(), vel.getDY());
-         double mach = totalVel / speedOfSound;
+      // determine mach
+      double totalVel = pythagoreanTheorem(vel.getDX(), vel.getDY());
+      double mach = totalVel / speedOfSound;
 
-         // determine the drag coefficient according to the altitude
-         dragCoefficient = linearInterpolationListWrapper(dragCoefficentTable, machTable, MACHTABLELENGTH, mach);
-      }
-      else
-      {
-         // return the gravity at ground level, if you are below 0
-         gravity = -9.807;
-      }
+      // determine the drag coefficient according to the altitude
+      dragCoefficient = linearInterpolationListWrapper(dragCoefficentTable, machTable, MACHTABLELENGTH, mach);
 
       // WARN  the drag calculations are not 100% right
       double dragForce = calcDragForce(dragCoefficient, airDensity, &vel, surArea);
@@ -278,7 +283,7 @@ int runSim(double angle)
       timeOfImpact = linearInterpolation(prevTime, prevAltiude, time, pos.getMetersY(), 0);
 
       // TODO remove this
- //     cout << "Distance:  " << pos.getMetersX() << ",  Altitude: " << pos.getMetersY() << ", HangTime:  " << time << endl;
+      //cout << "Distance:  " << pos.getMetersX() << ",  Altitude: " << pos.getMetersY() << ", HangTime:  " << time << endl;
    }
 
    cout << "Distance:  " << pos.getMetersX() << ", HangTime:  " << timeOfImpact << endl;
