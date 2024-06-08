@@ -116,13 +116,15 @@ int linearSearch(double targetValue, double list[], int listLength)
 double linearInterpalation(double xPos, double yPos, double xPos1, double yPos1, double givenYPos)
 {
    // WARN  this is not 100% right  
-   return yPos + ((yPos1 - yPos) * (givenYPos - xPos)) / (xPos1 - xPos);
+   // return yPos + ((yPos1 - yPos) * (givenYPos - xPos)) / (xPos1 - xPos);
 
-   /*cout <<endl;*/
-   /*cout << xPos + (yPos1 - yPos) / ((xPos1 - xPos) * (givenYPos - yPos)) << endl;*/
-   /*cout << ((yPos - yPos1) * xPos + (givenYPos - yPos) * xPos1) / yPos - yPos1 << endl;*/
-   /*cout <<endl;*/
-   /*return 1.0;*/
+
+
+   double x = xPos + ((givenYPos - yPos )*(xPos1 - xPos))/(yPos1 - yPos);
+   cout << xPos << ", " << yPos << endl;
+   cout << xPos1 << ", " << yPos1 << endl;
+   cout << x << ", " << givenYPos << endl;
+   return x;
 }
 
 /* ********************************************
@@ -192,7 +194,7 @@ int main(int argc, char *argv[])
          // determine the gravity according to the altitude
          altitudeIndex = linearSearch(pos.getMetersY(), altitudeTable, GRAVITYTABLELENGTH);
          gravity = linearInterpalation(
-            altitudeTable[altitudeIndex], gravityTable[altitudeIndex], altitudeTable[altitudeIndex + 1], gravityTable[altitudeIndex + 1], pos.getMetersY());
+            gravityTable[altitudeIndex], altitudeTable[altitudeIndex], gravityTable[altitudeIndex + 1], altitudeTable[altitudeIndex + 1], pos.getMetersY());
       }
       else
       {
