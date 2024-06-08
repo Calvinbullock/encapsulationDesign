@@ -48,20 +48,6 @@ private:
    double dy;
 };
 
-// WARN  this might not be needed
-/*// Function to calculate slope*/
-/*double calculateSlope(double x1, double y1, double x2, double y2) {*/
-/*   // Check for division by zero (avoid if x2 - x1 is 0)*/
-/*   if (x2 - x1 == 0) {*/
-/*      cout << "Error: Cannot calculate slope. Division by zero." << endl;*/
-/*      return numeric_limits<double>::infinity(); // Return infinity as an error indicator*/
-/*   }*/
-/**/
-/*   // Calculate slope using the formula (y2 - y1) / (x2 - x1)*/
-/*   double slope = (y2 - y1) / (x2 - x1);*/
-/*   return slope;*/
-/*}*/
-
 /* ********************************************
  * CALCULATE VELOCITY
  *    Adds the acceleration due to gravity
