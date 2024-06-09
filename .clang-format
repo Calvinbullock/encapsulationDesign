@@ -2,7 +2,7 @@ BasedOnStyle: LLVM
 IndentWidth: 3
 BinPackArguments: false
 BinPackParameters: false
-ColumnLimit: 0  # No line wrapping
+ColumnLimit: 80  # No line wrapping
 BreakBeforeBraces: Allman
 
 # Indentation for continuation lines within braces
