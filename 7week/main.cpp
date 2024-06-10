@@ -66,20 +66,20 @@ void calcVelocity(Velocity *vel, double time, double ddx, double ddy)
  * CHANGE IN POSITION
  *    Calculates the change in position - inertia
  * ***************************************** */
-void changeInPostion(Position *pos, Velocity *vel, double time, double ddx, double ddy)
+void changeInPostion(Position *pos, Velocity *vel, double time, double ddx,
+                     double ddy)
 {
-   pos->setMetersX(pos->getMetersX() + vel->getDX() * time + (.5 * ddx * (time * time)));
-   pos->setMetersY(pos->getMetersY() + vel->getDY() * time + (.5 * ddy) * (time * time));
+   pos->setMetersX(pos->getMetersX() + vel->getDX() * time +
+                   (.5 * ddx * (time * time)));
+   pos->setMetersY(pos->getMetersY() + vel->getDY() * time +
+                   (.5 * ddy) * (time * time));
 }
 
 /* ********************************************
  * CALCULATE ACCELERATION
  *    gets acceleration using newtons 2nd law
  * ***************************************** */
-double calcAcceleration(double force, double mass)
-{
-   return force / mass;
-}
+double calcAcceleration(double force, double mass) { return force / mass; }
 
 /* ********************************************
  * CALCULATE ACCELERATION COMPONENT X
@@ -104,10 +104,7 @@ double calcAccelComponentY(double angle, double accel, double gravity)
  * DEGREES TO RADIANS
  *    converts degrees to radians
  * ***************************************** */
-double toRadians(double degree)
-{
-   return (degree * M_PI) / 180;
-}
+double toRadians(double degree) { return (degree * M_PI) / 180; }
 
 /* ********************************************
  * LINEAR SEARCH
@@ -138,7 +135,8 @@ int linearSearch(double targetValue, double list[], int listLength)
  *    the given y between two points on a
  *    slope.
  * ***************************************** */
-double linearInterpolation(double xPos, double yPos, double xPos1, double yPos1, double givenYPos)
+double linearInterpolation(double xPos, double yPos, double xPos1, double yPos1,
+                           double givenYPos)
 {
    return xPos + ((givenYPos - yPos) * (xPos1 - xPos)) / (yPos1 - yPos);
 }
@@ -147,17 +145,15 @@ double linearInterpolation(double xPos, double yPos, double xPos1, double yPos1,
  * CALCULATE SURFACE AREA
  *    Calculates and returns the surface area
  * ***************************************** */
-double calcSurfaceArea(double radius)
-{
-   return M_PI * (radius * radius);
-}
+double calcSurfaceArea(double radius) { return M_PI * (radius * radius); }
 
 /* ********************************************
  * CALCULATE DRAG FORCE
  *    Calculates the drag force
  *    d = ½ c ρ v2 a
  * ***************************************** */
-double calcDragForce(double drag, double gasDensity, Velocity *vel, double surArea)
+double calcDragForce(double drag, double gasDensity, Velocity *vel,
+                     double surArea)
 {
    return .5 * drag * gasDensity * (vel->getDX() * vel->getDX()) * surArea;
 }
@@ -180,7 +176,8 @@ double pythagoreanTheorem(double dx, double dy)
  *    returns the interpolated x value
  *
  * ***************************************** */
-double linearInterpolationListWrapper(double listX[], double listY[], int listLength, double yTarget)
+double linearInterpolationListWrapper(double listX[], double listY[],
+                                      int listLength, double yTarget)
 {
    if (yTarget < listY[0])
    {
@@ -196,7 +193,8 @@ double linearInterpolationListWrapper(double listX[], double listY[], int listLe
    {
       // in list bounds
       int index = linearSearch(yTarget, listY, listLength);
-      return linearInterpolation(listX[index], listY[index], listX[index + 1], listY[index + 1], yTarget);
+      return linearInterpolation(listX[index], listY[index], listX[index + 1],
+                                 listY[index + 1], yTarget);
    }
 }
 
@@ -208,18 +206,34 @@ double linearInterpolationListWrapper(double listX[], double listY[], int listLe
 int runSim(double angle)
 {
    // gravity table - altitude = x, gravity = y
-   double altitudeTable[GRAVITYTABLELENGTH] = {0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 15000, 20000, 25000};
-   double gravityTable[GRAVITYTABLELENGTH] = {-9.807, -9.804, -9.801, -9.797, -9.794, -9.791, -9.788, -9.785, -9.782, -9.779, -9.776, -9.761, -9.745, -9.730};
+   double altitudeTable[GRAVITYTABLELENGTH] = {0,     1000,  2000,  3000, 4000,
+                                               5000,  6000,  7000,  8000, 9000,
+                                               10000, 15000, 20000, 25000};
+   double gravityTable[GRAVITYTABLELENGTH] = {
+      -9.807, -9.804, -9.801, -9.797, -9.794, -9.791, -9.788,
+      -9.785, -9.782, -9.779, -9.776, -9.761, -9.745, -9.730};
 
    // mach to drag coefficient table - mach = x, drag = y
-   double machTable[MACHTABLELENGTH] = {0.300, 0.500, 0.700, 0.890, 0.920, 0.960, 0.980, 1.000, 1.020, 1.060, 1.240, 1.530, 1.990, 2.870, 2.890, 5.000};
-   double dragCoefficentTable[MACHTABLELENGTH] = {0.1629, 0.1659, 0.2031, 0.2597, 0.3010, 0.3287, 0.4002, 0.4258, 0.4335, 0.4483, 0.4064, 0.3663, 0.2897, 0.2297, 0.2306, 0.2656};
+   double machTable[MACHTABLELENGTH] = {
+      0.300, 0.500, 0.700, 0.890, 0.920, 0.960, 0.980, 1.000,
+      1.020, 1.060, 1.240, 1.530, 1.990, 2.870, 2.890, 5.000};
+   double dragCoefficentTable[MACHTABLELENGTH] = {
+      0.1629, 0.1659, 0.2031, 0.2597, 0.3010, 0.3287, 0.4002, 0.4258,
+      0.4335, 0.4483, 0.4064, 0.3663, 0.2897, 0.2297, 0.2306, 0.2656};
 
    // x values of the tables
-   double highAltitudeTable[ENVIRONMENTALTABLELENGTH] = {0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 15000, 20000, 25000, 30000, 40000, 50000, 60000, 70000, 80000};
+   double highAltitudeTable[ENVIRONMENTALTABLELENGTH] = {
+      0,     1000,  2000,  3000,  4000,  5000,  6000,  7000,  8000,  9000,
+      10000, 15000, 20000, 25000, 30000, 40000, 50000, 60000, 70000, 80000};
    // y values of the tables
-   double speedOfSoundTable[ENVIRONMENTALTABLELENGTH] = {340, 336, 332, 328, 324, 320, 316, 312, 308, 303, 299, 295, 295, 295, 305, 324, 337, 319, 289, 269};
-   double airDensityTable[ENVIRONMENTALTABLELENGTH] = {1.2250000, 1.1120000, 1.0070000, 0.9093000, 0.8194000, 0.7364000, 0.6601000, 0.5900000, 0.5258000, 0.4671000, 0.4135000, 0.1948000, 0.0889100, 0.0400800, 0.0184100, 0.0039960, 0.0010270, 0.0003097, 0.0000828, 0.0000185};
+   double speedOfSoundTable[ENVIRONMENTALTABLELENGTH] = {
+      340, 336, 332, 328, 324, 320, 316, 312, 308, 303,
+      299, 295, 295, 295, 305, 324, 337, 319, 289, 269};
+   double airDensityTable[ENVIRONMENTALTABLELENGTH] = {
+      1.2250000, 1.1120000, 1.0070000, 0.9093000, 0.8194000,
+      0.7364000, 0.6601000, 0.5900000, 0.5258000, 0.4671000,
+      0.4135000, 0.1948000, 0.0889100, 0.0400800, 0.0184100,
+      0.0039960, 0.0010270, 0.0003097, 0.0000828, 0.0000185};
 
    // Shell stats - const
    double mass = 46.7;                  // kg
@@ -255,23 +269,30 @@ int runSim(double angle)
       time += timeInterval;
 
       // determine the gravity according to the altitude
-      gravity = linearInterpolationListWrapper(gravityTable, altitudeTable, GRAVITYTABLELENGTH, pos.getMetersY());
+      gravity = linearInterpolationListWrapper(
+         gravityTable, altitudeTable, GRAVITYTABLELENGTH, pos.getMetersY());
 
       // determine the air density according to the altitude
-      airDensity = linearInterpolationListWrapper(airDensityTable, highAltitudeTable, ENVIRONMENTALTABLELENGTH, pos.getMetersY());
+      airDensity = linearInterpolationListWrapper(
+         airDensityTable, highAltitudeTable, ENVIRONMENTALTABLELENGTH,
+         pos.getMetersY());
 
       // determine the speed of sound according to the altitude
-      speedOfSound = linearInterpolationListWrapper(speedOfSoundTable, highAltitudeTable, ENVIRONMENTALTABLELENGTH, pos.getMetersY());
+      speedOfSound = linearInterpolationListWrapper(
+         speedOfSoundTable, highAltitudeTable, ENVIRONMENTALTABLELENGTH,
+         pos.getMetersY());
 
       // determine mach
       double totalVel = pythagoreanTheorem(vel.getDX(), vel.getDY());
       double mach = totalVel / speedOfSound;
 
       // determine the drag coefficient according to the altitude
-      dragCoefficient = linearInterpolationListWrapper(dragCoefficentTable, machTable, MACHTABLELENGTH, mach);
+      dragCoefficient = linearInterpolationListWrapper(
+         dragCoefficentTable, machTable, MACHTABLELENGTH, mach);
 
       // WARN  the drag calculations are not 100% right
-      double dragForce = calcDragForce(dragCoefficient, airDensity, &vel, surArea);
+      double dragForce =
+         calcDragForce(dragCoefficient, airDensity, &vel, surArea);
       double dragAccel = calcAcceleration(dragForce, mass);
 
       double ddx = calcAccelComponentX(angle, dragAccel);
@@ -280,13 +301,16 @@ int runSim(double angle)
       calcVelocity(&vel, timeInterval, ddx, ddy);
       changeInPostion(&pos, &vel, timeInterval, ddx, ddy);
 
-      timeOfImpact = linearInterpolation(prevTime, prevAltiude, time, pos.getMetersY(), 0);
+      timeOfImpact =
+         linearInterpolation(prevTime, prevAltiude, time, pos.getMetersY(), 0);
 
       // TODO remove this
-      //cout << "Distance:  " << pos.getMetersX() << ",  Altitude: " << pos.getMetersY() << ", HangTime:  " << time << endl;
+      // cout << "Distance:  " << pos.getMetersX() << ",  Altitude: " <<
+      // pos.getMetersY() << ", HangTime:  " << time << endl;
    }
 
-   cout << "Distance:  " << pos.getMetersX() << ", HangTime:  " << timeOfImpact << endl;
+   cout << "Distance:  " << pos.getMetersX() << ", HangTime:  " << timeOfImpact
+        << endl;
 
    return 0;
 }
