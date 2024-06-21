@@ -63,7 +63,7 @@ public:
 
 
    // Setters
-   void setRadians(double radians) { radians = normalize(radians); }
+   void setRadians(double radians) { this->radians = normalize(radians); }
    void setDegrees(double degrees) 
    { 
       radians = normalize(convertToRadians(degrees));

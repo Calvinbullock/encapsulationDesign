@@ -12,6 +12,8 @@
 
 #include "angle.h"
 #include "unitTest.h"
+#include <cmath>
+#include <iostream>
 
 /*******************************
  * TEST ANGLE
