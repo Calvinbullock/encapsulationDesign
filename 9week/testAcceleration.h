@@ -2,7 +2,7 @@
  * Header File:
  *    TEST ACCELERATION
  * Author:
- *    <your name here>
+ *     Calvin, Hyrum
  * Summary:
  *    Unit tests for the Acceleration class.
  ************************************************************************/
