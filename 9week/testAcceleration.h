@@ -323,9 +323,22 @@ private:
     *********************************************/
    void addDDX_zero()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+
+      // setup
+      Acceleration a;
+      a.ddx = 2.3;
+      a.ddy = 4.5;
+      double magnitude =  0.0;
+
+      // exercise
+      a.addDDX(magnitude);
+
+      // verify
+      assertEquals(a.ddx, 2.3); //0 + 2.3 = 2.3
+      assertEquals(a.ddy, 4.5); 
+      
    }
-   
+
    /*********************************************
     * name:    ADD DDX 4.1
     * input:   a=(2.3, 4.5) ddx=4.1
@@ -333,7 +346,19 @@ private:
     *********************************************/
    void addDDX_value()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Acceleration a;
+      a.ddx = 2.3;
+      a.ddy = 4.5;
+      double magnitude =  4.1;
+
+
+      // exercise
+      a.addDDX(magnitude);
+
+      // verify
+      assertEquals(a.ddx, 6.4); //4.1 + 2.3 = 6.4
+      assertEquals(a.ddy, 4.5); 
    }
 
    /*********************************************
@@ -343,7 +368,19 @@ private:
     *********************************************/
    void addDDY_zero()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Acceleration a;
+      a.ddx = 2.3;
+      a.ddy = 4.5;
+      double magnitude =  0.0;
+
+
+      // exercise
+      a.addDDY(magnitude);
+
+      // verify
+      assertEquals(a.ddx, 2.3);
+      assertEquals(a.ddy, 4.5); 
    }
 
    /*********************************************
@@ -353,7 +390,19 @@ private:
     *********************************************/
    void addDDY_value()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Acceleration a;
+      a.ddx = 2.3;
+      a.ddy = 4.5;
+      double magnitude =  4.1;
+
+
+      // exercise
+      a.addDDY(magnitude);
+
+      // verify
+      assertEquals(a.ddx, 2.3);
+      assertEquals(a.ddy, 8.6); 
    }
 
    /*********************************************
@@ -363,7 +412,22 @@ private:
     *********************************************/
    void add_zeroZero()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Acceleration aLHS;
+      aLHS.ddx = 0.0;
+      aLHS.ddy = 0.0;
+      
+      Acceleration aRHS;
+      aRHS.ddx = 0.0;
+      aRHS.ddy = 0.0;
+
+
+      // exercise
+      aLHS.add(aRHS);
+
+      // verify
+      assertEquals(aLHS.ddx, 0.0);
+      assertEquals(aLHS.ddy, 0.0); 
    }
 
    /*********************************************
@@ -373,7 +437,23 @@ private:
     *********************************************/
    void add_valueZero()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Acceleration aLHS;
+      aLHS.ddx = 1.1;
+      aLHS.ddy = 2.2;
+
+      Acceleration aRHS;
+      aRHS.ddx = 0.0;
+      aRHS.ddy = 0.0;
+
+
+      // exercise
+      aLHS.add(aRHS);
+
+      // verify
+      assertEquals(aLHS.ddx, 1.1);
+      assertEquals(aLHS.ddy, 2.2); 
+
    }
 
    /*********************************************
@@ -383,7 +463,23 @@ private:
     *********************************************/
    void add_zeroValue()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Acceleration aLHS;
+      aLHS.ddx = 0.0;
+      aLHS.ddy = 0.0;
+      
+      Acceleration aRHS;
+      aRHS.ddx = 4.4;
+      aRHS.ddy = 7.7;
+
+
+      // exercise
+      aLHS.add(aRHS);
+
+      // verify
+      assertEquals(aLHS.ddx, 4.4);
+      assertEquals(aLHS.ddy, 7.7); 
+
    }
 
    /*********************************************
@@ -393,7 +489,23 @@ private:
     *********************************************/
    void add_valueValue()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Acceleration aLHS;
+      aLHS.ddx = 1.1;
+      aLHS.ddy = 2.2;
+
+      Acceleration aRHS;
+      aRHS.ddx = 4.4;
+      aRHS.ddy = 7.7;
+
+
+      // exercise
+      aLHS.add(aRHS);
+
+      // verify
+      assertEquals(aLHS.ddx, 5.5);
+      assertEquals(aLHS.ddy, 9.9); 
+
    }
 
 };
