@@ -35,9 +35,9 @@ public:
    friend TestProjectile;
 
    // Constructors
-   Angle()                  : radians(0.0)         {}
-   Angle(const Angle &rhs)  : radians(rhs.radians) {}
-   Angle(double degrees)    : radians()         
+   Angle()                  : radians(0.0), dx(), dy() {}
+   Angle(const Angle &rhs)  : radians(rhs.radians), dx(), dy()  {}
+   Angle(double degrees)    : radians(), dx(), dy()          
    {
       radians = normalize(convertToRadians(degrees));
    }
@@ -56,10 +56,10 @@ public:
    //    | /
    // dy = cos a
    // dx = sin a
-   double getDx() const { return 9.9; }
-   double getDy() const { return 9.9; }
-   bool   isRight()          const { return true; }
-   bool   isLeft()           const { return true; }
+   double getDx()    const { return dx; }
+   double getDy()    const { return dy; }
+   bool   isRight()  const { return (radians == convertToRadians(180.0)); }
+   bool   isLeft()   const { return (radians == convertToRadians(270.0)); }
 
 
    // Setters
@@ -99,7 +99,11 @@ public:
    //     | a /
    //     |  /
    //     | /
-   void setDxDy(double dx, double dy)  { }
+   void setDxDy(double dx, double dy)  
+   {
+      this->dx = dx;
+      this->dy = dy;
+   }
    Angle operator+(double degrees) const { return Angle(); }
 
 private:
@@ -108,6 +112,8 @@ private:
    double normalize(double radians) const;
 
    double radians;   // 360 degrees equals 2 PI radians
+   double dx;
+   double dy;
 };
 
 #include <iostream>
