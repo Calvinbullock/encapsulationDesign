@@ -15,8 +15,6 @@
 #define _USE_MATH_DEFINES
 #define TWO_PI (2.0 * M_PI)
 
-#include <iostream> // WARN 
-
  // for the unit tests
 class TestAngle;
 class TestPosition;
@@ -60,19 +58,10 @@ public:
    //    | /
    // dx = sin a
    // dy = cos a
-   double getDx()    { 
-      dx = sin(radians); 
-      return dx;
-   }
-   double getDy()    
-   { 
-      dy = cos(radians); 
-      return dy;
-   }
-
+   double getDx() { dx = sin(radians); return dx; }
+   double getDy() { dy = cos(radians); return dy; }
    bool   isRight()  const { return (radians == convertToRadians(180.0)); }
    bool   isLeft()   const { return (radians == convertToRadians(270.0)); }
-
 
    // Setters
    void setRadians(double radians) { this->radians = normalize(radians); }
@@ -80,27 +69,18 @@ public:
    { 
       radians = normalize(convertToRadians(degrees));
    }
-   void setUp()
+
+   void setUp() { radians = normalize(convertToRadians(0.0)); }
+   void setDown() { radians = normalize(convertToRadians(180.0)); }
+   void setRight() { radians = normalize(convertToRadians(90.0)); }
+   void setLeft() { radians = normalize(convertToRadians(270.0)); }
+
+   void reverse() { radians = TWO_PI - fmod(radians, TWO_PI); }
+   Angle &add(double delta)
    {
-      radians = normalize(convertToRadians(0.0));
+      radians = normalize(radians + delta);
+      return *this;
    }
-   void setDown()
-   {
-      radians = normalize(convertToRadians(180.0));
-   }
-   void setRight()
-   {
-      radians = normalize(convertToRadians(90.0));
-   }
-   void setLeft()
-   {
-      radians = normalize(convertToRadians(270.0));
-   }
-   void reverse()
-   {
-      radians = TWO_PI - fmod(radians, TWO_PI);
-   }
-   Angle& add(double delta)        { return *this; }
 
    // set based on the components
    //         dx
@@ -111,11 +91,7 @@ public:
    //     | a /
    //     |  /
    //     | /
-   void setDxDy(double dx, double dy)  
-   {
-      this->dx = dx;
-      this->dy = dy;
-   }
+   void setDxDy(double dx, double dy) { this->dx = dx; this->dy = dy; }
    Angle operator+(double degrees) const { return Angle(); }
 
 private:

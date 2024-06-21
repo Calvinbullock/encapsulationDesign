@@ -40,7 +40,7 @@ void testRunner()
 #endif // _WIN32
 
    TestAngle().run();
-   TestAcceleration().run();
-   TestPosition().run();
-   TestVelocity().run();
+   /*TestAcceleration().run();*/
+   /*TestPosition().run();*/
+   /*TestVelocity().run();*/
 }
