@@ -9,8 +9,9 @@
 
 #pragma once
 
-#define _USE_MATH_DEFINES
 #include <math.h>   // for M_PI which is 3.14159
+#define _USE_MATH_DEFINES
+#define TWO_PI (2.0 * M_PI)
 
  // for the unit tests
 class TestAngle;
@@ -34,13 +35,16 @@ public:
    friend TestProjectile;
 
    // Constructors
-   Angle()                  : radians(9.9)         {}
-   Angle(const Angle& rhs)  : radians(9.9)         {}
-   Angle(double degrees)    : radians(9.9)         {}
+   Angle()                  : radians(0.0)         {}
+   Angle(const Angle &rhs)  : radians(rhs.radians) {}
+   Angle(double degrees)    : radians()         
+   {
+      radians = normalize(convertToRadians(degrees));
+   }
 
    // Getters
-   double getDegrees() const { return 9.9; }
-   double getRadians() const { return 9.9; }
+   double getDegrees() const { return convertToDegrees(radians); }
+   double getRadians() const { return radians; }
 
    //         dx
    //    +-------/
@@ -59,13 +63,31 @@ public:
 
 
    // Setters
-   void setDegrees(double degrees) { }
-   void setRadians(double radians) { }
-   void setUp()                    { }
-   void setDown()                  { }
-   void setRight()                 { }
-   void setLeft()                  { }
-   void reverse()                  { }
+   void setRadians(double radians) { radians = normalize(radians); }
+   void setDegrees(double degrees) 
+   { 
+      radians = normalize(convertToRadians(degrees));
+   }
+   void setUp()
+   {
+      radians = normalize(convertToRadians(0.0));
+   }
+   void setDown()
+   {
+      radians = normalize(convertToRadians(180.0));
+   }
+   void setRight()
+   {
+      radians = normalize(convertToRadians(90.0));
+   }
+   void setLeft()
+   {
+      radians = normalize(convertToRadians(270.0));
+   }
+   void reverse()
+   {
+      radians = TWO_PI - fmod(radians, TWO_PI);
+   }
    Angle& add(double delta)        { return *this; }
 
    // set based on the components
@@ -81,7 +103,8 @@ public:
    Angle operator+(double degrees) const { return Angle(); }
 
 private:
-
+   double convertToDegrees(double radians) const;
+   double convertToRadians(double degrees) const;
    double normalize(double radians) const;
 
    double radians;   // 360 degrees equals 2 PI radians
