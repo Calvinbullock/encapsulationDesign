@@ -12,8 +12,10 @@
 
 #include "angle.h"
 #include "unitTest.h"
+#include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <iterator>
 
 /*******************************
  * TEST ANGLE
@@ -662,9 +664,16 @@ private:
     * output:  1
     *********************************************/
    void getDy_up()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      Angle a;
+      a.radians = 0.0; // 30 degrees
+      double dy = -99.9;
+      // exercise
+      dy = a.getDy();
+      // verify
+      assertEquals(dy, 1);
+      assertEquals(a.radians, 0.0);
+   }  // teardown
 
    /*********************************************
     * name:    GET DY - DOWN
@@ -672,9 +681,17 @@ private:
     * output:  -1
     *********************************************/
    void getDy_down()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      double rad = 180 * M_PI / 180; // 180 degrees
+      Angle a;
+      a.radians = rad; 
+      double dy = -99.9;
+      // exercise
+      dy = a.getDy();
+      // verify
+      assertEquals(dy, cos(rad));
+      assertEquals(a.radians, rad);
+   }  // teardown
 
 
    /*********************************************

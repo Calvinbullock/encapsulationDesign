@@ -9,9 +9,13 @@
 
 #pragma once
 
+#include <algorithm>
+#include <cmath>
 #include <math.h>   // for M_PI which is 3.14159
 #define _USE_MATH_DEFINES
 #define TWO_PI (2.0 * M_PI)
+
+#include <iostream> // WARN 
 
  // for the unit tests
 class TestAngle;
@@ -35,8 +39,8 @@ public:
    friend TestProjectile;
 
    // Constructors
-   Angle()                  : radians(0.0), dx(), dy() {}
-   Angle(const Angle &rhs)  : radians(rhs.radians), dx(), dy()  {}
+   Angle()                  : radians(0.0), dx(0.0), dy(0.0)               {}
+   Angle(const Angle &rhs)  : radians(rhs.radians), dx(rhs.dx), dy(rhs.dy) {}
    Angle(double degrees)    : radians(), dx(), dy()          
    {
       radians = normalize(convertToRadians(degrees));
@@ -54,10 +58,18 @@ public:
    //    | a /
    //    |  /
    //    | /
-   // dy = cos a
    // dx = sin a
-   double getDx()    const { return dx; }
-   double getDy()    const { return dy; }
+   // dy = cos a
+   double getDx()    { 
+      dx = sin(radians); 
+      return dx;
+   }
+   double getDy()    
+   { 
+      dy = cos(radians); 
+      return dy;
+   }
+
    bool   isRight()  const { return (radians == convertToRadians(180.0)); }
    bool   isLeft()   const { return (radians == convertToRadians(270.0)); }
 
