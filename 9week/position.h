@@ -2,7 +2,7 @@
  * Header File:
  *    POSITION
  * Author:
- *    <your name here>
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    Everything we need to know about a location on the screen.
  ************************************************************************/
@@ -61,7 +61,7 @@ public:
    double addPixelsY(double y) { return this->y += pixelsToMeters(y); }
 
    void add(const Acceleration& a, const Velocity& v, double t);
-   void reverse() { }
+   void reverse() { x *= -1; y *= -1; }
 
 
 private:
@@ -69,8 +69,14 @@ private:
    double y;                  // vertical position
    static double metersFromPixels; // 1 Pix : metersFromPixels meters
 
-   double metersToPixels(double meters) const { return meters / metersFromPixels; }
-   double pixelsToMeters(double pixels) const { return pixels * metersFromPixels; }
+   double metersToPixels(double meters) const 
+   { 
+      return meters / metersFromPixels; 
+   }
+   double pixelsToMeters(double pixels) const 
+   { 
+      return pixels * metersFromPixels; 
+   }
 };
 
 

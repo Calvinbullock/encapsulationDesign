@@ -2,7 +2,7 @@
  * Header File:
  *    ANGLE
  * Author:
- *    <your name here>
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    Everything we need to know about a direction
  ************************************************************************/

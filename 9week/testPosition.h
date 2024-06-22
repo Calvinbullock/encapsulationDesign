@@ -2,7 +2,7 @@
  * Header File:
  *    TEST POSITION
  * Author:
- *    <your name here>
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    Unit tests for the Position class.
  ************************************************************************/
