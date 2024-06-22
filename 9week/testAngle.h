@@ -518,8 +518,20 @@ private:
     * input:   dx=-0.01 dy=0
     * output:  270 degrees
     *********************************************/
+   // WARN might be a normalization issues that causes 
+   //    this to fail
    void setDxDy_left()
    {  // setup
+      Angle a;
+      a.radians = 1.234567;
+      double dx = -0.01;
+      double dy = 0;
+
+      // exercise
+      a.setDxDy(dx, dy);
+
+      // verify
+      assertEquals(a.radians, 270.0 * M_PI / 180.0 );
    }  // teardown
 
    /*********************************************

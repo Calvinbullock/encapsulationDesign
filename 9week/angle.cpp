@@ -28,9 +28,7 @@ void Angle::setDxDy(double dx, double dy) {
    this->dx = dx; 
    this->dy = dy; 
 
-   double hyp = sqrt((dx * dx) + (dy * dy));
-   double sign = (dx > 0) ? 1.0 : -1.0;
-   radians = asin(dx * sign / hyp);
+   radians = atan2(dx, dy);
 }
 
 /************************************
