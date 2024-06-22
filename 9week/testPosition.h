@@ -701,8 +701,29 @@ private:
     * output:  pos=(11.1,22.2)
     *********************************************/
    void add_stationary()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // SETUP
+      double metersFromPixels = Position::metersFromPixels;
+      Position::metersFromPixels = 99.9;
+      Position pos;
+      pos.x = 11.1;
+      pos.y = 22.2;
+      Velocity vel;
+      vel.dx = 0.0;
+      vel.dy = 0.0;
+      Acceleration acc;
+      acc.ddx = 0.0;
+      acc.ddy = 0.0;
+      double time(1.0);
+
+      // EXERCISE
+      pos.add(acc, vel, time);
+
+      // VERIFY
+      assertEquals(pos.x,  11.1); // 12.5 = 11.1 + 0.5*2 + 1/2 .2 2^2
+      assertEquals(pos.y,  22.2); // 23.6 = 22.2 + 0.4*2 + 1/2 .3 2^2
+
+      // TEARDOWN
+      Position::metersFromPixels = metersFromPixels;
    }
 
    /*********************************************
@@ -712,8 +733,34 @@ private:
     *          pos.y = 22.6 = 22.2 + 0.4*1
     *********************************************/
    void add_moving()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // SETUP
+      double metersFromPixels = Position::metersFromPixels;
+      Position::metersFromPixels = 99.9;
+      Position pos;
+      pos.x = 11.1;
+      pos.y = 22.2;
+      Velocity vel;
+      vel.dx = 0.5;
+      vel.dy = 0.4;
+      Acceleration acc;
+      acc.ddx = 0.0;
+      acc.ddy = 0.0;
+      double time = 1.0;
+
+      // EXERCISE
+      pos.add(acc, vel, time);
+
+      // VERIFY
+      assertEquals(pos.x,  11.6);
+      assertEquals(pos.y,  22.6);
+      assertEquals(vel.dx,  0.5);
+      assertEquals(vel.dy,  0.4);
+      assertEquals(acc.ddx, 0.0);
+      assertEquals(acc.ddy, 0.0);
+      assertEquals(time,    1.0);
+
+      // TEARDOWN
+      Position::metersFromPixels = metersFromPixels;
    }
 
    /*********************************************
@@ -723,8 +770,34 @@ private:
     *          pos.y = 23.0 = 22.2 + 0.4*2
     *********************************************/
    void add_movingLonger()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // SETUP
+      double metersFromPixels = Position::metersFromPixels;
+      Position::metersFromPixels = 99.9;
+      Position pos;
+      pos.x = 11.1;
+      pos.y = 22.2;
+      Velocity vel;
+      vel.dx = 0.5;
+      vel.dy = 0.4;
+      Acceleration acc;
+      acc.ddx = 0.0;
+      acc.ddy = 0.0;
+      double time = 2.0;
+
+      // EXERCISE
+      pos.add(acc, vel, time);
+
+      // VERIFY
+      assertEquals(pos.x,  12.1);
+      assertEquals(pos.y,  23.0);
+      assertEquals(vel.dx,  0.5);
+      assertEquals(vel.dy,  0.4);
+      assertEquals(acc.ddx, 0.0);
+      assertEquals(acc.ddy, 0.0);
+      assertEquals(time,    2.0);
+
+      // TEARDOWN
+      Position::metersFromPixels = metersFromPixels;
    }
 
    /*********************************************
@@ -734,8 +807,34 @@ private:
     *          pos.y = 22.35 = 22.2 + 1/2 .3 1^2
     *********************************************/
    void add_fromStop()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // SETUP
+      double metersFromPixels = Position::metersFromPixels;
+      Position::metersFromPixels = 99.9;
+      Position pos;
+      pos.x = 11.1;
+      pos.y = 22.2;
+      Velocity vel;
+      vel.dx = 0.0;
+      vel.dy = 0.0;
+      Acceleration acc;
+      acc.ddx = 0.2;
+      acc.ddy = 0.3;
+      double time = 1.0;
+
+      // EXERCISE
+      pos.add(acc, vel, time);
+
+      // VERIFY
+      assertEquals(pos.x,  11.20);
+      assertEquals(pos.y,  22.35);
+      assertEquals(vel.dx,  0.0);
+      assertEquals(vel.dy,  0.0);
+      assertEquals(acc.ddx, 0.2);
+      assertEquals(acc.ddy, 0.3);
+      assertEquals(time,    1.0);
+
+      // TEARDOWN
+      Position::metersFromPixels = metersFromPixels;
    }
 
    /*********************************************
@@ -745,8 +844,34 @@ private:
     *          pos.y = 22.8 = 22.2 + 1/2 .3 2^2
     *********************************************/
    void add_fromStopLonger()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // SETUP
+      double metersFromPixels = Position::metersFromPixels;
+      Position::metersFromPixels = 99.9;
+      Position pos;
+      pos.x = 11.1;
+      pos.y = 22.2;
+      Velocity vel;
+      vel.dx = 0.0;
+      vel.dy = 0.0;
+      Acceleration acc;
+      acc.ddx = 0.2;
+      acc.ddy = 0.3;
+      double time = 2.0;
+
+      // EXERCISE
+      pos.add(acc, vel, time);
+
+      // VERIFY
+      assertEquals(pos.x,  11.5);
+      assertEquals(pos.y,  22.8);
+      assertEquals(vel.dx,  0.0);
+      assertEquals(vel.dy,  0.0);
+      assertEquals(acc.ddx, 0.2);
+      assertEquals(acc.ddy, 0.3);
+      assertEquals(time,    2.0);
+
+      // TEARDOWN
+      Position::metersFromPixels = metersFromPixels;
    }
    
    /*********************************************
