@@ -22,6 +22,18 @@ double Angle::convertToDegrees(double r) const
 }
 
 /************************************
+ * ANGLE : SET DX DY
+ ************************************/
+void Angle::setDxDy(double dx, double dy) {
+   this->dx = dx; 
+   this->dy = dy; 
+
+   double hyp = sqrt((dx * dx) + (dy * dy));
+   double sign = (dx > 0) ? 1.0 : -1.0;
+   radians = asin(dx * sign / hyp);
+}
+
+/************************************
  * ANGLE : CONVERT TO RADIANS
  ************************************/
 double Angle::convertToRadians(double d) const

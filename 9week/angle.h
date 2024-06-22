@@ -15,6 +15,8 @@
 #define _USE_MATH_DEFINES
 #define TWO_PI (2.0 * M_PI)
 
+#include <iostream>
+
  // for the unit tests
 class TestAngle;
 class TestPosition;
@@ -58,8 +60,8 @@ public:
    //    | /
    // dx = sin a
    // dy = cos a
-   double getDx() { dx = sin(radians); return dx; }
-   double getDy() { dy = cos(radians); return dy; }
+   double getDx() { return dx = sin(radians); }
+   double getDy() { return dy = cos(radians); }
    bool   isRight()  const { return (radians == convertToRadians(180.0)); }
    bool   isLeft()   const { return (radians == convertToRadians(270.0)); }
 
@@ -91,7 +93,7 @@ public:
    //     | a /
    //     |  /
    //     | /
-   void setDxDy(double dx, double dy) { this->dx = dx; this->dy = dy; }
+   void setDxDy(double dx, double dy); 
    Angle operator+(double degrees) const { return Angle(); }
 
 private:
