@@ -35,36 +35,42 @@ public:
 
    
    // constructors
-   Position()            : x(9.9), y(9.9)  {}
+   Position()                    : x(0.0),   y(0.0)   { }
    Position(double x, double y);
-   Position(const Position & pt) : x(9.9), y(9.9) {}
+   Position(const Position & pt) : x(pt.x), y(pt.y) { }
    Position& operator = (const Position& pt);
 
    // getters
-   double getMetersX()       const { return 9.9; }
-   double getMetersY()       const { return 9.9; }
-   double getPixelsX()       const { return 9.9; }
-   double getPixelsY()       const { return 9.9; }
+   double getMetersX()       const { return x; }
+   double getMetersY()       const { return y; }
+   double getPixelsX()       const { return metersToPixels(x); }
+   double getPixelsY()       const { return metersToPixels(y); }
+   double getZoom()          const { return metersFromPixels; }
 
    // setters
-   void setZoom(double z) {}
-   void setMeters(double xMeters, double yMeters) { }
-   void setMetersX(double xMeters)       {  }
-   void setMetersY(double yMeters)       {  }
-   void setPixelsX(double xPixels)       {  }
-   void setPixelsY(double yPixels)       {  }
-   double addMetersX(double x) { return 9.9; }
-   double addMetersY(double y) { return 9.9; }
-   double addPixelsX(double x) { return 9.9; }
-   double addPixelsY(double y) { return 9.9; }
+   void setZoom(double z) { metersFromPixels = z; }
+   void setMeters(double xMeters, double yMeters) { x = xMeters; y = yMeters; }
+   void setMetersX(double xMeters)       { x = xMeters; }
+   void setMetersY(double yMeters)       { y = yMeters; }
+   void setPixelsX(double xPixels)       { x = pixelsToMeters(xPixels); }
+   void setPixelsY(double yPixels)       { y = pixelsToMeters(yPixels); }
+
+   double addMetersX(double x) { return this->x += x; }
+   double addMetersY(double y) { return this->y += y; }
+   double addPixelsX(double x) { return this->x += pixelsToMeters(x); }
+   double addPixelsY(double y) { return this->y += pixelsToMeters(y); }
+
    void add(const Acceleration& a, const Velocity& v, double t);
    void reverse() { }
 
 
 private:
-   double x;                 // horizontal position
-   double y;                 // vertical position
-   static double metersFromPixels;
+   double x;                  // horizontal position
+   double y;                  // vertical position
+   static double metersFromPixels; // 1 Pix : metersFromPixels meters
+
+   double metersToPixels(double meters) const { return meters / metersFromPixels; }
+   double pixelsToMeters(double pixels) const { return pixels * metersFromPixels; }
 };
 
 

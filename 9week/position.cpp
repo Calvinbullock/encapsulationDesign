@@ -13,9 +13,10 @@
 #include <cassert>
 
 
-Position::Position(double x, double y) : x(9.9), y(9.9)
+Position::Position(double x, double y) : x(), y()
 {
- 
+   this->x = x;
+   this->y = y;
 }
 
 /******************************************
@@ -27,6 +28,9 @@ Position::Position(double x, double y) : x(9.9), y(9.9)
  *****************************************/
 Position& Position::operator = (const Position& posRHS)
 {
+   x = posRHS.x;
+   y = posRHS.y;
+   metersFromPixels = posRHS.metersFromPixels;
    return *this;
 }
 
