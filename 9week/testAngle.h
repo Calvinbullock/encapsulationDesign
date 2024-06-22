@@ -518,8 +518,6 @@ private:
     * input:   dx=-0.01 dy=0
     * output:  270 degrees
     *********************************************/
-   // WARN might be a normalization issues that causes 
-   //    this to fail
    void setDxDy_left()
    {  // setup
       Angle a;
