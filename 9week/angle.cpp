@@ -28,7 +28,7 @@ void Angle::setDxDy(double dx, double dy) {
    this->dx = dx; 
    this->dy = dy; 
 
-   radians = atan2(dx, dy);
+   radians = normalize(atan2(dx, dy));
 }
 
 /************************************
