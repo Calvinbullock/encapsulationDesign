@@ -2,7 +2,7 @@
  * Source File:
  *    POSITION
  * Author:
- *    <your name here>
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    Everything we need to know about a location on the screen.
  ************************************************************************/
@@ -13,9 +13,10 @@
 #include <cassert>
 
 
-Position::Position(double x, double y) : x(9.9), y(9.9)
+Position::Position(double x, double y) : x(), y()
 {
- 
+   this->x = x;
+   this->y = y;
 }
 
 /******************************************
@@ -27,6 +28,9 @@ Position::Position(double x, double y) : x(9.9), y(9.9)
  *****************************************/
 Position& Position::operator = (const Position& posRHS)
 {
+   x = posRHS.x;
+   y = posRHS.y;
+   metersFromPixels = posRHS.metersFromPixels;
    return *this;
 }
 
@@ -49,6 +53,8 @@ Position& Position::operator = (const Position& posRHS)
  *************************************************************************/
 void Position::add(const Acceleration& a, const Velocity& v, double t)
 {
+   x = x + v.getDX() * t + (0.5 * a.getDDX() * (t * t));
+   y = y + v.getDY() * t + (0.5 * a.getDDY() * (t * t));
 }
 
 
