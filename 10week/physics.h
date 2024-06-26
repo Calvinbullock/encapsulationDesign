@@ -2,7 +2,7 @@
  * Header File:
  *    PHYSICS
  * Author:
- *    <your name here>
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    Laws of motion, effects of gravity, wind resistence, etc.
  ************************************************************************/
