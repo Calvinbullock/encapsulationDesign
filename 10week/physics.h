@@ -14,6 +14,11 @@
 #include <math.h>
 #include <cassert>  // for ASSERT 
 
+#define SPEEDSOUNDFROMALTITUDEMAPLENGTH 20
+#define DENSITYFROMALTITUDEMAPLENGTH    20
+#define GRAVITYFROMALTITUDEMAPLENGTH    14
+#define DRAGFROMMACHMAPLENGTH           16
+
  /*******************************************************
   * AREA FROM RADIUS
   * Compute the area of a circle from the radius
@@ -133,4 +138,6 @@ double speedSoundFromAltitude(double altitude);
  *********************************************************/
 double dragFromMach(double speedMach);
 
+
+int linearSearch(double targetValue, Mapping list[], int listLength);
 

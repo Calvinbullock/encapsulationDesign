@@ -9,7 +9,7 @@
   
  #include "physics.h"  // for the prototypes
 
-Mapping densityFromAltitudeMap[20] = {
+Mapping densityFromAltitudeMap[DENSITYFROMALTITUDEMAPLENGTH] = {
    {0, 1.2250000},
    {1000, 1.1120000},
    {2000, 1.0070000},
@@ -32,7 +32,7 @@ Mapping densityFromAltitudeMap[20] = {
    {80000, 0.0000185},
 };
 
-Mapping speedSoundFromAltitudeMap[20] = {
+Mapping speedSoundFromAltitudeMap[SPEEDSOUNDFROMALTITUDEMAPLENGTH] = {
    {0, 340},
    {1000, 336},
    {2000, 332},
@@ -55,7 +55,7 @@ Mapping speedSoundFromAltitudeMap[20] = {
    {80000, 269}
 };
 
-Mapping dragFromMachMap[14] = {
+Mapping gravityFromAltitudeMap[GRAVITYFROMALTITUDEMAPLENGTH] = {
    {0.0, 9.807},
    {1000.0, 9.804},
    {2000.0, 9.801},
@@ -72,7 +72,7 @@ Mapping dragFromMachMap[14] = {
    {25000.0, 9.730}
 };
 
-Mapping gravityFromAltitudeMap[16] = {
+Mapping dragFromMachMap[DRAGFROMMACHMAPLENGTH] = {
    {0.300, 0.1629},
    {0.500, 0.1659},
    {0.700, 0.2031},
@@ -108,7 +108,8 @@ double linearInterpolation(const Mapping mapping[], int numMapping, double domai
  *********************************************************/
 double gravityFromAltitude(double altitude)
 {
-   return -99.9;
+   int mapIndex = linearSearch(altitude, gravityFromAltitudeMap, GRAVITYFROMALTITUDEMAPLENGTH);
+   return linearInterpolation(gravityFromAltitudeMap, mapIndex, altitude);
 }
 
 /*********************************************************
@@ -117,7 +118,8 @@ double gravityFromAltitude(double altitude)
  *********************************************************/
 double densityFromAltitude(double altitude)
 {
-   return -99.9;
+   int mapIndex = linearSearch(altitude, densityFromAltitudeMap, DENSITYFROMALTITUDEMAPLENGTH);
+   return linearInterpolation(densityFromAltitudeMap, mapIndex, altitude);
 }
 
 /*********************************************************
@@ -126,7 +128,8 @@ double densityFromAltitude(double altitude)
  ********************************************************/
 double speedSoundFromAltitude(double altitude)
 {
-   return -99.9;
+   int mapIndex = linearSearch(altitude, speedSoundFromAltitudeMap, SPEEDSOUNDFROMALTITUDEMAPLENGTH);
+   return linearInterpolation(speedSoundFromAltitudeMap, mapIndex, altitude);
 }
 
 
@@ -136,6 +139,31 @@ double speedSoundFromAltitude(double altitude)
  *********************************************************/
 double dragFromMach(double speedMach)
 {
-   return -99.9;
+   int mapIndex = linearSearch(speedMach, dragFromMachMap, DRAGFROMMACHMAPLENGTH);
+   return linearInterpolation(dragFromMachMap, mapIndex, speedMach);
+}
+
+
+/* ********************************************
+ * LINEAR SEARCH
+ *    Search a list for the value before the target
+ *
+ *    returns the index of the value, add one to get
+ *    the other pair
+ * ***************************************** */
+int linearSearch(double targetValue, Mapping list[], int listLength)
+{
+   for (int i = 0; i < listLength; i++)
+   {
+      // cout << "line, 100, " << list[i] << ", " << targetValue << endl;
+      if (targetValue >= list[i].domain && targetValue <= list[i + 1].domain)
+      {
+         return i;
+      }
+   }
+
+   // assert will fire if target not in list.
+   assert(false);
+   return -1;
 }
 
