@@ -703,7 +703,7 @@ private:
     *         d
     *********************************************************/
    void linearInterpolation_coordinatesOne()
-     {  // setup
+   {  // setup
       const Mapping mapping[] = 
       { // d    r
          {0.0, 0.0},   // mapping[0]
@@ -730,9 +730,20 @@ private:
     *         d
     *********************************************************/
    void linearInterpolation_coordinatesMiddle()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      const Mapping mapping[] = 
+      { // d    r
+         {0.0, 0.0},   // mapping[0]
+         {8.0, 8.0},   // mapping[1]
+      };
+      double d = 4;
+      double r = 4;  // output
+      // exercise
+      r = linearInterpolation(mapping, 2 /*numMapping*/, d);
+      // verify
+      assertEquals(d, 4.0);
+      assertEquals(r, 4.0);
+   }  // teardown
 
    /*********************************************************
     * LINEAR INTERPOLATION - coordinate version where (d,r) is near one
@@ -746,9 +757,20 @@ private:
     *         d
     *********************************************************/
    void linearInterpolation_coordinatesTop()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      const Mapping mapping[] = 
+      { // d    r
+         {0.0, 0.0},   // mapping[0]
+         {8.0, 8.0},   // mapping[2]
+      };
+      double d = 6;
+      double r = 6;  // output
+      // exercise
+      r = linearInterpolation(mapping, 2 /*numMapping*/, d);
+      // verify
+      assertEquals(d, 6.0);
+      assertEquals(r, 6.0);
+   }  // teardown
 
    /*********************************************************
     * LINEAR INTERPOLATION - coordinate version slope of line is negative
@@ -763,9 +785,20 @@ private:
     *         d
     *********************************************************/
    void linearInterpolation_coordinatesBackwards()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      const Mapping mapping[] = 
+      { // d    r
+         {1.0, 9.0},   // mapping[0]
+         {7.0, -3.0},   // mapping[2]
+      };
+      double d = 3;
+      double r = 5;  // output
+      // exercise
+      r = linearInterpolation(mapping, 2 /*numMapping*/, d);
+      // verify
+      assertEquals(d, 3.0);
+      assertEquals(r, 5.0);
+   }  // teardown
 
 
    /*****************************************************************
@@ -830,9 +863,22 @@ private:
     *       d
     *********************************************************/
    void linearInterpolation_mappingTwo()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      const Mapping mapping[] = 
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 7;
+      double r = 5;  // output
+      // exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+      // verify
+      assertEquals(d, 7.0);
+      assertEquals(r, 5.0);
+   }  // teardown
 
 
    /*********************************************************
@@ -850,9 +896,22 @@ private:
     *       d
     *********************************************************/
    void linearInterpolation_mappingMid01()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      const Mapping mapping[] = 
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 2;
+      double r = 2.5;  // output
+      // exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+      // verify
+      assertEquals(d, 2.0);
+      assertEquals(r, 2.5);
+   }  // teardown
 
 
    /*********************************************************
@@ -870,9 +929,22 @@ private:
     *       d
     *********************************************************/
    void linearInterpolation_mappingTop01()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      const Mapping mapping[] = 
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 2.8;
+      double r = 2.9;  // output
+      // exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+      // verify
+      assertEquals(d, 2.8);
+      assertEquals(r, 2.9);
+   }  // teardown
 
 
    /*********************************************************
@@ -890,9 +962,22 @@ private:
     *       d
     *********************************************************/
    void linearInterpolation_mappinglower23()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      const Mapping mapping[] = 
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 7.33333333;
+      double r = 5.5;  // output
+      // exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+      // verify
+      assertEquals(d, 7.33333333);
+      assertEquals(r, 5.5);
+   }  // teardown
 
 
    /*********************************************************
@@ -911,9 +996,22 @@ private:
     *       d
     *********************************************************/
    void linearInterpolation_mappingSmall()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      const Mapping mapping[] = 
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 0;
+      double r = 2;  // output
+      // exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+      // verify
+      assertEquals(d, 0);
+      assertEquals(r, 2);
+   }  // teardown
 
 
    /*********************************************************
@@ -932,9 +1030,22 @@ private:
     *       d
     *********************************************************/
    void linearInterpolation_mappingLarge()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      const Mapping mapping[] = 
+      { // d    r
+         {1.0, 2.0},   // mapping[0]
+         {3.0, 3.0},   // mapping[1]
+         {7.0, 5.0},   // mapping[2]
+         {8.0, 6.5}    // mapping[3]
+      };
+      double d = 50;
+      double r = 6.5;  // output
+      // exercise
+      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
+      // verify
+      assertEquals(d, 50);
+      assertEquals(r, 6.5);
+   }  // teardown
 
 
    /*****************************************************************
