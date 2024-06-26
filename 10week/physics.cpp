@@ -96,8 +96,10 @@ Mapping gravityFromAltitudeMap[16] = {
  * From a list of domains and ranges, linear interpolate
  *********************************************************/
 double linearInterpolation(const Mapping mapping[], int numMapping, double domain)
-{
-   return -99.9;
+{  
+   return linearInterpolation(mapping[numMapping].domain,mapping[numMapping].range, 
+                              mapping[numMapping+1].domain, mapping[numMapping+1].range, 
+                              domain);
 }
 
 /*********************************************************
