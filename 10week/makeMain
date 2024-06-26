@@ -8,13 +8,13 @@ CXX = g++
 CXXFLAGS = -O2 -Wall
 
 # Source files (cpp)
-SRCS = acceleration.cpp main.cpp test.cpp angle.cpp position.cpp velocity.cpp
+SRCS = acceleration.cpp main.cpp test.cpp angle.cpp position.cpp velocity.cpp physics.cpp
 
 # Object files (created from source files)
 OBJS = $(SRCS:.cpp=.o)
 
 # Header files (include for compilation)
-HDRS = acceleration.h testAcceleration.h testPosition.h velocity.h angle.h testAngle.h testVelocity.h position.h test.h unitTest.h
+HDRS = acceleration.h testAcceleration.h testPosition.h velocity.h angle.h testAngle.h testVelocity.h position.h test.h unitTest.h physics.h testPhysics.h
 
 # Linker flags (link with OpenGL and GLFW libraries)
 LDFLAGS = -lglut -lGL -lGLU -lGLEW
