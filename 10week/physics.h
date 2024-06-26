@@ -51,7 +51,7 @@ inline double forceFromDrag(double density, double drag,
  ************************************************************/
 inline double accelerationFromForce(double force, double mass)
 {
-   return force * mass;
+   return force / mass;
 }
 
 /***********************************************************
