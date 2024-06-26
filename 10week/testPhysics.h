@@ -676,9 +676,20 @@ private:
     *         d
     *********************************************************/
    void linearInterpolation_coordinatesZero()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      const Mapping mapping[] = 
+      { // d    r
+         {0.0, 0.0},   // mapping[0]
+         {8.0, 8.0},   // mapping[1]
+      };
+      double d = 0;
+      double r = 0;  // output
+      // exercise
+      r = linearInterpolation(mapping, 2 /*numMapping*/, d);
+      // verify
+      assertEquals(d, 0.0);
+      assertEquals(r, 0.0);
+   }  // teardown
 
    /*********************************************************
     * LINEAR INTERPOLATION - coordinate version where (d,r) is (d1,r1)
@@ -692,9 +703,20 @@ private:
     *         d
     *********************************************************/
    void linearInterpolation_coordinatesOne()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+     {  // setup
+      const Mapping mapping[] = 
+      { // d    r
+         {0.0, 0.0},   // mapping[0]
+         {8.0, 8.0},   // mapping[1]
+      };
+      double d = 8;
+      double r = 8;  // output
+      // exercise
+      r = linearInterpolation(mapping, 2 /*numMapping*/, d);
+      // verify
+      assertEquals(d, 8.0);
+      assertEquals(r, 8.0);
+   }  // teardown
 
    /*********************************************************
     * LINEAR INTERPOLATION - coordinate version where (d,r) is in middle
