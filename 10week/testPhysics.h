@@ -2,7 +2,7 @@
  * Header File:
  *    TEST PHYSICS
  * Author:
- *    <your name here>
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    All the automation for the physics functions
  ************************************************************************/
