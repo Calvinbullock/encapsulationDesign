@@ -95,10 +95,11 @@ Mapping dragFromMachMap[DRAGFROMMACHMAPLENGTH] = {
  * LINEAR INTERPOLATION
  * From a list of domains and ranges, linear interpolate
  *********************************************************/
-double linearInterpolation(const Mapping mapping[], int numMapping, double domain)
+double linearInterpolation(const Mapping mapping[], int mapLength, double domain)
 {  
-   return linearInterpolation(mapping[numMapping].domain,mapping[numMapping].range, 
-                              mapping[numMapping+1].domain, mapping[numMapping+1].range, 
+   int mapIndex = linearSearch(domain, gravityFromAltitudeMap, mapLength);
+   return linearInterpolation(mapping[mapIndex].domain,mapping[mapIndex].range, 
+                              mapping[mapIndex+1].domain, mapping[mapIndex+1].range, 
                               domain);
 }
 
@@ -108,8 +109,7 @@ double linearInterpolation(const Mapping mapping[], int numMapping, double domai
  *********************************************************/
 double gravityFromAltitude(double altitude)
 {
-   int mapIndex = linearSearch(altitude, gravityFromAltitudeMap, GRAVITYFROMALTITUDEMAPLENGTH);
-   return linearInterpolation(gravityFromAltitudeMap, mapIndex, altitude);
+   return linearInterpolation(gravityFromAltitudeMap, GRAVITYFROMALTITUDEMAPLENGTH, altitude);
 }
 
 /*********************************************************
@@ -118,8 +118,7 @@ double gravityFromAltitude(double altitude)
  *********************************************************/
 double densityFromAltitude(double altitude)
 {
-   int mapIndex = linearSearch(altitude, densityFromAltitudeMap, DENSITYFROMALTITUDEMAPLENGTH);
-   return linearInterpolation(densityFromAltitudeMap, mapIndex, altitude);
+   return linearInterpolation(densityFromAltitudeMap, DENSITYFROMALTITUDEMAPLENGTH, altitude);
 }
 
 /*********************************************************
@@ -128,8 +127,7 @@ double densityFromAltitude(double altitude)
  ********************************************************/
 double speedSoundFromAltitude(double altitude)
 {
-   int mapIndex = linearSearch(altitude, speedSoundFromAltitudeMap, SPEEDSOUNDFROMALTITUDEMAPLENGTH);
-   return linearInterpolation(speedSoundFromAltitudeMap, mapIndex, altitude);
+   return linearInterpolation(speedSoundFromAltitudeMap, SPEEDSOUNDFROMALTITUDEMAPLENGTH, altitude);
 }
 
 
@@ -139,8 +137,7 @@ double speedSoundFromAltitude(double altitude)
  *********************************************************/
 double dragFromMach(double speedMach)
 {
-   int mapIndex = linearSearch(speedMach, dragFromMachMap, DRAGFROMMACHMAPLENGTH);
-   return linearInterpolation(dragFromMachMap, mapIndex, speedMach);
+   return linearInterpolation(dragFromMachMap, DRAGFROMMACHMAPLENGTH, speedMach);
 }
 
 
