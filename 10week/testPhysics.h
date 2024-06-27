@@ -1183,15 +1183,13 @@ private:
      ********************************************************/
    void densityFromAltitude_80000()
    {  // setup
-      assertUnit(NOT_YET_IMPLEMENTED);
-      // WARN  b
-      /*double altitude = 80000;*/
-      /*double density = -999.999;*/
-      /*// exercise*/
-      /*density = densityFromAltitude(altitude);*/
-      /*// verify*/
-      /*assertEquals(altitude, 80000);*/
-      /*assertEquals(density,  0.0000185);*/
+      double altitude = 80000;
+      double density = -999.999;
+      // exercise
+      density = densityFromAltitude(altitude);
+      // verify
+      assertEquals(altitude, 80000);
+      assertEquals(density,  0.0000185);
    }  // teardown
 
     /*******************************************************
@@ -1217,15 +1215,13 @@ private:
      ********************************************************/
    void densityFromAltitude_43333()
    {  // setup
-      assertUnit(NOT_YET_IMPLEMENTED);
-      // WARN  
-      /*double altitude = 43333;*/
-      /*double density = -999.999;*/
-      /*// exercise*/
-      /*density = densityFromAltitude(altitude);*/
-      /*// verify*/
-      /*assertEquals(altitude, 43333);*/
-      /*assertEquals(density,  0.0030063);*/
+      double altitude = 43333;
+      double density = -999.999;
+      // exercise
+      density = densityFromAltitude(altitude);
+      // verify
+      assertEquals(altitude, 43333);
+      assertEquals(density,  0.0030063);
    }  // teardown
 
     /*******************************************************
@@ -1308,15 +1304,13 @@ private:
      ********************************************************/
    void speedSoundFromAltitude_80000()
    {  // setup
-      // WARN  broken
-      assertUnit(NOT_YET_IMPLEMENTED);
-      /*double altitude = 80000.0;*/
-      /*double speed = -99.99;*/
-      /*// exercise*/
-      /*speed = speedSoundFromAltitude(altitude);*/
-      /*// verify*/
-      /*assertEquals(altitude, 80000.0);*/
-      /*assertEquals(speed,    269.0);*/
+      double altitude = 80000.0;
+      double speed = -99.99;
+      // exercise
+      speed = speedSoundFromAltitude(altitude);
+      // verify
+      assertEquals(altitude, 80000.0);
+      assertEquals(speed,    269.0);
    }  // teardown
 
     /*******************************************************
@@ -1342,15 +1336,14 @@ private:
      ********************************************************/
    void speedSoundFromAltitude_43333()
    {  // setup
-      assertUnit(NOT_YET_IMPLEMENTED);
-      // WARN  broken
-      /*double altitude = 43333.0;*/
-      /*double speed = -99.99;*/
-      /*// exercise*/
-      /*speed = speedSoundFromAltitude(altitude);*/
-      /*// verify*/
-      /*assertEquals(altitude, 43333.0);*/
-      /*assertEquals(speed,    328.3329);*/
+      std::cout << "fubuki" << std::endl;
+      double altitude = 43333.0;
+      double speed = -99.99;
+      // exercise
+      speed = speedSoundFromAltitude(altitude);
+      // verify
+      assertEquals(altitude, 43333.0);
+      assertEquals(speed,    328.3329);
    }  // teardown
 
     /*******************************************************

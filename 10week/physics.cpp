@@ -7,7 +7,9 @@
  *    Laws of motion, effects of gravity, wind resistence, etc.
  ************************************************************************/
   
- #include "physics.h"  // for the prototypes
+#include "physics.h"  // for the prototypes
+#include <iostream>
+#include <ostream>
 
 Mapping densityFromAltitudeMap[DENSITYFROMALTITUDEMAPLENGTH] = {
    {0, 1.2250000},
@@ -32,7 +34,7 @@ Mapping densityFromAltitudeMap[DENSITYFROMALTITUDEMAPLENGTH] = {
    {80000, 0.0000185},
 };
 
-Mapping speedSoundFromAltitudeMap[SPEEDSOUNDFROMALTITUDEMAPLENGTH] = {
+Mapping speedSoundFromAltitudeMap[] = {
    {0, 340},
    {1000, 336},
    {2000, 332},
@@ -69,7 +71,13 @@ Mapping gravityFromAltitudeMap[GRAVITYFROMALTITUDEMAPLENGTH] = {
    {10000.0, 9.776},
    {15000.0, 9.761},
    {20000.0, 9.745},
-   {25000.0, 9.730}
+   {25000.0, 9.730},
+   {30000.0, 9.715},
+   {40000.0, 9.684},
+   {50000.0, 9.654},
+   {60000.0, 9.624},
+   {70000.0, 9.594},
+   {80000.0, 9.564},
 };
 
 Mapping dragFromMachMap[DRAGFROMMACHMAPLENGTH] = {
@@ -150,9 +158,10 @@ double dragFromMach(double speedMach)
  * ***************************************** */
 int linearSearch(double targetValue, Mapping list[], int listLength)
 {
+
    for (int i = 0; i < listLength; i++)
    {
-      // cout << "line, 100, " << list[i] << ", " << targetValue << endl;
+      //std::cout << "line, 155, " << list[i].domain << ",     " << targetValue << ",   " << i << std::endl;
       if (targetValue >= list[i].domain && targetValue <= list[i + 1].domain)
       {
          return i;

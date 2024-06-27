@@ -17,7 +17,7 @@
 // map array lengths
 #define SPEEDSOUNDFROMALTITUDEMAPLENGTH 20
 #define DENSITYFROMALTITUDEMAPLENGTH    20
-#define GRAVITYFROMALTITUDEMAPLENGTH    14
+#define GRAVITYFROMALTITUDEMAPLENGTH    20
 #define DRAGFROMMACHMAPLENGTH           16
 
  /*******************************************************
