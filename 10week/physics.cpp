@@ -8,8 +8,6 @@
  ************************************************************************/
   
 #include "physics.h"  // for the prototypes
-#include <iostream>
-#include <ostream>
 
 Mapping densityFromAltitudeMap[DENSITYFROMALTITUDEMAPLENGTH] = {
    {0, 1.2250000},
@@ -158,7 +156,6 @@ double dragFromMach(double speedMach)
  * ***************************************** */
 int linearSearch(double targetValue, Mapping list[], int listLength)
 {
-
    for (int i = 0; i < listLength; i++)
    {
       //std::cout << "line, 155, " << list[i].domain << ",     " << targetValue << ",   " << i << std::endl;
