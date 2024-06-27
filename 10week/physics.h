@@ -14,6 +14,7 @@
 #include <math.h>
 #include <cassert>  // for ASSERT 
 
+// map array lengths
 #define SPEEDSOUNDFROMALTITUDEMAPLENGTH 20
 #define DENSITYFROMALTITUDEMAPLENGTH    20
 #define GRAVITYFROMALTITUDEMAPLENGTH    14
