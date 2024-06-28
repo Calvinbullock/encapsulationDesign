@@ -1428,9 +1428,15 @@ private:
      * output: 0
      ********************************************************/
    void dragFromMach_000()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      double speedMach = 0.0;
+      double drag = 0.0;
+      // exercise
+      drag = dragFromMach(speedMach);
+      // verify
+      assertEquals(speedMach, 0.0);
+      assertEquals(drag,      0.0);
+   }  // teardown
 
     /*******************************************************
      * DRAG FROM MACH : top speed
@@ -1438,9 +1444,15 @@ private:
      * output: 0.2656
      ********************************************************/
    void dragFromMach_500()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      double speedMach = 5.0;
+      double drag = 0.2656;
+      // exercise
+      drag = dragFromMach(speedMach);
+      // verify
+      assertEquals(speedMach, 5.0);
+      assertEquals(drag,      0.2656);
+   }  // teardown
 
     /*******************************************************
      * DRAG FROM MACH : speed of sound
@@ -1448,9 +1460,15 @@ private:
      * output: 0.4258
      ********************************************************/
    void dragFromMach_100()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      double speedMach = 1.0;
+      double drag = 0.4258;
+      // exercise
+      drag = dragFromMach(speedMach);
+      // verify
+      assertEquals(speedMach, 1.0);
+      assertEquals(drag,      0.4258);
+   }  // teardown
 
     /*******************************************************
      * DRAG FROM MACH : halfway between 0.5 and 0.7
@@ -1458,9 +1476,15 @@ private:
      * output: 0.1845
      ********************************************************/
    void dragFromMach_060()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      double speedMach = 0.6;
+      double drag = 0.1845;
+      // exercise
+      drag = dragFromMach(speedMach);
+      // verify
+      assertEquals(speedMach, 0.6);
+      assertEquals(drag,      0.1845);
+   }  // teardown
 
     /*******************************************************
      * DRAG FROM MACH : one third between 0 and .3
@@ -1468,9 +1492,15 @@ private:
      * output: 0.0543
      ********************************************************/
    void dragFromMach_010()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+   {  // setup
+      double speedMach = 0.1;
+      double drag = 0.0543;
+      // exercise
+      drag = dragFromMach(speedMach);
+      // verify
+      assertEquals(speedMach, 0.1);
+      assertEquals(drag,      0.0543);
+   }  // teardown
 
     /*******************************************************
      * DRAG FROM MACH : random spot
