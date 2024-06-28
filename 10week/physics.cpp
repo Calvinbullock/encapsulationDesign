@@ -6,9 +6,10 @@
  * Summary:
  *    Laws of motion, effects of gravity, wind resistence, etc.
  ************************************************************************/
-  
-#include "physics.h"  // for the prototypes
 
+#include "physics.h" // for the prototypes
+
+// clang-format off
 Mapping densityFromAltitudeMap[DENSITYFROMALTITUDEMAPLENGTH] = {
    {0, 1.2250000},
    {1000, 1.1120000},
@@ -96,17 +97,19 @@ Mapping dragFromMachMap[DRAGFROMMACHMAPLENGTH] = {
    {2.890, 0.2306},
    {5.000, 0.2656}
 };
- 
- /*********************************************************
+// clang-format on
+
+/*********************************************************
  * LINEAR INTERPOLATION
  * From a list of domains and ranges, linear interpolate
  *********************************************************/
-double linearInterpolation(const Mapping mapping[], int mapLength, double domain)
-{  
-   int mapIndex = linearSearch( mapping, domain, mapLength);
-   return linearInterpolation(mapping[mapIndex].domain,mapping[mapIndex].range, 
-                              mapping[mapIndex+1].domain, mapping[mapIndex+1].range, 
-                              domain);
+double linearInterpolation(const Mapping mapping[], int mapLength,
+                           double domain)
+{
+   int mapIndex = linearSearch(mapping, domain, mapLength);
+   return linearInterpolation(mapping[mapIndex].domain, mapping[mapIndex].range,
+                              mapping[mapIndex + 1].domain,
+                              mapping[mapIndex + 1].range, domain);
 }
 
 /*********************************************************
@@ -115,7 +118,8 @@ double linearInterpolation(const Mapping mapping[], int mapLength, double domain
  *********************************************************/
 double gravityFromAltitude(double altitude)
 {
-   return linearInterpolation(gravityFromAltitudeMap, GRAVITYFROMALTITUDEMAPLENGTH, altitude);
+   return linearInterpolation(gravityFromAltitudeMap, 
+                              GRAVITYFROMALTITUDEMAPLENGTH, altitude);
 }
 
 /*********************************************************
@@ -124,7 +128,8 @@ double gravityFromAltitude(double altitude)
  *********************************************************/
 double densityFromAltitude(double altitude)
 {
-   return linearInterpolation(densityFromAltitudeMap, DENSITYFROMALTITUDEMAPLENGTH, altitude);
+   return linearInterpolation(densityFromAltitudeMap,
+                              DENSITYFROMALTITUDEMAPLENGTH, altitude);
 }
 
 /*********************************************************
@@ -133,9 +138,9 @@ double densityFromAltitude(double altitude)
  ********************************************************/
 double speedSoundFromAltitude(double altitude)
 {
-   return linearInterpolation(speedSoundFromAltitudeMap, SPEEDSOUNDFROMALTITUDEMAPLENGTH, altitude);
+   return linearInterpolation(speedSoundFromAltitudeMap,
+                              SPEEDSOUNDFROMALTITUDEMAPLENGTH, altitude);
 }
-
 
 /*********************************************************
  * DRAG FROM MACH
@@ -143,9 +148,9 @@ double speedSoundFromAltitude(double altitude)
  *********************************************************/
 double dragFromMach(double speedMach)
 {
-   return linearInterpolation(dragFromMachMap, DRAGFROMMACHMAPLENGTH, speedMach);
+   return linearInterpolation(dragFromMachMap, DRAGFROMMACHMAPLENGTH,
+                              speedMach);
 }
-
 
 /* ********************************************
  * LINEAR SEARCH
@@ -158,7 +163,6 @@ int linearSearch(const Mapping list[], double targetValue, int listLength)
 {
    for (int i = 0; i < listLength; i++)
    {
-      //std::cout << "line, 155, " << list[i].domain << ",     " << targetValue << ",   " << i << std::endl;
       if (targetValue >= list[i].domain && targetValue <= list[i + 1].domain)
       {
          return i;
@@ -169,4 +173,3 @@ int linearSearch(const Mapping list[], double targetValue, int listLength)
    // assert(false);
    return -1;
 }
-

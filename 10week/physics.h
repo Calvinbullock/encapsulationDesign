@@ -10,25 +10,22 @@
 #pragma once
 
 #include <cmath>
-#define _USE_MATH_DEFINES 
+#define _USE_MATH_DEFINES
+#include <cassert> // for ASSERT
 #include <math.h>
-#include <cassert>  // for ASSERT 
 
 // map array lengths
 #define SPEEDSOUNDFROMALTITUDEMAPLENGTH 20
-#define DENSITYFROMALTITUDEMAPLENGTH    20
-#define GRAVITYFROMALTITUDEMAPLENGTH    20
-#define DRAGFROMMACHMAPLENGTH           16
+#define DENSITYFROMALTITUDEMAPLENGTH 20
+#define GRAVITYFROMALTITUDEMAPLENGTH 20
+#define DRAGFROMMACHMAPLENGTH 16
 
- /*******************************************************
-  * AREA FROM RADIUS
-  * Compute the area of a circle from the radius
-  *    area = pi * radius ^ 2
-  ********************************************************/
-inline double areaFromRadius(double radius)
-{
-   return M_PI * (radius * radius);
-}
+/*******************************************************
+ * AREA FROM RADIUS
+ * Compute the area of a circle from the radius
+ *    area = pi * radius ^ 2
+ ********************************************************/
+inline double areaFromRadius(double radius) { return M_PI * (radius * radius); }
 
 /**********************************************************
  * FORCE FROM DRAG
@@ -40,8 +37,8 @@ inline double areaFromRadius(double radius)
  * This force is determined by
  *    force = 1/2 density drag area velocity ^ 2
  ************************************************************/
-inline double forceFromDrag(double density, double drag, 
-                            double radius, double velocity)
+inline double forceFromDrag(double density, double drag, double radius,
+                            double velocity)
 {
    return 0.5 * density * drag * areaFromRadius(radius) * (velocity * velocity);
 }
@@ -91,8 +88,7 @@ inline double velocityFromAcceleration(double acceleration, double time)
  * Thus:
  *   r  = r0 + (r1 - r0) (d - d0) / (d1 - d0)
  *********************************************************/
-inline double linearInterpolation(double d0, double r0,
-                                  double d1, double r1,
+inline double linearInterpolation(double d0, double r0, double d1, double r1,
                                   double d)
 {
    return r0 + (r1 - r0) * (d - d0) / (d1 - d0);
@@ -113,8 +109,8 @@ struct Mapping
  * LINEAR INTERPOLATION
  * From a list of domains and ranges, linear interpolate
  *********************************************************/
-double linearInterpolation(const Mapping mapping[], int mapLength, double domain);
-
+double linearInterpolation(const Mapping mapping[], int mapLength,
+                           double domain);
 
 /*********************************************************
  * GRAVITY FROM ALTITUDE
@@ -139,6 +135,4 @@ double speedSoundFromAltitude(double altitude);
  *********************************************************/
 double dragFromMach(double speedMach);
 
-
-int linearSearch(const Mapping list[], double targetValue,  int listLength);
-
+int linearSearch(const Mapping list[], double targetValue, int listLength);
