@@ -103,7 +103,7 @@ Mapping dragFromMachMap[DRAGFROMMACHMAPLENGTH] = {
  *********************************************************/
 double linearInterpolation(const Mapping mapping[], int mapLength, double domain)
 {  
-   int mapIndex = linearSearch(domain, gravityFromAltitudeMap, mapLength);
+   int mapIndex = linearSearch( mapping, domain, mapLength);
    return linearInterpolation(mapping[mapIndex].domain,mapping[mapIndex].range, 
                               mapping[mapIndex+1].domain, mapping[mapIndex+1].range, 
                               domain);
@@ -154,7 +154,7 @@ double dragFromMach(double speedMach)
  *    returns the index of the value, add one to get
  *    the other pair
  * ***************************************** */
-int linearSearch(double targetValue, Mapping list[], int listLength)
+int linearSearch(const Mapping list[], double targetValue, int listLength)
 {
    for (int i = 0; i < listLength; i++)
    {
@@ -166,7 +166,7 @@ int linearSearch(double targetValue, Mapping list[], int listLength)
    }
 
    // assert will fire if target not in list.
-   assert(false);
+   // assert(false);
    return -1;
 }
 

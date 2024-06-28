@@ -140,5 +140,5 @@ double speedSoundFromAltitude(double altitude);
 double dragFromMach(double speedMach);
 
 
-int linearSearch(double targetValue, Mapping list[], int listLength);
+int linearSearch(const Mapping list[], double targetValue,  int listLength);
 
