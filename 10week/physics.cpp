@@ -157,7 +157,7 @@ double dragFromMach(double speedMach)
  *    Search a list for the value before the target
  *
  *    returns the index of the value, add one to get
- *    the other pair
+ *    the other map pair for linear interpolation
  * ***************************************** */
 int linearSearch(const Mapping list[], double targetValue, int listLength)
 {

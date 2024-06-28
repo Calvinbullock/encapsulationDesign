@@ -135,4 +135,7 @@ double speedSoundFromAltitude(double altitude);
  *********************************************************/
 double dragFromMach(double speedMach);
 
+/*********************************************************
+ * Linear search through a Mapping List
+ ********************************************************/
 int linearSearch(const Mapping list[], double targetValue, int listLength);
