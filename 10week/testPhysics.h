@@ -1372,7 +1372,6 @@ private:
      ********************************************************/
    void speedSoundFromAltitude_43333()
    {  // setup
-      std::cout << "fubuki" << std::endl;
       double altitude = 43333.0;
       double speed = -99.99;
       // exercise

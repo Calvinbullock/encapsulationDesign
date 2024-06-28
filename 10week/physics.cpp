@@ -87,6 +87,7 @@ Mapping dragFromMachMap[DRAGFROMMACHMAPLENGTH] = {
    {0.920, 0.3010},
    {0.960, 0.3287},
    {0.980, 0.4002},
+   {0.0, 0.0},
    {1.000, 0.4258},
    {1.020, 0.4335},
    {1.060, 0.4483},
@@ -163,6 +164,8 @@ int linearSearch(const Mapping list[], double targetValue, int listLength)
 {
    for (int i = 0; i < listLength; i++)
    {
+      // look for a index with a value smaller then the target and 
+      //    index +1 value is greater then target
       if (targetValue >= list[i].domain && targetValue <= list[i + 1].domain)
       {
          return i;
@@ -170,6 +173,6 @@ int linearSearch(const Mapping list[], double targetValue, int listLength)
    }
 
    // assert will fire if target not in list.
-   // assert(false);
+   //assert(false);
    return -1;
 }
