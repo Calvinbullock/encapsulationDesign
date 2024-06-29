@@ -107,7 +107,24 @@ Mapping dragFromMachMap[DRAGFROMMACHMAPLENGTH] = {
 double linearInterpolation(const Mapping mapping[], int mapLength,
                            double domain)
 {
+   // find index value
    int mapIndex = linearSearch(mapping, domain, mapLength);
+
+   // index value outside map range
+   if (mapIndex == -1)
+   {
+      if (mapping[0].domain > domain)
+      {
+         // value below range
+         return mapping[0].range;
+      }
+      else if (mapping[mapLength - 1].domain < domain)
+      {
+         // value above range
+         return mapping[mapLength - 1].range;
+      }
+   }
+
    return linearInterpolation(mapping[mapIndex].domain, mapping[mapIndex].range,
                               mapping[mapIndex + 1].domain,
                               mapping[mapIndex + 1].range, domain);
@@ -119,7 +136,7 @@ double linearInterpolation(const Mapping mapping[], int mapLength,
  *********************************************************/
 double gravityFromAltitude(double altitude)
 {
-   return linearInterpolation(gravityFromAltitudeMap, 
+   return linearInterpolation(gravityFromAltitudeMap,
                               GRAVITYFROMALTITUDEMAPLENGTH, altitude);
 }
 
@@ -159,20 +176,18 @@ double dragFromMach(double speedMach)
  *
  *    returns the index of the value, add one to get
  *    the other map pair for linear interpolation
+ *    -1 if not in array.
  * ***************************************** */
 int linearSearch(const Mapping list[], double targetValue, int listLength)
 {
    for (int i = 0; i < listLength; i++)
    {
-      // look for a index with a value smaller then the target and 
+      // look for a index with a value smaller then the target and
       //    index +1 value is greater then target
       if (targetValue >= list[i].domain && targetValue <= list[i + 1].domain)
       {
          return i;
       }
    }
-
-   // assert will fire if target not in list.
-   //assert(false);
    return -1;
 }
