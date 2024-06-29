@@ -80,6 +80,7 @@ Mapping gravityFromAltitudeMap[GRAVITYFROMALTITUDEMAPLENGTH] = {
 };
 
 Mapping dragFromMachMap[DRAGFROMMACHMAPLENGTH] = {
+   {0.0, 0.0},
    {0.300, 0.1629},
    {0.500, 0.1659},
    {0.700, 0.2031},
@@ -87,7 +88,6 @@ Mapping dragFromMachMap[DRAGFROMMACHMAPLENGTH] = {
    {0.920, 0.3010},
    {0.960, 0.3287},
    {0.980, 0.4002},
-   {0.0, 0.0},
    {1.000, 0.4258},
    {1.020, 0.4335},
    {1.060, 0.4483},
