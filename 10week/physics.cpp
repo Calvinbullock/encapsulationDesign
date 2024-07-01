@@ -100,8 +100,8 @@ const Mapping dragFromMachMap[] = {
 };
 // clang-format on
 
-int arrayDensity( const Mapping array){
-   int arraySize = sizeof(array) / sizeof(array);
+int getArrayDensity( const Mapping array[]){
+   int arraySize = sizeof(array) / sizeof(array[0]);
    return arraySize;
 }
 
@@ -142,7 +142,7 @@ double linearInterpolation(const Mapping mapping[], int mapLength,
 double gravityFromAltitude(double altitude)
 {
    return linearInterpolation(gravityFromAltitudeMap,
-                              GRAVITYFROMALTITUDEMAPLENGTH, altitude);
+                              getArrayDensity(gravityFromAltitudeMap), altitude);
 }
 
 /*********************************************************
@@ -152,7 +152,7 @@ double gravityFromAltitude(double altitude)
 double densityFromAltitude(double altitude)
 {
    return linearInterpolation(densityFromAltitudeMap,
-                              DENSITYFROMALTITUDEMAPLENGTH, altitude);
+                              getArrayDensity(densityFromAltitudeMap), altitude);
 }
 
 /*********************************************************
@@ -162,7 +162,7 @@ double densityFromAltitude(double altitude)
 double speedSoundFromAltitude(double altitude)
 {
    return linearInterpolation(speedSoundFromAltitudeMap,
-                              SPEEDSOUNDFROMALTITUDEMAPLENGTH, altitude);
+                              getArrayDensity(speedSoundFromAltitudeMap), altitude);
 }
 
 /*********************************************************
@@ -171,7 +171,7 @@ double speedSoundFromAltitude(double altitude)
  *********************************************************/
 double dragFromMach(double speedMach)
 {
-   return linearInterpolation(dragFromMachMap, DRAGFROMMACHMAPLENGTH,
+   return linearInterpolation(dragFromMachMap, getArrayDensity(dragFromMachMap),
                               speedMach);
 }
 
