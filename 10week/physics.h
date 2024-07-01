@@ -14,11 +14,6 @@
 #include <cassert> // for ASSERT
 #include <math.h>
 
-// map array lengths
-#define SPEEDSOUNDFROMALTITUDEMAPLENGTH 20
-#define DENSITYFROMALTITUDEMAPLENGTH 20
-#define GRAVITYFROMALTITUDEMAPLENGTH 20
-#define DRAGFROMMACHMAPLENGTH 17
 
 /*******************************************************
  * AREA FROM RADIUS

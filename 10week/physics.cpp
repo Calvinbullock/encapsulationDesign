@@ -10,7 +10,7 @@
 #include "physics.h" // for the prototypes
 
 // clang-format off
-Mapping densityFromAltitudeMap[DENSITYFROMALTITUDEMAPLENGTH] = {
+const Mapping densityFromAltitudeMap[] = {
    {0, 1.2250000},
    {1000, 1.1120000},
    {2000, 1.0070000},
@@ -33,7 +33,7 @@ Mapping densityFromAltitudeMap[DENSITYFROMALTITUDEMAPLENGTH] = {
    {80000, 0.0000185},
 };
 
-Mapping speedSoundFromAltitudeMap[] = {
+const Mapping speedSoundFromAltitudeMap[] = {
    {0, 340},
    {1000, 336},
    {2000, 332},
@@ -56,7 +56,7 @@ Mapping speedSoundFromAltitudeMap[] = {
    {80000, 269}
 };
 
-Mapping gravityFromAltitudeMap[GRAVITYFROMALTITUDEMAPLENGTH] = {
+const Mapping gravityFromAltitudeMap[] = {
    {0.0, 9.807},
    {1000.0, 9.804},
    {2000.0, 9.801},
@@ -79,8 +79,8 @@ Mapping gravityFromAltitudeMap[GRAVITYFROMALTITUDEMAPLENGTH] = {
    {80000.0, 9.564},
 };
 
-Mapping dragFromMachMap[DRAGFROMMACHMAPLENGTH] = {
-   {0.0, 0.0},
+const Mapping dragFromMachMap[] = {
+   {0.0  , 0.0},
    {0.300, 0.1629},
    {0.500, 0.1659},
    {0.700, 0.2031},
@@ -99,6 +99,11 @@ Mapping dragFromMachMap[DRAGFROMMACHMAPLENGTH] = {
    {5.000, 0.2656}
 };
 // clang-format on
+
+int arrayDensity( const Mapping array){
+   int arraySize = sizeof(array) / sizeof(array);
+   return arraySize;
+}
 
 /*********************************************************
  * LINEAR INTERPOLATION
