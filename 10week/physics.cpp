@@ -70,7 +70,8 @@ double gravityFromAltitude(double altitude)
    };
    // clang-format on
 
-   int listSize = sizeof(gravityFromAltitudeMap) / sizeof(gravityFromAltitudeMap[0]);
+   int listSize = sizeof(gravityFromAltitudeMap) 
+               / sizeof(gravityFromAltitudeMap[0]);
    return linearInterpolation(gravityFromAltitudeMap, listSize, altitude);
 }
 
@@ -106,7 +107,8 @@ double densityFromAltitude(double altitude)
    };
    // clang-format on
 
-   int listSize = sizeof(densityFromAltitudeMap) / sizeof(densityFromAltitudeMap[0]);
+   int listSize = sizeof(densityFromAltitudeMap) 
+               / sizeof(densityFromAltitudeMap[0]);
    return linearInterpolation(densityFromAltitudeMap, listSize, altitude);
 }
 
@@ -141,7 +143,8 @@ double speedSoundFromAltitude(double altitude)
    };
    // clang-format on
 
-   int listSize = sizeof(speedSoundFromAltitudeMap) / sizeof(speedSoundFromAltitudeMap[0]);
+   int listSize = sizeof(speedSoundFromAltitudeMap) 
+               / sizeof(speedSoundFromAltitudeMap[0]);
    return linearInterpolation(speedSoundFromAltitudeMap, listSize, altitude);
 }
 
@@ -172,7 +175,7 @@ double dragFromMach(double speedMach)
       {5.000, 0.2656}
    };
    // clang-format on
-   
+
    int listSize = sizeof(dragFromMachMap) / sizeof(dragFromMachMap[0]);
    return linearInterpolation(dragFromMachMap, listSize, speedMach);
 }
