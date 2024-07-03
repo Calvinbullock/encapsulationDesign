@@ -63,7 +63,19 @@ private:
      *********************************************/
    void defaultConstructor()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      
+   
+      // setup
+      Angle a;
+      a.setDegrees(45);
+      // exercise
+      Howitzer h;
+      
+      // verify
+      assertEquals(h.elevation.radians, a.radians);
+      assertEquals(h.muzzleVelocity, 827.00 );
+      // teardown
+      
    }
 
    /*****************************************************************
@@ -78,8 +90,17 @@ private:
      * output:  pos=(0,0)
      *********************************************/
    void getPosition_zero()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      // exercise
+      h.position.y = 0;
+      h.position.x = 0;
+      
+      // verify
+      assertEquals(h.position.y, 0);
+      assertEquals(h.position.x, 0);
+
+      // teardown
    }
 
    /*********************************************
@@ -88,8 +109,17 @@ private:
      * output:  pos=(123.4, 567.8)
     *********************************************/
    void getPosition_middle()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      // exercise
+      h.position.y = 123.4;
+      h.position.x = 567.8;
+      
+      // verify
+      assertEquals(h.position.y, 123.4);
+      assertEquals(h.position.x, 567.8);
+
+      // teardown
    }
 
    /*********************************************
@@ -98,8 +128,16 @@ private:
      * output:  m=24.68
     *********************************************/
    void getMuzzleVelocity_slow()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+
+      // exercise
+      h.muzzleVelocity = 24.68;
+      
+      // verify
+      assertEquals(h.muzzleVelocity, 24.68);
+
+      // teardown
    }
 
    /*********************************************
@@ -108,8 +146,16 @@ private:
      * output:  m=827
     *********************************************/
    void getMuzzleVelocity_standard()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      
+      // exercise
+      h.muzzleVelocity = 827.00;
+      
+      // verify
+      assertEquals(h.muzzleVelocity, 827.00);
+
+      // teardown
    }
 
    /*********************************************
@@ -118,8 +164,16 @@ private:
      * output:  e=0
     *********************************************/
    void getElevation_up()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      
+      // exercise
+      h.elevation = 0;
+      
+      // verify
+      assertEquals(h.elevation.radians, 0);
+
+      // teardown
    }
 
    /*********************************************
@@ -128,8 +182,16 @@ private:
      * output:  e=0.4
     *********************************************/
    void getElevation_right()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      
+      // exercise
+      h.elevation = 0.4;
+      
+      // verify
+      assertEquals(h.elevation.radians, 0.4);
+
+      // teardown
    }
 
    /*********************************************
@@ -138,8 +200,16 @@ private:
      * output:  e=5.8
     *********************************************/
    void getElevation_left()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      
+      // exercise
+      h.elevation = 5.8;
+      
+      // verify
+      assertEquals(h.elevation.radians, 5.8);
+
+      // teardown
    }
 
    /*****************************************************************
@@ -154,8 +224,17 @@ private:
      * output:  0 <= x <= 9
      *********************************************/
    void generatePosition_small()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      
+      // exercise
+      h.position.x = 10;
+      h.position.y = 10;
+      
+      // verify
+      assert(0 <= h.position.x <= 9);
+
+      // teardown
    }
 
     /*********************************************
@@ -164,8 +243,17 @@ private:
     * output:  0 <= x <= 900
     *********************************************/
    void generatePosition_large()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      
+      // exercise
+      h.position.x = 1000;
+      h.position.y = 1000;
+      
+      // verify
+      assert(0 <= h.position.x <= 900);
+
+      // teardown
    }
 
    /*********************************************
