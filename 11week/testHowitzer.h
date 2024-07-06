@@ -186,7 +186,7 @@ private:
       Howitzer h;
       
       // exercise
-      h.elevation = 0.4;
+      h.elevation.radians = 0.4;
       
       // verify
       assertEquals(h.elevation.radians, 0.4);
@@ -204,7 +204,7 @@ private:
       Howitzer h;
       
       // exercise
-      h.elevation = 5.8;
+      h.elevation.radians = 5.8;
       
       // verify
       assertEquals(h.elevation.radians, 5.8);
@@ -262,8 +262,16 @@ private:
     * output:  h.elevation=0.6radians
     *********************************************/
    void raise_rightDown()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      h.elevation.radians = 0.5;
+      // exercise
+      h.raise(-0.1);
+      
+      // verify
+      assertEquals(h.elevation.radians, 0.6);
+
+      // teardown
    }
 
    /*********************************************
@@ -272,8 +280,16 @@ private:
     * output:  h.elevation=0.4radians
     *********************************************/
    void raise_rightUp()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      h.elevation.radians = 0.5;
+      // exercise
+      h.raise(0.1);
+      
+      // verify
+      assertEquals(h.elevation.radians, 0.4);
+
+      // teardown
    }
 
    /*********************************************
@@ -282,9 +298,17 @@ private:
     * output:  h.elevation=-0.6radians
     *********************************************/
    void raise_leftDown()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+    {  // setup
+      Howitzer h;
+      h.elevation.radians = -0.5;
+      // exercise
+      h.raise(-0.1);
+      
+      // verify
+      assertEquals(h.elevation.radians, -0.6);
+
+      // teardown
+    }
 
    /*********************************************
     * name:    RAISE to the left up
@@ -292,9 +316,17 @@ private:
     * output:  h.elevation=0.4radians
     *********************************************/
    void raise_leftUp()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+    {  // setup
+      Howitzer h;
+      h.elevation.radians = -0.5;
+      // exercise
+      h.raise(0.1);
+      
+      // verify
+      assertEquals(h.elevation.radians, -0.4);
+
+      // teardown
+    }
 
    /*********************************************
     * name:    ROTATE CLOCKWISE no wrapping
