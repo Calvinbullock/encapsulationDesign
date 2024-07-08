@@ -316,7 +316,7 @@ private:
     * output:  h.elevation=0.4radians
     *********************************************/
    void raise_leftUp()
-    {  // setup
+   {  // setup
       Howitzer h;
       h.elevation.radians = -0.5;
       // exercise
@@ -326,7 +326,7 @@ private:
       assertEquals(h.elevation.radians, -0.4);
 
       // teardown
-    }
+   }
 
    /*********************************************
     * name:    ROTATE CLOCKWISE no wrapping
@@ -334,8 +334,16 @@ private:
     * output:  h.elevation=1.53
     *********************************************/
    void rotate_clock()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      h.elevation.radians = 1.23;
+      // exercise
+      h.rotate(0.3);
+      
+      // verify
+      assertEquals(h.elevation.radians, 1.53);
+
+      // teardown
    }
 
    /*********************************************
@@ -344,8 +352,16 @@ private:
     * output:  h.elevation=0.93
     *********************************************/
    void rotate_counterClock()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      h.elevation.radians = 1.23;
+      // exercise
+      h.rotate(-0.3);
+      
+      // verify
+      assertEquals(h.elevation.radians, 0.93);
+
+      // teardown
    }
 
    /*********************************************
@@ -354,9 +370,18 @@ private:
     * output:  h.elevation=.1
     *********************************************/
    void rotate_wrapClock()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      h.elevation.radians = 6.1;
+      // exercise
+      h.rotate(0.2);
+      
+      // verify
+      assertEquals(h.elevation.radians, 0.1);
+
+      // teardown
    }
+
 
    /*********************************************
     * name:    ROTATE COUNTER CLOCKWISE WRAP BY 4PI
@@ -364,8 +389,16 @@ private:
     * output:  h.elevation=6.1
     *********************************************/
    void rotate_wrapCounterClock()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   {  // setup
+      Howitzer h;
+      h.elevation.radians = 0.1;
+      // exercise
+      h.rotate(-0.2);
+      
+      // verify
+      assertEquals(h.elevation.radians, 6.1);
+
+      // teardown
    }
 
    /*****************************************************************
