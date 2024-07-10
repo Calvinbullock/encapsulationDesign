@@ -2,7 +2,7 @@
  * Header File:
  *    TEST PROJECTILE
  * Author:
- *    <your name here>
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    All the unit tests for Projectile
  ************************************************************************/
@@ -10,8 +10,11 @@
 
 #pragma once
 
+#include "angle.h"
+#include "position.h"
 #include "projectile.h"
 #include "unitTest.h"
+#include "velocity.h"
 
 
 using namespace std;
@@ -61,7 +64,11 @@ private:
     *********************************************/
    void defaultConstructor()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      Projectile shell = Projectile();
+      
+      assertEquals(shell.mass, 46.7);
+      assertEquals(shell.radius, 0.077545);
+      assertUnit(NOT_YET_IMPLEMENTED); // TODO flight path
    }
 
    /*********************************************
@@ -71,7 +78,11 @@ private:
     *********************************************/
    void reset_empty()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      Projectile shell = Projectile(-99, -99);
+      
+      assertEquals(shell.mass, -99);
+      assertEquals(shell.radius, -99);
+      assertUnit(NOT_YET_IMPLEMENTED); // TODO flight path
    }
 
    /*********************************************
@@ -81,7 +92,11 @@ private:
     *********************************************/
    void reset_full()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      Projectile shell = Projectile(-99, -99);
+
+      assertEquals(shell.mass, -99);
+      assertEquals(shell.radius, -99);
+      assertUnit(NOT_YET_IMPLEMENTED); // TODO flight path
    }
 
 
@@ -98,7 +113,22 @@ private:
     *********************************************/
    void fire_right()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // set up
+      Projectile shell = Projectile();
+      Angle angle = Angle(90);
+      Position pos = Position(111, 222);
+      double muzVel = 100.0;
+      
+      // content
+      shell.fire(angle, pos, muzVel);
+      Projectile::PositionVelocityTime pvt = shell.flightPath.back();
+      double temp = 0.0;
+
+      assertEquals(pvt.pos.x, 111.0);
+      assertEquals(pvt.pos.y, 222.0);
+      assertEquals(pvt.v.dx, 100.0);
+      assertEquals(pvt.v.dy, 0.0);
+      assertEquals(pvt.t, 1);
    }
 
    /*********************************************
@@ -108,7 +138,21 @@ private:
     *********************************************/
    void fire_left()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // set up
+      Projectile shell = Projectile();
+      Angle angle = Angle(-90);
+      Position pos = Position(111, 222);
+      double muzVel = 100.0;
+
+      // content
+      shell.fire(angle, pos, muzVel);
+      Projectile::PositionVelocityTime pvt = shell.flightPath.back();
+
+      assertEquals(pvt.pos.x, 111);
+      assertEquals(pvt.pos.y, 222);
+      assertEquals(pvt.v.dx, -100);
+      assertEquals(pvt.v.dy, 0);
+      assertEquals(pvt.t, 1);
    }
 
    /*********************************************
@@ -118,7 +162,21 @@ private:
     *********************************************/
    void fire_up()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // set up
+      Projectile shell = Projectile();
+      Angle angle = Angle(0);
+      Position pos = Position(111, 222);
+      double muzVel = 100.0;
+
+      // content
+      shell.fire(angle, pos, muzVel);
+      Projectile::PositionVelocityTime pvt = shell.flightPath.back();
+
+      assertEquals(pvt.pos.x, 111);
+      assertEquals(pvt.pos.y, 222);
+      assertEquals(pvt.v.dx, 0.0);
+      assertEquals(pvt.v.dy, 100.0);
+      assertEquals(pvt.t, 1);
    }
 
    /*****************************************************************
