@@ -68,7 +68,7 @@ private:
       
       assertEquals(shell.mass, 46.7);
       assertEquals(shell.radius, 0.077545);
-      assertUnit(NOT_YET_IMPLEMENTED); // TODO flight path
+      assertUnit(shell.flightPath.empty());
    }
 
    /*********************************************
@@ -82,7 +82,7 @@ private:
       
       assertEquals(shell.mass, -99);
       assertEquals(shell.radius, -99);
-      assertUnit(NOT_YET_IMPLEMENTED); // TODO flight path
+      assertUnit(shell.flightPath.empty());
    }
 
    /*********************************************
@@ -96,7 +96,7 @@ private:
 
       assertEquals(shell.mass, -99);
       assertEquals(shell.radius, -99);
-      assertUnit(NOT_YET_IMPLEMENTED); // TODO flight path
+      assertUnit(shell.flightPath.empty());
    }
 
 
