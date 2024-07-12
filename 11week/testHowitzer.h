@@ -301,16 +301,13 @@ private:
 void raise_leftDown()
     {  // setup
       Howitzer h;
-      h.elevation.radians = -0.5; // -0.5 normalised in terms of pi : 1.84*M_PI
+      h.elevation.radians = 2*M_PI -0.5;
       
       // exercise
-      h.raise(-0.1); //-0.1 normalised in terms of pi : 1.98*M_PI
-
-      cout << fixed << setprecision(8) << 1.81*M_PI << " = " << h.elevation.radians << endl;
+      h.raise(2*M_PI -0.1);
 
       // verify
-      assertEquals(h.elevation.radians, 1.82*M_PI); //-0.6 normalised in terms of pi : 1.82*M_PI
-
+      assertEquals(h.elevation.radians, 2*M_PI-0.6);
       // teardown
    }
 
@@ -322,15 +319,13 @@ void raise_leftDown()
    void raise_leftUp()
    {  // setup
       Howitzer h;
-      h.elevation.radians = -0.5; // -0.5 normalised in terms of pi : 1.84*M_PI
-      Angle a;
+      h.elevation.radians = 2*M_PI -0.5;
 
       // exercise
-      h.raise(0.1); //-0.1 normalised in terms of pi : 0.032*M_PI
-      cout << fixed << setprecision(8) << 1.87*M_PI << " = " << h.elevation.radians << endl;
-      
+      h.raise(0.1);
+            
       // verify
-      assertEquals(h.elevation.radians, 1.87*M_PI); //-0.4 normalised in terms of pi : 1.87*M_PI
+      assertEquals(h.elevation.radians, 2*M_PI-0.4); 
 
       // teardown
    }
