@@ -12,6 +12,7 @@
 
 #include "howitzer.h"
 #include "unitTest.h"
+#include <iomanip>
 
 /*******************************
  * TEST HOWITZER
@@ -266,7 +267,7 @@ private:
       Howitzer h;
       h.elevation.radians = 0.5;
       // exercise
-      h.raise(-0.1);
+      h.raise(0.1);
       
       // verify
       assertEquals(h.elevation.radians, 0.6);
@@ -284,7 +285,7 @@ private:
       Howitzer h;
       h.elevation.radians = 0.5;
       // exercise
-      h.raise(0.1);
+      h.raise(-0.1);
       
       // verify
       assertEquals(h.elevation.radians, 0.4);
@@ -297,33 +298,39 @@ private:
     * input:   h.elevation=-0.5radians  raise(-0.1)
     * output:  h.elevation=-0.6radians
     *********************************************/
-   void raise_leftDown()
+void raise_leftDown()
     {  // setup
       Howitzer h;
-      h.elevation.radians = -0.5;
-      // exercise
-      h.raise(-0.1);
+      h.elevation.radians = -0.5; // -0.5 normalised in terms of pi : 1.84*M_PI
       
+      // exercise
+      h.raise(-0.1); //-0.1 normalised in terms of pi : 1.98*M_PI
+
+      cout << fixed << setprecision(8) << 1.81*M_PI << " = " << h.elevation.radians << endl;
+
       // verify
-      assertEquals(h.elevation.radians, -0.6);
+      assertEquals(h.elevation.radians, 1.82*M_PI); //-0.6 normalised in terms of pi : 1.82*M_PI
 
       // teardown
-    }
+   }
 
    /*********************************************
     * name:    RAISE to the left up
     * input:   h.elevation=-0.5radians  raise(0.1)
-    * output:  h.elevation=0.4radians
+    * output:  h.elevation=-0.4radians
     *********************************************/
    void raise_leftUp()
    {  // setup
       Howitzer h;
-      h.elevation.radians = -0.5;
+      h.elevation.radians = -0.5; // -0.5 normalised in terms of pi : 1.84*M_PI
+      Angle a;
+
       // exercise
-      h.raise(0.1);
+      h.raise(0.1); //-0.1 normalised in terms of pi : 0.032*M_PI
+      cout << fixed << setprecision(8) << 1.87*M_PI << " = " << h.elevation.radians << endl;
       
       // verify
-      assertEquals(h.elevation.radians, -0.4);
+      assertEquals(h.elevation.radians, 1.87*M_PI); //-0.4 normalised in terms of pi : 1.87*M_PI
 
       // teardown
    }
