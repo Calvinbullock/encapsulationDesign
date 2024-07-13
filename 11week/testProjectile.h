@@ -15,6 +15,8 @@
 #include "projectile.h"
 #include "unitTest.h"
 #include "velocity.h"
+#include <iostream>
+#include <ostream>
 
 
 using namespace std;
@@ -226,7 +228,7 @@ private:
       pvt.t = 100.0;
       p.flightPath.push_back(pvt);
       // exercise
-      //p.advance(101.0); // TODO 
+      p.advance(101.0);
       // verify
       assertUnit(p.flightPath.size() == 2);
       assertEquals(p.mass, 46.7);
@@ -242,9 +244,6 @@ private:
       }
       // teardown
       teardownStandardFixture();
-
-      // WARN 
-      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
    /*********************************************
@@ -270,7 +269,7 @@ private:
       pvt.t = 100.0;
       p.flightPath.push_back(pvt);
       // exercise
-      //p.advance(101.0); // TODO 
+      p.advance(101.0);
       // verify
       assertUnit(p.flightPath.size() == 2);
       assertEquals(p.mass, 46.7);
@@ -286,9 +285,6 @@ private:
       }
       // teardown
       teardownStandardFixture();
-
-      // WARN 
-      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
    /*********************************************
@@ -314,7 +310,7 @@ private:
       pvt.t = 100.0;
       p.flightPath.push_back(pvt);
       // exercise
-      //p.advance(101.0); // TODO 
+      p.advance(101.0);
       // verify
       assertUnit(p.flightPath.size() == 2);
       assertEquals(p.mass, 46.7);
@@ -330,9 +326,6 @@ private:
       }
       // teardown
       teardownStandardFixture();
-
-      // WARN 
-      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
    /*********************************************
@@ -358,7 +351,7 @@ private:
       pvt.t = 100.0;
       p.flightPath.push_back(pvt);
       // exercise
-      //p.advance(101.0); // TODO 
+      p.advance(101.0);
       // verify
       assertUnit(p.flightPath.size() == 2);
       assertEquals(p.mass, 46.7);
@@ -374,9 +367,6 @@ private:
       }
       // teardown
       teardownStandardFixture();
-
-      // WARN 
-      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
    /*********************************************
