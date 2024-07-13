@@ -41,33 +41,10 @@ public:
                                             radius(radius), 
                                             flightPath() {}
 
-   void fire(Angle angle, Position pos, double muzzleVelocity) 
-   {
-      double timeInterval = 1.0;
-      Acceleration accel = Acceleration();
-      PositionVelocityTime pvt = PositionVelocityTime();
-      
-      // set velocity
-      accel.set(angle, muzzleVelocity);
-      pvt.v.add(accel, timeInterval);
-
-      // set position 
-      pvt.pos.setPixelsX(pos.getPixelsX());
-      pvt.pos.setPixelsY(pos.getPixelsY());
-
-      pvt.t = timeInterval;
-      flightPath.push_back(pvt);
-   }
+   void fire(Angle angle, Position pos, double muzzleVelocity);
 
    // advance the round forward until the next unit of time
-   void advance(double simulationTime) 
-   {
-      /*// TODO  this needs work */
-      /*PositionVelocityTime pvt = PositionVelocityTime();*/
-      /*pvt.v.add(, simulationTime);*/
-      /*pvt.pos.add(accel, pvt.v, simulationTime);*/
-      /*pvt.t = simulationTime;*/
-   }
+   void advance(double simulationTime);
 
 private:
 
