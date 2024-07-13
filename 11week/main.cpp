@@ -30,6 +30,8 @@ void callBack(const Interface* pUI, void* p)
    Simulator* pSim = (Simulator*)p;
 
    ogstream gout;
+   pSim->draw(gout);
+
    Position pos(10,10);
    gout = pos;
    gout << "Hello world";
@@ -63,7 +65,6 @@ int main(int argc, char** argv)
 
    // Initialize the simulation.
    Simulator sim(posUpperRight);
-
 
    // set everything into action
    ui.run(callBack, (void *)&sim);
