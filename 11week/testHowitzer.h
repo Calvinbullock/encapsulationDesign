@@ -13,6 +13,7 @@
 #include "howitzer.h"
 #include "unitTest.h"
 #include <iomanip>
+#include <iostream>
 
 /*******************************
  * TEST HOWITZER
@@ -266,8 +267,9 @@ private:
    {  // setup
       Howitzer h;
       h.elevation.radians = 0.5;
+
       // exercise
-      h.raise(0.1);
+      h.raise(-0.1);
       
       // verify
       assertEquals(h.elevation.radians, 0.6);
@@ -284,8 +286,9 @@ private:
    {  // setup
       Howitzer h;
       h.elevation.radians = 0.5;
+
       // exercise
-      h.raise(-0.1);
+      h.raise(0.1);
       
       // verify
       assertEquals(h.elevation.radians, 0.4);
@@ -323,7 +326,7 @@ void raise_leftDown()
 
       // exercise
       h.raise(0.1);
-            
+
       // verify
       assertEquals(h.elevation.radians, 2*M_PI-0.4); 
 
@@ -376,12 +379,15 @@ void raise_leftDown()
       Howitzer h;
       h.elevation.radians = 6.1;
       // exercise
-      h.rotate(0.2);
+
+      h.rotate(.2);
       
       // verify
-      assertEquals(h.elevation.radians, 0.1);
+      assertEquals(h.elevation.radians, (6.3 -2*M_PI));
 
       // teardown
+      //  6.1 + 0.2 = 6.3
+      //  6.3 -2*pi = 0.0168146928204
    }
 
 
@@ -392,15 +398,20 @@ void raise_leftDown()
     *********************************************/
    void rotate_wrapCounterClock()
    {  // setup
+      double answer = .1+ (-.2 -4*M_PI);
+      answer += 6*M_PI;
       Howitzer h;
       h.elevation.radians = 0.1;
       // exercise
-      h.rotate(-0.2);
+      cout << answer << endl;
       
       // verify
-      assertEquals(h.elevation.radians, 6.1);
+      
+      assertEquals(h.elevation.radians, answer);
 
       // teardown
+      // .1+ (-.2 -4pi)      = 12.4663706144
+      // 12.6663706144 - 6pi = 6.18318530714 
    }
 
    /*****************************************************************

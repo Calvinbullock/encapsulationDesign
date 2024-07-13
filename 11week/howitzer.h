@@ -66,7 +66,7 @@ class Howitzer
       // raise (or lower) the howitzer
       void raise(double radian)
       {
-         elevation.add(elevation.isRight() ? -radian : radian);
+         elevation.add(elevation.isLeft() ? -radian : radian);
       }
 
       // get the elevation

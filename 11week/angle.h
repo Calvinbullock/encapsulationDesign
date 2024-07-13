@@ -62,8 +62,11 @@ public:
    // dy = cos a
    double getDx() { return dx = sin(radians); }
    double getDy() { return dy = cos(radians); }
-   bool   isRight()  const { return (radians == convertToRadians(180.0)); }
-   bool   isLeft()   const { return (radians == convertToRadians(270.0)); }
+   bool   isRight()  const { return (radians >= convertToRadians(180.0) &&
+                                     radians <= 2*M_PI); }
+
+   bool   isLeft()   const { return (radians >= convertToRadians(0.0  ) && 
+                                     radians <= convertToRadians(180.0)); }
 
    // Setters
    void setRadians(double radians) { this->radians = normalize(radians); }
