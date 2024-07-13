@@ -14,6 +14,15 @@
 #include <cassert> // for ASSERT
 #include <math.h>
 
+/* ********************************************
+ * PYTHAGOREAN THEOREM
+ *    Calculates the Pythagorean theorem
+ *    and returns the result
+ * ***************************************** */
+inline double pythagoreanTheorem(double dx, double dy)
+{
+   return sqrt((dx * dx) + (dy * dy));
+}
 
 /*******************************************************
  * AREA FROM RADIUS
