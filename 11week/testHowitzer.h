@@ -402,8 +402,9 @@ void raise_leftDown()
       answer += 6*M_PI;
       Howitzer h;
       h.elevation.radians = 0.1;
+      
       // exercise
-      cout << answer << endl;
+      h.rotate(-.2 - 4*M_PI);
       
       // verify
       
