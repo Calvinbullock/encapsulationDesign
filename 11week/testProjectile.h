@@ -206,6 +206,35 @@ private:
     *********************************************/
    void advance_fall()
    {
+      setupStandardFixture();
+      Position pos;
+      Projectile p;
+      Projectile::PositionVelocityTime pvt;
+      pvt.pos.x = 100.0;
+      pvt.pos.y = 200.0;
+      pvt.v.dx = 0.0;
+      pvt.v.dy = 0.0;
+      pvt.t = 100.0;
+      p.flightPath.push_back(pvt);
+      // exercise
+      //p.advance(101.0); // TODO 
+      // verify
+      assertUnit(p.flightPath.size() == 2);
+      assertEquals(p.mass, 46.7);
+      assertEquals(p.radius, 0.077545);
+      assertUnit(!p.flightPath.empty());
+      if (!p.flightPath.empty())
+      {
+         assertEquals(p.flightPath.back().pos.x, 100.0); // 100 + 0*1
+         assertEquals(p.flightPath.back().pos.y, 195.0968); // 200 + 0*1 + .5(-9.806)*1*1
+         assertEquals(p.flightPath.back().v.dx, 0.0);   // 0 + 0*1
+         assertEquals(p.flightPath.back().v.dy, -9.8);   // 0 + (-9.8064)*1
+         assertEquals(p.flightPath.back().t, 101.0);
+      }
+      // teardown
+      teardownStandardFixture();
+
+      // WARN 
       assertUnit(NOT_YET_IMPLEMENTED);
    }
 
@@ -220,6 +249,35 @@ private:
     *********************************************/
    void advance_horizontal()
    {
+      setupStandardFixture();
+      Position pos;
+      Projectile p;
+      Projectile::PositionVelocityTime pvt;
+      pvt.pos.x = 100.0;
+      pvt.pos.y = 200.0;
+      pvt.v.dx = 50.0;
+      pvt.v.dy = 0.0;
+      pvt.t = 100.0;
+      p.flightPath.push_back(pvt);
+      // exercise
+      //p.advance(101.0); // TODO 
+      // verify
+      assertUnit(p.flightPath.size() == 2);
+      assertEquals(p.mass, 46.7);
+      assertEquals(p.radius, 0.077545);
+      assertUnit(!p.flightPath.empty());
+      if (!p.flightPath.empty())
+      {
+         assertEquals(p.flightPath.back().pos.x, 149.9756); // 100 + 50*1 + .5(-0.0487)*1*1
+         assertEquals(p.flightPath.back().pos.y, 195.0968); // 200 + 0*1  + .5(-9.8064)*1*1
+         assertEquals(p.flightPath.back().v.dx, 49.9513);   // 50 + (-0.0487)*1
+         assertEquals(p.flightPath.back().v.dy, -9.8064);   // 0  + (-9.8064)*1
+         assertEquals(p.flightPath.back().t, 101.0);
+      }
+      // teardown
+      teardownStandardFixture();
+
+      // WARN 
       assertUnit(NOT_YET_IMPLEMENTED);
    }
 
@@ -234,6 +292,35 @@ private:
     *********************************************/
    void advance_up()
    {
+      setupStandardFixture();
+      Position pos;
+      Projectile p;
+      Projectile::PositionVelocityTime pvt;
+      pvt.pos.x = 100.0;
+      pvt.pos.y = 200.0;
+      pvt.v.dx = 0.0;
+      pvt.v.dy = 100.0;
+      pvt.t = 100.0;
+      p.flightPath.push_back(pvt);
+      // exercise
+      //p.advance(101.0); // TODO 
+      // verify
+      assertUnit(p.flightPath.size() == 2);
+      assertEquals(p.mass, 46.7);
+      assertEquals(p.radius, 0.077545);
+      assertUnit(!p.flightPath.empty());
+      if (!p.flightPath.empty())
+      {
+         assertEquals(p.flightPath.back().pos.x, 100.0);    // 0   + 0*1   + .5(0)*1*1*/
+         assertEquals(p.flightPath.back().pos.y, 294.9021); // 200 + 100*1 + .5(-9.8064-.3893)*1*1
+         assertEquals(p.flightPath.back().v.dx, 0.0);       // 0   + 0*1*/
+         assertEquals(p.flightPath.back().v.dy, 89.8042);   // 100 + (-9.8064-.3893)
+         assertEquals(p.flightPath.back().t, 101.0);
+      }
+      // teardown
+      teardownStandardFixture();
+
+      // WARN 
       assertUnit(NOT_YET_IMPLEMENTED);
    }
 
@@ -248,6 +335,35 @@ private:
     *********************************************/
    void advance_diagonalUp()
    {
+      setupStandardFixture();
+      Position pos;
+      Projectile p;
+      Projectile::PositionVelocityTime pvt;
+      pvt.pos.x = 100.0;
+      pvt.pos.y = 200.0;
+      pvt.v.dx = 50.0;
+      pvt.v.dy = 40.0;
+      pvt.t = 100.0;
+      p.flightPath.push_back(pvt);
+      // exercise
+      //p.advance(101.0); // TODO 
+      // verify
+      assertUnit(p.flightPath.size() == 2);
+      assertEquals(p.mass, 46.7);
+      assertEquals(p.radius, 0.077545);
+      assertUnit(!p.flightPath.empty());
+      if (!p.flightPath.empty())
+      {
+         assertEquals(p.flightPath.back().pos.x, 149.9600); // 100 + 50*1 + .5(-0.0799)*1*1
+         assertEquals(p.flightPath.back().pos.y, 235.0648); // 200 + 40*1 + .5(-9.8064-0.0638)*1*1
+         assertEquals(p.flightPath.back().v.dx, 49.9201);   // 50 + (-0.0799)*1
+         assertEquals(p.flightPath.back().v.dy, 30.1297);   // 30.1297  = 40 + (-9.8064-0.0638)*1
+         assertEquals(p.flightPath.back().t, 101.0);
+      }
+      // teardown
+      teardownStandardFixture();
+
+      // WARN 
       assertUnit(NOT_YET_IMPLEMENTED);
    }
 
