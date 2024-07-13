@@ -10,6 +10,7 @@
 
  #include "projectile.h"
  #include "angle.h"
+#include <iomanip>
  using namespace std;
 
 
@@ -46,9 +47,12 @@ void Projectile::advance(double simulationTime)
 {
    PositionVelocityTime currPvt = flightPath.back();
 
+   // BUG  the DRAG is off
    double airDensity = densityFromAltitude(currPvt.pos.getMetersY());
-   double totalVel = pythagoreanTheorem(currPvt.pos.getMetersX(), currPvt.pos.getMetersY());
-   double grav = gravityFromAltitude(currPvt.pos.getMetersY());
+   double totalVel = pythagoreanTheorem(
+      currPvt.pos.getMetersX(), 
+      currPvt.pos.getMetersY()
+   );
 
    // find drag
    double speedOfSound = speedSoundFromAltitude(currPvt.pos.getMetersY());
@@ -56,23 +60,38 @@ void Projectile::advance(double simulationTime)
    double drag = dragFromMach(mach);
 
    // find accel magnitude
-   double force = forceFromDrag(airDensity, drag, DEFAULT_PROJECTILE_RADIUS, totalVel);
-   double accelMangnitude = accelerationFromForce(force, DEFAULT_PROJECTILE_WEIGHT);
+   double force = forceFromDrag(
+      airDensity, 
+      drag, 
+      DEFAULT_PROJECTILE_RADIUS, 
+      totalVel
+   );
+
+   double accelMangnitude = accelerationFromForce(
+      force, 
+      DEFAULT_PROJECTILE_WEIGHT
+   );
 
    // get angle
-   Angle angle = Angle();
+   Angle angle;
    angle.setDxDy(currPvt.v.getDX(), currPvt.v.getDY());
 
    // calc ddx, ddy
-   // BUG  the ddx, ddy is wrong
-   Acceleration accel = Acceleration();
+   Acceleration accel;
    accel.set(angle, accelMangnitude);
-   accel.setDDY(accel.getDDY() - grav);
+
+   // get / use grav
+   double grav = gravityFromAltitude(currPvt.pos.getMetersY());
+   accel.addDDY(-grav);
 
    PositionVelocityTime pvt = PositionVelocityTime();
-   pvt.pos.add(accel, currPvt.v, simulationTime);
-   pvt.v.add(accel, simulationTime);
+   pvt.pos = Position(currPvt.pos.getMetersX(), currPvt.pos.getMetersY());
+
+   pvt.pos.add(accel, currPvt.v, simulationTime - currPvt.t);
+   pvt.v.add(accel, simulationTime - currPvt.t);
    pvt.t = simulationTime;
 
    flightPath.push_back(pvt);
 }
+
+
