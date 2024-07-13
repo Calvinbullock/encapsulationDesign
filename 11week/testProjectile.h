@@ -192,7 +192,16 @@ private:
     *********************************************/
    void advance_nothing()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      setupStandardFixture();
+      Position pos;
+      Projectile p;
+      // exercise
+      p.advance(0.0); // TODO 
+      // verify
+      assertUnit(p.flightPath.size() == 1);
+      // teardown
+      teardownStandardFixture();
    }
 
    /*********************************************
@@ -206,6 +215,7 @@ private:
     *********************************************/
    void advance_fall()
    {
+      // setup
       setupStandardFixture();
       Position pos;
       Projectile p;
@@ -249,6 +259,7 @@ private:
     *********************************************/
    void advance_horizontal()
    {
+      // setup
       setupStandardFixture();
       Position pos;
       Projectile p;
@@ -292,6 +303,7 @@ private:
     *********************************************/
    void advance_up()
    {
+      // setup
       setupStandardFixture();
       Position pos;
       Projectile p;
@@ -335,6 +347,7 @@ private:
     *********************************************/
    void advance_diagonalUp()
    {
+      // setup
       setupStandardFixture();
       Position pos;
       Projectile p;
