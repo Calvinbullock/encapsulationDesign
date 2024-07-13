@@ -194,10 +194,9 @@ private:
    {
       // setup
       setupStandardFixture();
-      Position pos;
       Projectile p;
       // exercise
-      p.advance(0.0); // TODO 
+      p.advance(0.0);
       // verify
       assertUnit(p.flightPath.size() == 1);
       // teardown
