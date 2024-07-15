@@ -26,8 +26,8 @@ public:
                                                howitzer() 
    {
       ground = Ground(posUpperRight);
-      howitzer.generatePosition(posUpperRight);
       howitzer = Howitzer();
+      howitzer.generatePosition(posUpperRight);
    }
 
    void draw(ogstream &gout) 
