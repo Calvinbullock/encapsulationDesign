@@ -32,6 +32,15 @@ void callBack(const Interface* pUI, void* p)
    ogstream gout;
    pSim->draw(gout);
 
+   pSim->howizerControls(pUI);
+
+   if (pUI->isSpace())
+      pSim->fireProjectile();
+
+   // pSim->advanceProjectile(); // WARN borks display
+
+
+      
    // Position pos(10,10);
    // gout = pos;
    // gout << "Hello world";

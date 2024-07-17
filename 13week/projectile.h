@@ -39,12 +39,28 @@ public:
 
    Projectile(double mass, double radius) : mass(mass), 
                                             radius(radius), 
-                                            flightPath() {}
+                                            flightPath(),
+                                            isFlying(false)
+                                          {}
 
    void fire(Angle angle, Position pos, double muzzleVelocity);
 
    // advance the round forward until the next unit of time
    void advance(double simulationTime);
+
+   bool getIsFlying()
+   {
+      return isFlying;
+   }
+
+   void draw(ogstream & gout)
+   {
+      for (PositionVelocityTime pvt : flightPath)
+      {
+         gout.drawProjectile(pvt.pos);
+      }
+   }
+
 
 private:
 
@@ -63,4 +79,5 @@ private:
    double mass;           // weight of the M795 projectile. Defaults to 46.7 kg
    double radius;         // radius of M795 projectile. Defaults to 0.077545 m
    std::list<PositionVelocityTime> flightPath;
+   bool isFlying;
 };

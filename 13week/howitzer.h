@@ -45,6 +45,11 @@ class Howitzer
             flightTime);
       }
 
+      void setPosition(Position& position){
+         this->position.setPixelsX(position.getPixelsX());
+         this->position.setPixelsY(position.getPixelsY());
+      }
+
       // where is the howitzer at right now?
       Position & getPosition() { return position; }
 
