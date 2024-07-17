@@ -26,6 +26,8 @@ public:
                                                howitzer() 
    {
       ground = Ground(posUpperRight);
+      ground.reset(howitzer.getPosition());
+
       howitzer = Howitzer();
       howitzer.generatePosition(posUpperRight);
    }
