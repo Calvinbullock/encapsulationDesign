@@ -80,11 +80,17 @@ public:
    void setRight() { radians = normalize(convertToRadians(90.0)); }
    void setLeft() { radians = normalize(convertToRadians(270.0)); }
 
-   void reverse() { radians = TWO_PI - fmod(radians, TWO_PI); }
+   void reverse() { radians = fmod(radians + M_PI, M_PI * 2); }
    Angle &add(double delta)
    {
       radians = normalize(radians + delta);
       return *this;
+   }
+   Angle operator- () const
+   {
+      Angle a(*this);
+      a.reverse();
+      return a;
    }
 
    // set based on the components

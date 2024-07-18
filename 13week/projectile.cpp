@@ -8,10 +8,10 @@
  ************************************************************************/
 
 
- #include "projectile.h"
- #include "angle.h"
-#include <iomanip>
- using namespace std;
+#include "projectile.h"
+#include "acceleration.h"
+#include "angle.h"
+using namespace std;
 
 
 /*********************************************
@@ -45,50 +45,35 @@ void Projectile::fire(Angle angle, Position pos, double muzzleVelocity)
 *********************************************/
 void Projectile::advance(double simulationTime) 
 {
-   PositionVelocityTime currPvt = flightPath.back();
+   // get the last point, speed and time interval
+   PositionVelocityTime pvt = flightPath.back();
+   double speed      = pvt.v.getSpeed();
+   double altitude   = pvt.pos.getMetersY();
+   double interval   = simulationTime - pvt.t;
 
    // BUG  the DRAG is off
-   double airDensity = densityFromAltitude(currPvt.pos.getMetersY());
-   double totalVel = pythagoreanTheorem(
-      currPvt.pos.getMetersX(), 
-      currPvt.pos.getMetersY()
-   );
+   // Find acceleration due to wind resistance. 
+   double airDensity    = densityFromAltitude(altitude);
+   double speedOfSound  = speedSoundFromAltitude(altitude);
+   double mach          = speed / speedOfSound;
+   double drag          = dragFromMach(mach);
+   double windRes       = forceFromDrag(airDensity, drag, DEFAULT_PROJECTILE_RADIUS, speed);
+   double accelMangnitude = accelerationFromForce(windRes, DEFAULT_PROJECTILE_WEIGHT);
+   Acceleration windAccel;
+   windAccel.set(-pvt.v.getAngle(), accelMangnitude);
 
-   // find drag
-   double speedOfSound = speedSoundFromAltitude(currPvt.pos.getMetersY());
-   double mach = totalVel / speedOfSound;
-   double drag = dragFromMach(mach);
+   // Find acceleration due to gravity
+   double grav = gravityFromAltitude(altitude);
+   Angle gravAngle;
+   gravAngle.setDown();
+   Acceleration gravAccel;
+   gravAccel.set(gravAngle, grav);
 
-   // find accel magnitude
-   double force = forceFromDrag(
-      airDensity, 
-      drag, 
-      DEFAULT_PROJECTILE_RADIUS, 
-      totalVel
-   );
+   Acceleration totalAccel = gravAccel + windAccel;
 
-   double accelMangnitude = accelerationFromForce(
-      force, 
-      DEFAULT_PROJECTILE_WEIGHT
-   );
-
-   // get angle
-   Angle angle;
-   angle.setDxDy(currPvt.v.getDX(), currPvt.v.getDY());
-
-   // calc ddx, ddy
-   Acceleration accel;
-   accel.set(angle, accelMangnitude);
-
-   // get / use grav
-   double grav = gravityFromAltitude(currPvt.pos.getMetersY());
-   accel.addDDY(-grav);
-
-   PositionVelocityTime pvt = PositionVelocityTime();
-   pvt.pos = Position(currPvt.pos.getMetersX(), currPvt.pos.getMetersY());
-
-   pvt.pos.add(accel, currPvt.v, simulationTime - currPvt.t);
-   pvt.v.add(accel, simulationTime - currPvt.t);
+   // update pvt
+   pvt.pos.add(totalAccel, pvt.v, interval);
+   pvt.v.add(totalAccel, interval);
    pvt.t = simulationTime;
 
    flightPath.push_back(pvt);

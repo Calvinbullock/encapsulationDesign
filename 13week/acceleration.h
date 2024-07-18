@@ -47,6 +47,13 @@ public:
    void addDDY(double ddy)           { this->ddy += ddy; }
    void add(const Acceleration& rhs);
 
+   Acceleration& operator+ (const Acceleration& rhs) 
+   {
+      ddx = rhs.ddx + this->ddx;
+      ddy = rhs.ddy + this->ddy;
+      return *this;
+   }
+
 private:
    double ddx;     // horizontal acceleration
    double ddy;     // vertical acceleration
