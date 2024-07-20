@@ -95,7 +95,7 @@ bool Projectile::checkImpact(double groundY)
 }
 
 /*********************************************
- * CHECKTARGETIMPACT
+ * CHECK TARGET IMPACT
  * Checks if the target has been hit.
  *********************************************/
 bool Projectile::checkTargetImpact(Position targetPos)
