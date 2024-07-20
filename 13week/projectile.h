@@ -48,16 +48,42 @@ public:
    // advance the round forward until the next unit of time
    void advance(double simulationTime);
 
+   // checks if the projectile has hit the ground
+   bool checkImpact(double groundY) 
+   {
+      PositionVelocityTime pvt = flightPath.back();
+      if (groundY >= pvt.pos.getMetersY()) 
+         isFlying = false;
+
+      return isFlying;
+   }
+
    bool getIsFlying()
    {
       return isFlying;
    }
 
+   Position getPojectilePosition()
+   {
+      PositionVelocityTime pvt = flightPath.back();
+      return pvt.pos;
+   }
+   
+   double getPojectileSpeed() 
+   {
+      PositionVelocityTime pvt = flightPath.back();
+      return pvt.v.getSpeed();
+   }
+
    void draw(ogstream & gout)
    {
-      for (PositionVelocityTime pvt : flightPath)
+      PositionVelocityTime pvt = flightPath.back();
+      double age = 0.0;
+         
+      for (auto it = flightPath.rbegin(); it != flightPath.rend(); ++it)
       {
-         gout.drawProjectile(pvt.pos);
+         gout.drawProjectile(it->pos, age);
+         age += .25;
       }
    }
 

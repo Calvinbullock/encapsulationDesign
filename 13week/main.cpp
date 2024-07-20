@@ -30,20 +30,23 @@ void callBack(const Interface* pUI, void* p)
    Simulator* pSim = (Simulator*)p;
 
    ogstream gout;
-   pSim->draw(gout);
 
    pSim->howizerControls(pUI);
-
-   if (pUI->isSpace())
+   
+   if (pUI->isSpace() && !pSim->isProjectileFlying())
       pSim->fireProjectile();
 
-   // pSim->advanceProjectile(); // WARN borks display
 
+   if (pUI->isQ())
+      pSim->fireProjectile();
 
+   pSim->advanceProjectile();
+
+   pSim->draw(gout);
       
-   // Position pos(10,10);
-   // gout = pos;
-   // gout << "Hello world";
+   Position pos(690, 490);
+   gout = pos;
+   gout << pSim->getStatDisplay();
 }
 
 double Position::metersFromPixels = 40.0;

@@ -22,6 +22,8 @@ using namespace std;
 *********************************************/
 void Projectile::fire(Angle angle, Position pos, double muzzleVelocity) 
 {
+   isFlying = true;
+
    double timeInterval = 1.0;
    Acceleration accel = Acceleration();
    PositionVelocityTime pvt = PositionVelocityTime();

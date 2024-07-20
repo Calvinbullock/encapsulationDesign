@@ -39,5 +39,4 @@ public:
 private:
    Ground ground;
    Howitzer howitzer;
-
 };
