@@ -15,6 +15,7 @@
 #include "uiDraw.h"
 #include "uiInteract.h" // for INTERFACE
 #include <cmath>
+#include <iomanip>
 #include <iostream>
 #include <string>
 
@@ -57,13 +58,13 @@ public:
 
       if (shell.getIsFlying())
       {
-         return "Distance: " + std::to_string(shellPos.getMetersX()) +
+         return "Distance: " + truncateString(shellPos.getMetersX(), 1) +
                 " m/sec\nHeight:    " +
-                std::to_string(round(shellPos.getMetersY(), 1)) +
-                " m/sec\nSpeed:    " + std::to_string(shellSpeed) + " m/sec";
+                truncateString(shellPos.getMetersY(), 1) +
+                " m/sec\nSpeed:    " + truncateString(shellSpeed, 1) + " m/sec";
       }
 
-      return "Elevation: " + std::to_string(elevation.getDegrees()) +
+      return "Elevation: " + truncateString(elevation.getDegrees(), 1) +
              " degrees";
    }
 
@@ -112,10 +113,20 @@ public:
    bool isProjectileFlying() { return shell.getIsFlying(); }
 
 private:
-   double round(double value, int desiredPrecision)
+   std::string truncateString(double value, int precision)
    {
-      return static_cast<int>(value * std::pow(10, desiredPrecision)) /
-             std::pow(10, desiredPrecision);
+      std::string num = std::to_string(value);
+
+      for (int i = 0; i < num.length(); i++)
+      {
+         if (num[i] == '.')
+         {
+            i += precision + 1;
+            return num.erase(i);
+         }
+      }
+
+      return num;
    }
 
    Ground ground;
