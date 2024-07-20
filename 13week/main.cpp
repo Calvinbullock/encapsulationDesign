@@ -37,7 +37,7 @@ void callBack(const Interface* pUI, void* p)
       pSim->fireProjectile(gout);
 
    if (pUI->isQ())
-      pSim->reset();
+      pSim->resetProjectile();
 
    pSim->advanceProjectile();
 
@@ -46,6 +46,10 @@ void callBack(const Interface* pUI, void* p)
    Position pos(20000, 18000);
    gout = pos;
    gout << pSim->getStatDisplay();
+
+   if (pSim->isTargetHit()) {
+       pSim->resetSim();
+    }
 }
 
 double Position::metersFromPixels = 40.0;
