@@ -2,7 +2,7 @@
  * Suurce File:
  *    SIMULATION
  * Author:
- *    <your name here>
+ *    Calvin, Hyrum Bullock
  * Summary:
  *    Execute one simulation of a projectile being fired.
  ************************************************************************/

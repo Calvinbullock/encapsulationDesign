@@ -19,7 +19,7 @@
 #include <iostream>
 #include <string>
 
-#define SIMTIME .2 // mili-seconds
+#define SIMTIME .5 // mili-seconds
 
 /*********************************************
  * Simulation
