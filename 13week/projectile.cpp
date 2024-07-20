@@ -82,7 +82,7 @@ void Projectile::advance(double simulationTime)
 }
 
 /*********************************************
- * CHECKIMPACT
+ * CHECK IMPACT
  * Checks if the projectile hits the ground
  *********************************************/
 bool Projectile::checkImpact(double groundY)
@@ -102,7 +102,7 @@ bool Projectile::checkTargetImpact(Position targetPos)
 {
    PositionVelocityTime pvt = flightPath.back();
    if (targetPos.getMetersX() >= pvt.pos.getMetersX() &&
-       targetPos.getMetersX() + 5 <= pvt.pos.getMetersX() && !isFlying)
+       targetPos.getMetersX() + 10 <= pvt.pos.getMetersX() && !isFlying)
       return true;
 
    return false;

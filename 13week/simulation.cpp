@@ -75,7 +75,9 @@ void Simulator::advanceProjectile()
    // check if shell has impacted ground
    Position pos = shell.getPojectilePosition();
    double groundY = ground.getElevationMeters(pos);
-   shell.checkImpact(groundY);
+    if (!shell.checkImpact(groundY))
+      resetProjectile();
+
 }
 
 /*********************************************
@@ -85,16 +87,16 @@ void Simulator::advanceProjectile()
 void Simulator::howizerControls(const Interface *pUI)
 {
    if (pUI->isRight())
-      howitzer.rotate(0.04);
+      howitzer.rotate(0.02);
 
    if (pUI->isLeft())
-      howitzer.rotate(-0.04);
+      howitzer.rotate(-0.02);
 
    if (pUI->isDown())
-      howitzer.raise(-0.01);
+      howitzer.raise(-0.001);
 
    if (pUI->isUp())
-      howitzer.raise(0.01);
+      howitzer.raise(0.001);
 }
 
 /*********************************************

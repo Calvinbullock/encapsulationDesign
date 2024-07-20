@@ -44,8 +44,8 @@ public:
 
    void draw(ogstream &gout)
    {
-      ground.draw(gout);
       shell.draw(gout);
+      ground.draw(gout);
       howitzer.draw(gout, 3);
    }
 
