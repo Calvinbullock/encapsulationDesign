@@ -57,7 +57,8 @@ public:
    bool checkImpact(double groundY) 
    {
       PositionVelocityTime pvt = flightPath.back();
-      if (groundY >= pvt.pos.getMetersY()) 
+
+      if (groundY >= pvt.pos.getMetersY() && pvt.t > 5) 
          isFlying = false;
 
       return isFlying;

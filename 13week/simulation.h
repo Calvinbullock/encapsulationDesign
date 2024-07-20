@@ -48,7 +48,11 @@ public:
       shell.draw(gout);
    }
 
-   void reset() { shell.reset(); }
+   void reset() 
+   { 
+      shell.reset(); 
+      simTime = 0;
+   }
 
    std::string getStatDisplay()
    {
