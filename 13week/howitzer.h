@@ -38,11 +38,11 @@ class Howitzer
       Howitzer() : muzzleVelocity(DEFAULT_MUZZLE_VELOCITY), elevation(45.0) {}
 
       // draw
-      void draw(ogstream& gout, double flightTime) const
+      void draw(ogstream& gout, double flashAge) const
       {
          gout.drawHowitzer(position,
             elevation.getRadians(),
-            flightTime);
+            flashAge);
       }
 
       void setPosition(Position& position){

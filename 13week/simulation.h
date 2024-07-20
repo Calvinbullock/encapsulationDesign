@@ -14,10 +14,11 @@
 #include "projectile.h"
 #include "uiDraw.h"
 #include "uiInteract.h" // for INTERFACE
+#include <cmath>
 #include <iostream>
 #include <string>
 
-#define SIMTIME .3 // mili-seconds
+#define SIMTIME .2 // mili-seconds
 
 /*********************************************
  * Simulation
@@ -42,38 +43,43 @@ public:
    void draw(ogstream &gout)
    {
       ground.draw(gout);
-      howitzer.draw(gout, 0.0);
+      howitzer.draw(gout, 3);
       shell.draw(gout);
    }
-   
-   std::string getStatDisplay() 
+
+   void reset() { shell.reset(); }
+
+   std::string getStatDisplay()
    {
-      Angle elevation   = howitzer.getElevation();
+      Angle elevation = howitzer.getElevation();
       Position shellPos = shell.getPojectilePosition();
       double shellSpeed = shell.getPojectileSpeed();
 
       if (shell.getIsFlying())
       {
-         return "Pos: (" + std::to_string(shellPos.getMetersX()) + ", " + std::to_string(shellPos.getMetersY()) + ")\nSpeed: " + std::to_string(shellSpeed);
+         return "Distance: " + std::to_string(shellPos.getMetersX()) +
+                " m/sec\nHeight:    " +
+                std::to_string(round(shellPos.getMetersY(), 1)) +
+                " m/sec\nSpeed:    " + std::to_string(shellSpeed) + " m/sec";
       }
-      
-      return "Elevation: " + std::to_string(elevation.getDegrees());
 
+      return "Elevation: " + std::to_string(elevation.getDegrees()) +
+             " degrees";
    }
 
-   void fireProjectile()
+   void fireProjectile(ogstream &gout)
    {
       Position pos = howitzer.getPosition();
       Angle a = howitzer.getElevation();
 
-      //pos.setPixelsX(pos.getPixelsX() + 5);
-      //pos.setMetersY(pos.getMetersY() + .3);
+      // pos.setPixelsX(pos.getPixelsX() + 5);
+      // pos.setMetersY(pos.getMetersY() + .3);
+      for (double age = 0; age <= 3; age += .1)
+      {
+         howitzer.draw(gout, age);
+      }
 
-      shell.fire(
-         howitzer.getElevation(),
-         pos,
-         howitzer.getMuzzleVelocity()
-      );
+      shell.fire(howitzer.getElevation(), pos, howitzer.getMuzzleVelocity());
    }
 
    void advanceProjectile()
@@ -86,9 +92,6 @@ public:
       Position pos = shell.getPojectilePosition();
       double groundY = ground.getElevationMeters(pos);
       shell.checkImpact(groundY);
-      
-      std::cout << "Flying? " << shell.getIsFlying() << std::endl;
-      std::cout << "x,y " << pos.getPixelsX() << ", " << pos.getPixelsY() << std::endl;
    }
 
    void howizerControls(const Interface *pUI)
@@ -106,9 +109,15 @@ public:
          howitzer.raise(0.01);
    }
 
-   bool isProjectileFlying() {return shell.getIsFlying();}
+   bool isProjectileFlying() { return shell.getIsFlying(); }
 
 private:
+   double round(double value, int desiredPrecision)
+   {
+      return static_cast<int>(value * std::pow(10, desiredPrecision)) /
+             std::pow(10, desiredPrecision);
+   }
+
    Ground ground;
    Howitzer howitzer;
    Projectile shell;

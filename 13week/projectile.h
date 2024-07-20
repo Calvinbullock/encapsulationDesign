@@ -42,6 +42,11 @@ public:
                                             flightPath(),
                                             isFlying(false)
                                           {}
+   void reset() 
+   {
+      flightPath.clear();
+      isFlying = false;
+   }
 
    void fire(Angle angle, Position pos, double muzzleVelocity);
 

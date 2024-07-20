@@ -34,17 +34,16 @@ void callBack(const Interface* pUI, void* p)
    pSim->howizerControls(pUI);
    
    if (pUI->isSpace() && !pSim->isProjectileFlying())
-      pSim->fireProjectile();
-
+      pSim->fireProjectile(gout);
 
    if (pUI->isQ())
-      pSim->fireProjectile();
+      pSim->reset();
 
    pSim->advanceProjectile();
 
    pSim->draw(gout);
       
-   Position pos(690, 490);
+   Position pos(20000, 18000);
    gout = pos;
    gout << pSim->getStatDisplay();
 }
